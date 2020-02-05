@@ -1,0 +1,36 @@
+{
+  "name": "buckleshusky/silverstripe-fa-picker",
+  "type": "silverstripe-vendormodule",
+  "description": "displays a picker for Font Awesome 5 free.",
+  "keywords": [
+    "silverstripe",
+    "elemental",
+    "blocks",
+    "soundcloud",
+    "panels"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Buckles Husky",
+      "homepage": "http://doggershusky.com"
+    }
+  ],
+  "require": {
+    "silverstripe/vendor-plugin": "^1@dev"
+  },
+  "require-dev": {
+    "phpunit/PHPUnit": "^5.7",
+    "squizlabs/php_codesniffer": "*"
+  },
+  "config": {
+    "process-timeout": 600
+  },
+  "extra": {
+    "expose": [
+      "css",
+      "js",
+	  "webfonts"
+    ]
+  }
+}
