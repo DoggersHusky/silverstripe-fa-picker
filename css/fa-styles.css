@@ -1,0 +1,29 @@
+.fapicker-icons__holder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.fapicker-icons__holder__icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: #3fa142;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+}
+
+.fapicker-icons__holder__icon i {
+  font-size: 40px;
+}
