@@ -63,6 +63,10 @@ input.fapicker.text {
   font-size: 35px;
 }
 
+.fapicker-icons__holder__icon.active {
+  box-shadow: 0 0 0 1px #3fa142;
+}
+
 span.fapicker-icons__holder__icon {
   width: 45px;
   height: 45px;
