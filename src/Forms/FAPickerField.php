@@ -1,6 +1,6 @@
 <?php
 
-namespace BucklesHusky\Forms;
+namespace BucklesHusky\SilverStripeFAPicker\Forms;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\TextField;
