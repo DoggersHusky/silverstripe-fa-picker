@@ -1,3 +1,6 @@
+//
+var fa_version = "5.12.1";
+
 //icon list
 var iconList = [
   "fas fa-ad",

@@ -4,8 +4,15 @@
       onmatch: function() {
         let self = $(this);
 
-        //inconlist length
-        console.log(iconList.length);
+        //update icon ammount
+        $(".fapicker-icons__bottom > span:nth-child(2)  strong").html(
+          iconList.length,
+        );
+
+        //update icon version
+        $(".fapicker-icons__bottom > span:nth-child(1)  strong").html(
+          fa_version,
+        );
 
         //loop through all the icons
         let newIcon = null;
