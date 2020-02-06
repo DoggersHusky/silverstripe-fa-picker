@@ -4,17 +4,18 @@
       onmatch: function() {
         let self = $(this);
 
+        //inconlist length
+        console.log(iconList.length);
+
         //loop through all the icons
         let newIcon = null;
-        for (i = 0; i < iconList.icons.length; i++) {
+        for (const icon of iconList) {
           //make the new icon
           newIcon =
             '<li class="fapicker-icons__holder__icon" data-icon="' +
-            iconList.icons[i].title +
-            '" data-search="' +
-            iconList.icons[i].searchTerms +
-            '"><i class="' +
-            iconList.icons[i].title +
+            icon +
+            '" ><i class="' +
+            icon +
             '"></i></li>';
 
           //add the icons
@@ -48,14 +49,9 @@
             .filter(function(index) {
               //check to see if the datta icon contains the searched word
               //inverse to hide everything else
-              return (
-                !$(this)
-                  .data("icon")
-                  .includes(newSearch) &&
-                !$(this)
-                  .data("search")
-                  .includes(newSearch)
-              );
+              return !$(this)
+                .data("icon")
+                .includes(newSearch);
             })
             .css("display", "none");
         });
