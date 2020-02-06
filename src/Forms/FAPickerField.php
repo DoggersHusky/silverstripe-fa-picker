@@ -83,9 +83,7 @@ JS
                 if (($key = array_search($ri, $icons)) !== false) {
                     unset($icons[$key]);
                 }
-
             }
-
         }
 
         return $icons;
