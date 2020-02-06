@@ -36,6 +36,12 @@
         $(".fapicker-icons__holder__icon").click(function(e) {
           //add the icon to the textfield
           self.val($(this).data("icon"));
+
+          //update slected icon
+          $("span.fapicker-icons__holder__icon i").attr(
+            "class",
+            $(this).data("icon"),
+          );
         });
 
         //search filter

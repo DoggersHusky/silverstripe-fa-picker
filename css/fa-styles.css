@@ -1,3 +1,7 @@
+input.fapicker.text {
+  display: none;
+}
+
 .fapicker-icons__holder {
   display: flex;
   flex-wrap: wrap;
@@ -24,14 +28,14 @@
   border-bottom: 1px solid #ebebeb;
   background-color: #f7f7f7;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 60px;
   align-items: center;
   justify-content: center;
 }
 
 .fapicker-icons__search-holder input {
-  width: 90% !important;
+  width: 80% !important;
 }
 
 .fapicker-icons__holder__icon {
@@ -50,12 +54,29 @@
 
   background-color: #ffffff;
 }
+
 .fapicker-icons__holder__icon:hover {
   background-color: #eee;
 }
 
 .fapicker-icons__holder__icon i {
   font-size: 35px;
+}
+
+span.fapicker-icons__holder__icon {
+  width: 45px;
+  height: 45px;
+  margin: 0px;
+  margin-right: 20px;
+  cursor: initial;
+}
+
+span.fapicker-icons__holder__icon i {
+  font-size: 30px;
+}
+
+span.fapicker-icons__holder__icon:hover {
+  background-color: #ffffff;
 }
 
 .fapicker-icons__bottom {
