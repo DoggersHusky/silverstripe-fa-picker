@@ -2,3 +2,5 @@
 Name: buckleshusky-silverstripe-fa-picker
 ---
 
+FontawesomeIcons:
+  version: "5.12.1"

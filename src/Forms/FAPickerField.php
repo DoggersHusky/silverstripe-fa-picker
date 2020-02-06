@@ -2,6 +2,7 @@
 
 namespace BucklesHusky\Forms;
 
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\TextField;
 use SilverStripe\View\Requirements;
 
@@ -15,11 +16,15 @@ class FAPickerField extends TextField
      */
     public function Field($properties = array())
     {
-        $icons = implode(",", (array) $this->getIconList());
+        //get the icon list and version
+        $icons = implode(",", $this->getIconList());
+        $version = $this->getVersion();
+
+        //convert to js for use on the template
         Requirements::customScript(<<<JS
             var iconList = "$icons";
             iconList = iconList.split(",");
-            var fa_version = "5.12.1";
+            var fa_version = "$version";
 JS
         );
         Requirements::javascript("buckleshusky/silverstripe-fa-picker:js/fapicker.js");
@@ -48,9 +53,19 @@ JS
     }
 
     /**
+     * get what version of fontawesome is being used
+     *
+     * @return string
+     */
+    public function getVersion()
+    {
+        return Config::inst()->get('FontawesomeIcons', 'version');
+    }
+
+    /**
      * get a list of icons to add to the array to be displayed in the field
      *
-     * @return void
+     * @return array
      */
     public function getIconList()
     {
@@ -1613,6 +1628,11 @@ JS
             "fab fa-youtube-square",
             "fab fa-zhihu",
         ];
+
+        //add in new icons if they are in the add list
+        if ($newIcons = Config::inst()->get('FontawesomeIcons', 'add')) {
+            $icons = array_merge($icons, $newIcons);
+        }
 
         return $icons;
 
