@@ -27,9 +27,21 @@
         //loop through all the icons
         let newIcon = null;
         for (const icon of iconList) {
+          let cssClass = "";
+
+          if (
+            $(this)
+              .find("input.fapicker.text")
+              .val() === icon
+          ) {
+            cssClass = "active";
+          }
+
           //make the new icon
           newIcon =
-            '<li class="fapicker-icons__holder__icon" data-icon="' +
+            '<li class="fapicker-icons__holder__icon ' +
+            cssClass +
+            '" data-icon="' +
             icon +
             '" ><i class="' +
             icon +
