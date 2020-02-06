@@ -6,5 +6,9 @@ PageController:
   extensions:
     - BucklesHusky\SilverStripeFAPicker\Extensions\PageControllerExtension
 
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - BucklesHusky\SilverStripeFAPicker\Extensions\LeftAndMainExtension
+
 FontawesomeIcons:
   version: "5.12.1"
