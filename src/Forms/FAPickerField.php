@@ -77,6 +77,17 @@ JS
             $icons = array_merge($icons, $newIcons);
         }
 
+        //remove icons
+        if ($removeIcons = Config::inst()->get('FontawesomeIcons', 'remove')) {
+            foreach ($removeIcons as $ri) {
+                if (($key = array_search($ri, $icons)) !== false) {
+                    unset($icons[$key]);
+                }
+
+            }
+
+        }
+
         return $icons;
 
     }
