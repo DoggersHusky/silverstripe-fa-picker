@@ -2,5 +2,9 @@
 Name: buckleshusky-silverstripe-fa-picker
 ---
 
+PageController:
+  extensions:
+    - BucklesHusky\SilverStripeFAPicker\Extensions\PageControllerExtension
+
 FontawesomeIcons:
   version: "5.12.1"
