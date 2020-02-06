@@ -10,7 +10,7 @@
 
     <div class="fapicker-icons">
         <div class="fapicker-icons__search-holder">
-            <span class="fapicker-icons__holder__icon"><i class="fab fa-shirtsinbulk"></i></span><input type="text" class="text"/>
+            <span class="fapicker-icons__holder__icon"><i class=""></i></span><input type="text" class="text"/>
         </div>
 
         <ul class="fapicker-icons__holder">

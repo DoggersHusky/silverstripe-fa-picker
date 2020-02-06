@@ -14,6 +14,16 @@
           .find(".fapicker-icons__bottom > span:nth-child(1)  strong")
           .html(fa_version);
 
+        //update selected icon on start
+        $(this)
+          .find("span.fapicker-icons__holder__icon i")
+          .attr(
+            "class",
+            $(this)
+              .find("input.fapicker.text")
+              .val()
+          );
+
         //loop through all the icons
         let newIcon = null;
         for (const icon of iconList) {
@@ -38,7 +48,7 @@
             //add the icon to the textfield
             self.find("input.fapicker.text").val($(this).data("icon"));
 
-            //update slected icon
+            //update selected icon
             self
               .find("span.fapicker-icons__holder__icon i")
               .attr("class", $(this).data("icon"));
