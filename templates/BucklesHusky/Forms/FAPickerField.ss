@@ -10,7 +10,7 @@
 
     <div class="fapicker-icons">
         <div class="fapicker-icons__search-holder">
-            <span class="fapicker-icons__holder__icon"><i class=""></i></span><input type="text" class="text"/>
+            <span class="fapicker-icons__holder__icon"><i class=""></i></span><input type="text" class="text" placeholder="Filter..."/>
         </div>
 
         <ul class="fapicker-icons__holder">
