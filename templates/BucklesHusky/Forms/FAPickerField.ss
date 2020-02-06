@@ -10,12 +10,12 @@
 
     <div class="fapicker-icons">
         <div class="fapicker-icons__search-holder">
-
+            <input type="text" class="text"/>
         </div>
 
-        <div class="fapicker-icons__holder">
+        <ul class="fapicker-icons__holder">
             
-        </div>
+        </ul>
     </div>
 </div>
 

@@ -4443,5 +4443,17 @@ var iconList = {
         title: "fab fa-youtube-square",
         searchTerms: [],
       },
+      {
+          title: "fas fa-broom",
+          searchTerms: ["cleaning", "sweeping"],
+      },
+      {
+          title: "fas fa-dog",
+          searchTerms: ["husky", "hound"],
+      },
+      {
+          title: "fas fa-cat",
+          searchTerms: ["feline"],
+      }
     ],
   };

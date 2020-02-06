@@ -4,12 +4,18 @@
   align-items: center;
   justify-content: center;
 
-  height: 400px;
+  height: 200px;
   overflow-x: hidden;
   overflow-y: scroll;
 
-  margin-left: 50px;
-  margin-right: 50px;
+  padding-left: 20px;
+  padding-right: 8px;
+  padding-top: 20px;
+}
+
+.fapicker-icons__search-holder input {
+  margin: 10px 40px;
+  width: calc(100% - 80px) !important;
 }
 
 .fapicker-icons__holder__icon {
@@ -18,12 +24,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-color: #3fa142;
-  border-width: 1px;
-  border-style: solid;
+
+  margin: 0 12px 12px 0;
   cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  box-shadow: 0 0 0 1px #ddd;
+  color: inherit;
+
+  background-color: #ffffff;
+}
+.fapicker-icons__holder__icon:hover {
+  background-color: #eee;
 }
 
 .fapicker-icons__holder__icon i {
-  font-size: 40px;
+  font-size: 35px;
 }
