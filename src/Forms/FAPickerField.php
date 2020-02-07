@@ -15,9 +15,9 @@ class FAPickerField extends TextField
      */
     public function Field($properties = array())
     {
-        Requirements::javascript("buckleshusky/silverstripe-fa-picker:js/fapicker.js");
-        Requirements::css("buckleshusky/silverstripe-fa-picker:css/fa-styles.css");
-        Requirements::css("buckleshusky/silverstripe-fa-picker:css/external/fontawesome-all.min.css");
+        Requirements::javascript("buckleshusky/fontawesomeiconpicker:js/fapicker.js");
+        Requirements::css("buckleshusky/fontawesomeiconpicker:css/fa-styles.css");
+        Requirements::css("buckleshusky/fontawesomeiconpicker:css/external/fontawesome-all.min.css");
         return parent::Field($properties);
     }
 

@@ -65,6 +65,7 @@ input.fapicker.text {
 
 .fapicker-icons__holder__icon.active {
   box-shadow: 0 0 0 1px #3fa142;
+  background-color: #eee;
 }
 
 span.fapicker-icons__holder__icon {
