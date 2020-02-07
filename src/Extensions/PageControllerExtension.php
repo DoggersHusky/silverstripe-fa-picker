@@ -14,6 +14,6 @@ class PageControllerExtension extends Extension
      */
     public function fontAwesome()
     {
-        Requirements::css("buckleshusky/silverstripe-fa-picker:css/external/fontawesome-all.min.css");
+        Requirements::css("buckleshusky/fontawesomeiconpicker:css/external/fontawesome-all.min.css");
     }
 }
