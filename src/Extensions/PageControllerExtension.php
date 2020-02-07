@@ -1,6 +1,6 @@
 <?php
 
-namespace BucklesHusky\SilverStripeFAPicker\Extensions;
+namespace BucklesHusky\FontAwesomeIconPicker\Extensions;
 
 use SilverStripe\Core\Extension;
 use SilverStripe\View\Requirements;
@@ -16,5 +16,4 @@ class PageControllerExtension extends Extension
     {
         Requirements::css("buckleshusky/silverstripe-fa-picker:css/external/fontawesome-all.min.css");
     }
-
 }

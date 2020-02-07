@@ -1,14 +1,13 @@
 ---
-Name: buckleshusky-silverstripe-fa-picker
+Name: buckleshusky-fontawesomeiconpicker
 ---
-
 PageController:
   extensions:
-    - BucklesHusky\SilverStripeFAPicker\Extensions\PageControllerExtension
+    - BucklesHusky\FontAwesomeIconPicker\Extensions\PageControllerExtension
 
 SilverStripe\Admin\LeftAndMain:
   extensions:
-    - BucklesHusky\SilverStripeFAPicker\Extensions\LeftAndMainExtension
+    - BucklesHusky\FontAwesomeIconPicker\Extensions\LeftAndMainExtension
 
 FontawesomeIcons:
   version: "5.12.1"

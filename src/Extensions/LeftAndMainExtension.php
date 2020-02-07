@@ -1,5 +1,6 @@
 <?php
-namespace BucklesHusky\SilverStripeFAPicker\Extensions;
+
+namespace BucklesHusky\FontAwesomeIconPicker\Extensions;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
@@ -15,7 +16,8 @@ class LeftAndMainExtension extends Extension
         $version = $this->getVersion();
 
         //convert to js for use on the template
-        Requirements::customScript(<<<JS
+        Requirements::customScript(
+            <<<JS
             var iconList = "$icons";
             iconList = iconList.split(",");
             var fa_version = "$version";
@@ -58,7 +60,5 @@ JS
         }
 
         return $icons;
-
     }
-
 }

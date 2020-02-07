@@ -1,6 +1,6 @@
 <?php
 
-namespace BucklesHusky\SilverStripeFAPicker\Forms;
+namespace BucklesHusky\FontAwesomeIconPicker\Forms;
 
 use SilverStripe\Forms\TextField;
 use SilverStripe\View\Requirements;
@@ -39,5 +39,4 @@ class FAPickerField extends TextField
 
         return implode(' ', $classes);
     }
-
 }

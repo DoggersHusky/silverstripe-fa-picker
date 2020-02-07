@@ -1,5 +1,5 @@
 {
-  "name": "buckleshusky/silverstripe-fa-picker",
+  "name": "buckleshusky/fontawesomeiconpicker",
   "type": "silverstripe-vendormodule",
   "description": "displays a picker for Font Awesome 5 free.",
   "keywords": [
@@ -30,7 +30,7 @@
     "expose": [
       "css",
       "js",
-	  "webfonts"
+      "webfonts"
     ]
   }
 }
