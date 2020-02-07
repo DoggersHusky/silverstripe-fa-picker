@@ -1,13 +1,13 @@
 {
   "name": "buckleshusky/fontawesomeiconpicker",
   "type": "silverstripe-vendormodule",
-  "description": "displays a picker for Font Awesome 5 free.",
+  "description": "Displays a Font Awesome 5 icon picker for SilverStripe.",
   "keywords": [
     "silverstripe",
-    "elemental",
-    "blocks",
-    "soundcloud",
-    "panels"
+    "fontawesome",
+    "font awesome",
+    "icons",
+    "picker"
   ],
   "license": "BSD-3-Clause",
   "authors": [
@@ -17,11 +17,13 @@
     }
   ],
   "require": {
-    "silverstripe/vendor-plugin": "^1@dev"
+    "silverstripe/framework": "~4.0",
+    "silverstripe/vendor-plugin": "^1.0"
   },
-  "require-dev": {
-    "phpunit/PHPUnit": "^5.7",
-    "squizlabs/php_codesniffer": "*"
+  "autoload": {
+    "psr-4": {
+      "buckleshusky\\FontAwesomeIconPicker\\": "src/"
+    }
   },
   "config": {
     "process-timeout": 600

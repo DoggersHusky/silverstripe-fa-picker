@@ -1,3 +1,33 @@
+FontAwesomeIconPicker
+=================
+
+Displays a Font Awesome 5 icon picker for SilverStripe.
+
+## Requirements
+
+* SilverStripe 4.x
+
+## Installation
+
+Installation is supported via composer only
+
+```sh
+composer require buckleshusky/fontawesomeiconpicker
+```
+
+* Run `dev/build?flush=all` to regenerate the manifest
+
+## Usage
+
+
+### Notes
+
+
+## Contributing
+
+### Translations
+
+
 //for the solid tab here: https://fontawesome.com/cheatsheet/free/solid
 ```javascript
 var names = new Set();
