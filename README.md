@@ -1,7 +1,7 @@
 FontAwesomeIconPicker
 =================
 
-Displays a Font Awesome 5 icon picker for SilverStripe.
+Displays a Font Awesome 5 icon picker for SilverStripe 4.
 
 ![Overview of Image Cropper Field](screenshots/screenshot1.PNG)
 
