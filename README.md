@@ -67,7 +67,7 @@ FontawesomeIcons:
     - "themes/test/css/inconpack2.css"
   icons:
     - "css icon class"
-	- "css icon class"
+    - "css icon class"
 ```
 
 **Removing icons:**
@@ -79,7 +79,7 @@ want your users to select.
 FontawesomeIcons:
   remove:
     - "fas fa-ad"
-	- "fas fa-air-freshener"
+    - "fas fa-air-freshener"
 ```
 
 **Disabling built in Fontawesome:**
@@ -91,10 +91,10 @@ you will need a yml list of icons.
 FontawesomeIcons:
   disable_builtin_fontawesome: true
   my_icons:
-	- "new icon"
-	- "new icon"
-	- "new icon"
-	- "new icon"
+    - "new icon"
+    - "new icon"
+    - "new icon"
+    - "new icon"
 ```
 
 
