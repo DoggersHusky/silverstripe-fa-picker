@@ -2,6 +2,7 @@
 
 namespace BucklesHusky\FontAwesomeIconPicker\Forms;
 
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\TextField;
 use SilverStripe\View\Requirements;
 
@@ -17,7 +18,19 @@ class FAPickerField extends TextField
     {
         Requirements::javascript("buckleshusky/fontawesomeiconpicker:js/fapicker.js");
         Requirements::css("buckleshusky/fontawesomeiconpicker:css/fa-styles.css");
-        Requirements::css("buckleshusky/fontawesomeiconpicker:css/external/fontawesome-all.min.css");
+
+        //should we disable the built in ontawesome
+        if (!$extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
+            Requirements::css("buckleshusky/fontawesomeiconpicker:css/external/fontawesome-all.min.css");
+        }
+
+        //add the extra requirements if need be
+        if ($extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'extra_requirements_css')) {
+            foreach ($extraCSSClasses as $css) {
+                Requirements::css($css);
+            }
+        }
+
         return parent::Field($properties);
     }
 

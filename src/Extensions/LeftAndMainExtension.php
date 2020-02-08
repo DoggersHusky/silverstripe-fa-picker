@@ -42,12 +42,12 @@ JS
      */
     public function getIconList()
     {
-        //get the icon list from the yml file
-        $icons = Config::inst()->get('FontawesomeIcons', 'icons');
-
-        //add in new icons if they are in the add list
-        if ($newIcons = Config::inst()->get('FontawesomeIcons', 'add')) {
-            $icons = array_merge($icons, $newIcons);
+        //should we disable the built in ontawesome
+        if (Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
+            //get the icon list from the yml file
+            $icons = Config::inst()->get('FontawesomeIcons', 'my_icons');
+        } else {
+            $icons = Config::inst()->get('FontawesomeIcons', 'icons');
         }
 
         //remove icons
