@@ -6,9 +6,16 @@
             <span class="fapicker-icons__holder__icon"><i class=""></i></span><input type="text" class="text" placeholder="Filter..."/>
         </div>
 
+        <ul class="fapicker-icons__type-selector">
+            <li>Solid</li>
+            <li>Regular</li>
+            <li>Brands</li>
+        </ul>
+
         <ul class="fapicker-icons__holder">
             
         </ul>
+
         <div class="fapicker-icons__bottom">
             <span class="small version">Version <strong>0</strong></span>
             <span class="small icons"><strong>0</strong> Free Icons</span>
