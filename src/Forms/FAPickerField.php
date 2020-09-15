@@ -2,12 +2,15 @@
 
 namespace BucklesHusky\FontAwesomeIconPicker\Forms;
 
+use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Flushable;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\Requirements;
 
-class FAPickerField extends TextField
+class FAPickerField extends TextField implements Flushable
 {
 
     private static $casting = [
@@ -73,41 +76,52 @@ class FAPickerField extends TextField
     public function getIconList()
     {
         $template = "";
+        $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
 
-        //check to see which icon list to use
-        if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
-            //get pro icons
-            $icons = Config::inst()->get('FontawesomeIcons', 'pro_icons');
-        } elseif (Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
-            //get the icon list from the users yml file
-            $icons = Config::inst()->get('FontawesomeIcons', 'my_icons');
-        } else {
-            //get free icons
-            $icons = Config::inst()->get('FontawesomeIcons', 'icons');
-        }
+        //check to see if the icon list exist
+        if (!$cache->has('iconList')) {
+            //check to see which icon list to use
+            if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
+                //get pro icons
+                $icons = Config::inst()->get('FontawesomeIcons', 'pro_icons');
+            } elseif (Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
+                //get the icon list from the users yml file
+                $icons = Config::inst()->get('FontawesomeIcons', 'my_icons');
+            } else {
+                //get free icons
+                $icons = Config::inst()->get('FontawesomeIcons', 'icons');
+            }
 
-        //remove icons
-        if ($removeIcons = Config::inst()->get('FontawesomeIcons', 'remove')) {
-            foreach ($removeIcons as $ri) {
-                if (($key = array_search($ri, $icons)) !== false) {
-                    unset($icons[$key]);
+            //remove icons
+            if ($removeIcons = Config::inst()->get('FontawesomeIcons', 'remove')) {
+                foreach ($removeIcons as $ri) {
+                    if (($key = array_search($ri, $icons)) !== false) {
+                        unset($icons[$key]);
+                    }
                 }
             }
+
+            //needs to be cached
+            foreach ($icons as $icon) {
+                $template .= '<li><div class="fapicker-icons__holder__icon ' .
+                    true .
+                    '" data-icon="' .
+                    $icon .
+                    '" ><i class="' .
+                    $icon .
+                    '"></i></div><div>' .
+                    $icon
+                    . '</div></li>';
+            }
+
+            //cache the template
+            $cache->set('iconList', $template);
+        } else {
+            //get from cache
+            $template = $cache->get('iconList');
         }
 
-        //needs to be cached
-        foreach ($icons as $icon) {
-            $template .= '<li><div class="fapicker-icons__holder__icon ' .
-                true .
-                '" data-icon="' .
-                $icon .
-                '" ><i class="' .
-                $icon .
-                '"></i></div><div>' .
-                $icon
-                . '</div></li>';
-        }
-
+        //output to template
         $html = DBHTMLText::create();
         $html->setValue($template);
         return $html;
@@ -134,5 +148,14 @@ class FAPickerField extends TextField
     public function getProVersionCss()
     {
         return Config::inst()->get('FontawesomeIcons', 'css');
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * */
+    public static function flush()
+    {
+        Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker')->clear();
     }
 }

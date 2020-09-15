@@ -11,3 +11,9 @@ SilverStripe\Admin\LeftAndMain:
 
 FontawesomeIcons:
   version: "5.14.0"
+
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.fontawesomeiconpicker:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: "fontawesomeiconpicker"
