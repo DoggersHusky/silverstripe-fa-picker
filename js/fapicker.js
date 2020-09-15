@@ -98,8 +98,7 @@
                         let newSearch = "" + $(this).val();
 
                         //filter the list of icons
-                        self.parent()
-                            .find(".fapicker-icons .fapicker-icons__holder li")
+                        self.find(".fapicker-icons .fapicker-icons__holder li")
                             .filter(function (index) {
                                 //check to see if the data icon contains the searched word
                                 //inverse to hide everything else
