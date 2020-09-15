@@ -124,3 +124,8 @@ span.fapicker-icons__holder__icon:hover {
 .fapicker-icons__type-selector li:hover {
     background-color: #d8e4eb;
 }
+
+.notInSearch,
+.iconNotSearch {
+    display: none;
+}
