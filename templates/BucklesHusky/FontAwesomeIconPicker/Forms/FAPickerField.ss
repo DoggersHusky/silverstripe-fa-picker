@@ -7,9 +7,10 @@
         </div>
 
         <ul class="fapicker-icons__type-selector">
-            <li>Solid</li>
-            <li>Regular</li>
-            <li>Brands</li>
+            <li data-type="all">All</li>
+            <li data-type="fas">Solid</li>
+            <li data-type="far">Regular</li>
+            <li data-type="fab">Brands</li>
         </ul>
 
         <ul class="fapicker-icons__holder">
