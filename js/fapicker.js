@@ -12,7 +12,7 @@
                 //add active class to icon
                 $(this)
                     .find(
-                        "." +
+                        ".fapicker-icons__holder ." +
                             $(this)
                                 .find("input.fapicker.text")
                                 .val()
