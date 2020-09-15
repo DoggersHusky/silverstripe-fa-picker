@@ -28,22 +28,20 @@
         }
 
         //clicking the icon event
-        $(this)
-          .find(".fapicker-icons__holder__icon")
-          .click(function () {
-            //add the icon to the textfield
-            self.find("input.fapicker.text").val($(this).data("icon"));
-            //hide all other actives
-            self
-              .find(".fapicker-icons__holder__icon.active")
-              .removeClass("active");
-            //set active
-            $(this).addClass("active");
-            //update selected icon
-            self
-              .find("span.fapicker-icons__holder__icon i")
-              .attr("class", $(this).data("icon"));
-          });
+        $(this).on("click", ".fapicker-icons__holder__icon", function () {
+          //add the icon to the textfield
+          self.find("input.fapicker.text").val($(this).data("icon"));
+          //hide all other actives
+          self
+            .find(".fapicker-icons__holder__icon.active")
+            .removeClass("active");
+          //set active
+          $(this).addClass("active");
+          //update selected icon
+          self
+            .find("span.fapicker-icons__holder__icon i")
+            .attr("class", $(this).data("icon"));
+        });
 
         //search filter
         $(this)
