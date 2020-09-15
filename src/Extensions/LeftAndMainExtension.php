@@ -42,11 +42,15 @@ JS
      */
     public function getIconList()
     {
-        //should we disable the built in ontawesome
-        if (Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
-            //get the icon list from the yml file
+        //check to see which icon list to use
+        if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
+            //get pro icons
+            $icons = Config::inst()->get('FontawesomeIcons', 'pro_icons');
+        } elseif (Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
+            //get the icon list from the users yml file
             $icons = Config::inst()->get('FontawesomeIcons', 'my_icons');
         } else {
+            //get free icons
             $icons = Config::inst()->get('FontawesomeIcons', 'icons');
         }
 

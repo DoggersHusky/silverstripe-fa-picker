@@ -10,6 +10,10 @@
             <li data-type="" class="active">All</li>
             <li data-type="fas">Solid</li>
             <li data-type="far">Regular</li>
+            <% if $IsProVersion %>
+                <li data-type="fal">Light</li>
+                <li data-type="fad">Duotone</li>
+            <% end_if %>
             <li data-type="fab">Brands</li>
         </ul>
 
@@ -19,7 +23,7 @@
 
         <div class="fapicker-icons__bottom">
             <span class="small version">Version <strong>0</strong></span>
-            <span class="small icons"><strong>0</strong> Free Icons</span>
+            <span class="small icons"><strong>0</strong> Icons</span>
         </div>
     </div>
 </div>

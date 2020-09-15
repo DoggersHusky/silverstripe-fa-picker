@@ -19,9 +19,16 @@ class FAPickerField extends TextField
         Requirements::javascript("buckleshusky/fontawesomeiconpicker:js/fapicker.js");
         Requirements::css("buckleshusky/fontawesomeiconpicker:css/fa-styles.css");
 
-        //should we disable the built in ontawesome
+        //should we disable the built in fontawesome
         if (!$extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
-            Requirements::css("buckleshusky/fontawesomeiconpicker:external/css/all.min.css");
+            //if the pro version is set, don't load the free version
+            if (!$this->getIsProVersion()) {
+                Requirements::css("buckleshusky/fontawesomeiconpicker:external/css/all.min.css");
+            }
+        }
+
+        if ($this->getIsProVersion()) {
+            Requirements::css($this->getProVersionCss());
         }
 
         //add the extra requirements if need be
@@ -51,5 +58,28 @@ class FAPickerField extends TextField
         $classes[] .= "text";
 
         return implode(' ', $classes);
+    }
+
+    /**
+     * Determine if the iconpicker should use the pro version of fontawesome
+     *
+     * @return boolean
+     */
+    public function getIsProVersion()
+    {
+        if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get the pro version css location
+     *
+     * @return void
+     */
+    public function getProVersionCss()
+    {
+        return Config::inst()->get('FontawesomeIcons', 'css');
     }
 }
