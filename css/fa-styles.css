@@ -117,6 +117,10 @@ span.fapicker-icons__holder__icon:hover {
     color: #5589a7;
 }
 
+.fapicker-icons__type-selector li.active {
+    background-color: #d8e4eb;
+}
+
 .fapicker-icons__type-selector li:hover {
     background-color: #d8e4eb;
 }
