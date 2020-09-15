@@ -10,4 +10,4 @@ SilverStripe\Admin\LeftAndMain:
     - BucklesHusky\FontAwesomeIconPicker\Extensions\LeftAndMainExtension
 
 FontawesomeIcons:
-  version: "5.12.1"
+  version: "5.14.0"
