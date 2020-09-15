@@ -90,9 +90,9 @@
                     .find(".fapicker-icons__search-holder input")
                     .keyup(function (e) {
                         //reset icons after each key to allow for better filtering
-                        self.parent()
-                            .find(".fapicker-icons .fapicker-icons__holder li")
-                            .css("display", "flex");
+                        self.find(
+                            ".fapicker-icons .fapicker-icons__holder li"
+                        ).css("display", "flex");
 
                         //set newSearch to the val of the input
                         let newSearch = "" + $(this).val();
