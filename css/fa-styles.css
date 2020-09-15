@@ -35,6 +35,7 @@ input.fapicker.text {
     height: 60px;
     align-items: center;
     justify-content: center;
+    padding: 0px 20px;
 }
 
 .fapicker-icons__search-holder input {
