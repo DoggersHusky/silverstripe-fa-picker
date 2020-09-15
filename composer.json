@@ -32,7 +32,7 @@
     "expose": [
       "css",
       "js",
-      "webfonts"
+      "external"
     ]
   }
 }
