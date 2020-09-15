@@ -4,47 +4,23 @@
         $(".fa-holder").entwine({
             Type: "",
             onmatch: function () {
-                //update icon ammount
-                // $(this)
-                //     .find(".fapicker-icons__bottom > span:nth-child(2)  strong")
-                //     .html(iconList.length);
-
-                //update icon version
-                $(this)
-                    .find(".fapicker-icons__bottom > span:nth-child(1)  strong")
-                    .html(fa_version);
-
                 //update selected icon on start
                 $(this)
                     .find("span.fapicker-icons__holder__icon i")
                     .attr("class", $(this).find("input.fapicker.text").val());
 
-                //loop through all the icons
-                // let newIcon = null;
-                // for (const icon of iconList) {
-                //     let cssClass = "";
-
-                //     if ($(this).find("input.fapicker.text").val() === icon) {
-                //         cssClass = "active";
-                //     }
-
-                //     //make the new icon
-                //     newIcon =
-                //         '<li><div class="fapicker-icons__holder__icon ' +
-                //         cssClass +
-                //         '" data-icon="' +
-                //         icon +
-                //         '" ><i class="' +
-                //         icon +
-                //         '"></i></div><div>' +
-                //         icon.split(" fa-").pop();
-                //     +"</div></li>";
-
-                //     //add the icons
-                //     $(this)
-                //         .find(".fapicker-icons .fapicker-icons__holder")
-                //         .append(newIcon);
-                // }
+                //add active class to icon
+                $(this)
+                    .find(
+                        "." +
+                            $(this)
+                                .find("input.fapicker.text")
+                                .val()
+                                .split(" ")
+                                .pop()
+                    )
+                    .parent()
+                    .addClass("active");
             },
         });
 

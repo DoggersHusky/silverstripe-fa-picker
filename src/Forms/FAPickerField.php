@@ -151,6 +151,16 @@ class FAPickerField extends TextField implements Flushable
     }
 
     /**
+     * get what version of fontawesome is being used
+     *
+     * @return string
+     */
+    public function getVersionNumber()
+    {
+        return Config::inst()->get('FontawesomeIcons', 'version');
+    }
+
+    /**
      * @inheritDoc
      *
      * */
