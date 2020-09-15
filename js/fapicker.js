@@ -3,6 +3,7 @@
         $(".fa-holder").entwine({
             onmatch: function () {
                 let self = $(this);
+                let type = null;
 
                 //update icon ammount
                 $(this)
@@ -68,6 +69,22 @@
                         );
                     });
 
+                //set the filter to the selected type and then run the filter
+                $(this)
+                    .find(".fapicker-icons__type-selector li")
+                    .click(function () {
+                        //get the type to filter by
+                        type = $(this).data("type");
+
+                        //hide all other actives
+                        self.find(
+                            ".fapicker-icons__type-selector li.active"
+                        ).removeClass("active");
+
+                        //add the active class
+                        $(this).addClass("active");
+                    });
+
                 //search filter
                 $(this)
                     .find(".fapicker-icons__search-holder input")
@@ -84,7 +101,7 @@
                         self.parent()
                             .find(".fapicker-icons .fapicker-icons__holder li")
                             .filter(function (index) {
-                                //check to see if the datta icon contains the searched word
+                                //check to see if the data icon contains the searched word
                                 //inverse to hide everything else
                                 return !$(this)
                                     .data("icon")
