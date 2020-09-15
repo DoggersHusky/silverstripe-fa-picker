@@ -81,7 +81,7 @@
           .filter(function (index) {
             //check to see if the data icon contains the searched word
             //inverse to hide everything else
-            return !$(this).data("icon").includes(newSearch);
+            return !$(this).data("search-icon").includes(newSearch);
           })
           .parent()
           .addClass("iconNotSearch");

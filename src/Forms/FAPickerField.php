@@ -110,8 +110,10 @@ class FAPickerField extends TextField implements Flushable
 
                 //add the icon to the template variable
                 $template .= '<li><div class="fapicker-icons__holder__icon" data-icon="' .
+                    $icon .
+                    '" data-search-icon="' .
                     $dataIcon .
-                    '" ><i class="' .
+                    '"><i class="' .
                     $icon .
                     '"></i></div><div>' .
                     $dataIcon
