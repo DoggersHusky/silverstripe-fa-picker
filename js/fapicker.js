@@ -30,13 +30,15 @@
 
                     //make the new icon
                     newIcon =
-                        '<li class="fapicker-icons__holder__icon ' +
+                        '<li><div class="fapicker-icons__holder__icon ' +
                         cssClass +
                         '" data-icon="' +
                         icon +
                         '" ><i class="' +
                         icon +
-                        '"></i></li>';
+                        '"></i></div><div>' +
+                        icon.split(" fa-").pop();
+                    +"</div></li>";
 
                     //add the icons
                     $(this)
@@ -92,12 +94,15 @@
 
                 //filter the list of icons
                 holder
-                    .find(".fapicker-icons .fapicker-icons__holder li")
+                    .find(
+                        ".fapicker-icons .fapicker-icons__holder li div:first-child"
+                    )
                     .filter(function (index) {
                         //check to see if the data icon contains the searched word
                         //inverse to hide everything else
                         return !$(this).data("icon").includes(newSearch);
                     })
+                    .parent()
                     .addClass("iconNotSearch");
             },
             doFilterType: function () {
@@ -115,13 +120,15 @@
                 if (type.trim()) {
                     //filter the list of icons
                     holder
-                        .find(".fapicker-icons .fapicker-icons__holder li")
+                        .find(
+                            ".fapicker-icons .fapicker-icons__holder li div:first-child"
+                        )
                         .filter(function (index) {
-                            console.log(type);
                             //check to see if the data icon contains the searched word
                             //inverse to hide everything else
                             return !$(this).data("icon").includes(type);
                         })
+                        .parent()
                         .addClass("notInSearch");
                 }
             },
