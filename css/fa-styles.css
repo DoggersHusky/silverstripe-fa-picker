@@ -113,4 +113,10 @@ span.fapicker-icons__holder__icon:hover {
     flex: 1;
     padding: 10px;
     text-align: center;
+    cursor: pointer;
+    color: #5589a7;
+}
+
+.fapicker-icons__type-selector li:hover {
+    background-color: #d8e4eb;
 }
