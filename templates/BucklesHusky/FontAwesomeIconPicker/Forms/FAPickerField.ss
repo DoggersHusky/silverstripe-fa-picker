@@ -18,7 +18,7 @@
         </ul>
 
         <ul class="fapicker-icons__holder">
-            
+            $IconList
         </ul>
 
         <div class="fapicker-icons__bottom">

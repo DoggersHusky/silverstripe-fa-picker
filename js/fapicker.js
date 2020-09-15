@@ -5,9 +5,9 @@
             Type: "",
             onmatch: function () {
                 //update icon ammount
-                $(this)
-                    .find(".fapicker-icons__bottom > span:nth-child(2)  strong")
-                    .html(iconList.length);
+                // $(this)
+                //     .find(".fapicker-icons__bottom > span:nth-child(2)  strong")
+                //     .html(iconList.length);
 
                 //update icon version
                 $(this)
@@ -20,31 +20,31 @@
                     .attr("class", $(this).find("input.fapicker.text").val());
 
                 //loop through all the icons
-                let newIcon = null;
-                for (const icon of iconList) {
-                    let cssClass = "";
+                // let newIcon = null;
+                // for (const icon of iconList) {
+                //     let cssClass = "";
 
-                    if ($(this).find("input.fapicker.text").val() === icon) {
-                        cssClass = "active";
-                    }
+                //     if ($(this).find("input.fapicker.text").val() === icon) {
+                //         cssClass = "active";
+                //     }
 
-                    //make the new icon
-                    newIcon =
-                        '<li><div class="fapicker-icons__holder__icon ' +
-                        cssClass +
-                        '" data-icon="' +
-                        icon +
-                        '" ><i class="' +
-                        icon +
-                        '"></i></div><div>' +
-                        icon.split(" fa-").pop();
-                    +"</div></li>";
+                //     //make the new icon
+                //     newIcon =
+                //         '<li><div class="fapicker-icons__holder__icon ' +
+                //         cssClass +
+                //         '" data-icon="' +
+                //         icon +
+                //         '" ><i class="' +
+                //         icon +
+                //         '"></i></div><div>' +
+                //         icon.split(" fa-").pop();
+                //     +"</div></li>";
 
-                    //add the icons
-                    $(this)
-                        .find(".fapicker-icons .fapicker-icons__holder")
-                        .append(newIcon);
-                }
+                //     //add the icons
+                //     $(this)
+                //         .find(".fapicker-icons .fapicker-icons__holder")
+                //         .append(newIcon);
+                // }
             },
         });
 
