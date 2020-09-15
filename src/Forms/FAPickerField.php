@@ -105,14 +105,16 @@ class FAPickerField extends TextField implements Flushable
 
             //needs to be cached
             foreach ($icons as $icon) {
-                $template .= '<li><div class="fapicker-icons__holder__icon ' .
-                    true .
-                    '" data-icon="' .
-                    $icon .
+                //the data icon value/the name of the icon
+                $dataIcon = trim(substr($icon, strpos($icon, '-') + 1));
+
+                //add the icon to the template variable
+                $template .= '<li><div class="fapicker-icons__holder__icon" data-icon="' .
+                    $dataIcon .
                     '" ><i class="' .
                     $icon .
                     '"></i></div><div>' .
-                    $icon
+                    $dataIcon
                     . '</div></li>';
             }
 
