@@ -1,99 +1,116 @@
 input.fapicker.text {
-  display: none;
+    display: none;
 }
 
 .fapicker-icons__holder {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 
-  height: 200px;
-  overflow-x: hidden;
-  overflow-y: scroll;
+    height: 350px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
-  padding-left: 20px;
-  padding-right: 8px;
-  padding-top: 20px;
-  margin-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 8px;
+    padding-top: 20px;
+    margin-bottom: 0px;
 }
 
 .fapicker-icons {
-  background-color: #fff;
-  border: 1px solid;
-  border-color: #dbe0e9 #ced5e1;
+    background-color: #fff;
+    border: 1px solid;
+    border-color: #dbe0e9 #ced5e1;
 }
 
 .fapicker-icons__search-holder {
-  border-bottom: 1px solid #ebebeb;
-  background-color: #f7f7f7;
-  display: flex;
-  flex-direction: row;
-  height: 60px;
-  align-items: center;
-  justify-content: center;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
 }
 
 .fapicker-icons__search-holder input {
-  width: 80% !important;
+    width: 80% !important;
 }
 
 .fapicker-icons__holder__icon {
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  margin: 0 12px 12px 0;
-  cursor: pointer;
-  border-radius: 3px;
-  font-size: 14px;
-  box-shadow: 0 0 0 1px #ddd;
-  color: inherit;
+    margin: 0 12px 12px 0;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    box-shadow: 0 0 0 1px #ddd;
+    color: inherit;
 
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
 
 .fapicker-icons__holder__icon:hover {
-  background-color: #eee;
+    background-color: #eee;
 }
 
 .fapicker-icons__holder__icon i {
-  font-size: 35px;
+    font-size: 35px;
 }
 
 .fapicker-icons__holder__icon.active {
-  box-shadow: 0 0 0 1px #3fa142;
-  background-color: #eee;
+    box-shadow: 0 0 0 1px #3fa142;
+    background-color: #eee;
 }
 
 span.fapicker-icons__holder__icon {
-  width: 45px;
-  height: 45px;
-  margin: 0px;
-  margin-right: 20px;
-  cursor: initial;
+    width: 45px;
+    height: 45px;
+    margin: 0px;
+    margin-right: 20px;
+    cursor: initial;
 }
 
 span.fapicker-icons__holder__icon i {
-  font-size: 30px;
+    font-size: 30px;
 }
 
 span.fapicker-icons__holder__icon:hover {
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
 
 .fapicker-icons__bottom {
-  border-bottom: 1px solid #ebebeb;
-  background-color: #f7f7f7;
-  display: flex;
-  flex-direction: row;
-  height: 30px;
-  align-items: center;
-  justify-content: center;
+    border-bottom: 1px solid #ebebeb;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
 }
 
 .fapicker-icons__bottom span:not(:last-child) {
-  margin-right: 10px;
+    margin-right: 10px;
+}
+
+.fapicker-icons__type-selector {
+    border-bottom: 1px solid #ebebeb;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+.fapicker-icons__type-selector li {
+    flex-basis: 0;
+    flex: 1;
+    padding: 10px;
+    text-align: center;
 }
