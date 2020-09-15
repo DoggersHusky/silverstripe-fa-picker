@@ -21,7 +21,7 @@ class FAPickerField extends TextField
 
         //should we disable the built in ontawesome
         if (!$extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
-            Requirements::css("buckleshusky/fontawesomeiconpicker:css/external/fontawesome-all.min.css");
+            Requirements::css("buckleshusky/fontawesomeiconpicker:external/css/all.min.css");
         }
 
         //add the extra requirements if need be
