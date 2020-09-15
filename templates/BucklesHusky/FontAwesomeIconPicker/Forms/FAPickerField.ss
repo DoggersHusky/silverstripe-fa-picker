@@ -23,7 +23,7 @@
 
         <div class="fapicker-icons__bottom">
             <span class="small version">Version <strong>$VersionNumber</strong></span>
-            <span class="small icons"><strong>0</strong> Icons</span>
+            <span class="small icons"><strong>$IconAmount</strong> Icons</span>
         </div>
     </div>
 </div>

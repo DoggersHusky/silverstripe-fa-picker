@@ -13,6 +13,8 @@ use SilverStripe\View\Requirements;
 class FAPickerField extends TextField implements Flushable
 {
 
+    private $iconAmount = null;
+
     private static $casting = [
         'getIconList' => 'HTMLFragment',
     ];
@@ -114,12 +116,18 @@ class FAPickerField extends TextField implements Flushable
                     . '</div></li>';
             }
 
+            //total amount icons
+            $cache->set('iconAmount', count($icons));
+
             //cache the template
             $cache->set('iconList', $template);
         } else {
             //get from cache
             $template = $cache->get('iconList');
         }
+
+        //store the icon amount
+        $this->iconAmount = $cache->get('iconAmount');
 
         //output to template
         $html = DBHTMLText::create();
@@ -158,6 +166,11 @@ class FAPickerField extends TextField implements Flushable
     public function getVersionNumber()
     {
         return Config::inst()->get('FontawesomeIcons', 'version');
+    }
+
+    public function getIconAmount()
+    {
+        return $this->iconAmount;
     }
 
     /**
