@@ -1,9 +1,13 @@
-FontAwesomeIconPicker
+Font Awesome Icon Picker
 =================
 
-Displays a Font Awesome 5 icon picker for SilverStripe 4.
+Adds a Font Awesome 5 icon picker to SilverStripe 4. This currently supports version 5.14.0 of Font Awesome
 
+**Free version**
 ![Overview of Image Cropper Field](screenshots/screenshot1.PNG)
+
+**Pro Version**
+![Overview of Image Cropper Field](screenshots/screenshot2.PNG)
 
 ## Requirements
 
@@ -21,7 +25,7 @@ composer require buckleshusky/fontawesomeiconpicker
 
 ## Usage
 
-Simple add the field to a DataObject or Page like you normally would. 
+Simply add the field to a DataObject or Page like you normally would. 
 This will save the Font Awesome Icon's class info to a dbfield for use on the front end.
 
 ```php
@@ -53,27 +57,37 @@ class TestDataObject extends DataObject
 ```
 
 ### Notes
-This has not been tested for use on the frontend of a site.
+
+This has not been tested for use on the frontend of a site, but this version should work. Please note, the enabling the pro version does introduce some lag. Caching has been introduce to midigate some of it, however, swapping between icon types or filtering does still cause lag. This is being looked into.
 
 ### Settings
 
+**Enable Font Awesome Pro**
+To enable Font Awesome Pro, add this to your yml file. Replace `all.min.css` with the Font Awesome Pro css name.
+
+```yml
+FontawesomeIcons:
+  unlock_pro_mode: true
+  css: "all.min.css"
+```
+
 **Adding your own icons:**
-To add your own icons from another css, you can add this to your yml file:
+To add your own icons from another (css) icon set, you can add this to your yml file:
 
 ```yml
 FontawesomeIcons:
   extra_requirements_css:
-    - "themes/test/css/iconpack.css"
-    - "themes/test/css/inconpack2.css"
+    - "themes/{your theme}/css/iconpack.css"
+    - "themes/{your theme}/css/inconpack2.css"
   icons:
-    - "css icon class"
-    - "css icon class"
+    - "{css icon class}"
+    - "{css icon class}"
 ```
 
 **Removing icons:**
-This only works for the built in fontawesome icons.
+This only works for the built in Font Awesome icons.
 Simply add this to your yml and list the icons you don't 
-want your users to select.
+want your users to be able to select.
 
 ```yml
 FontawesomeIcons:
@@ -82,9 +96,9 @@ FontawesomeIcons:
     - "fas fa-air-freshener"
 ```
 
-**Disabling built in Fontawesome:**
-If you want to use your own icons or a new version of fontawesome,
-you can disable the built in fontawesome. If you decide to add your own,
+**Disabling built in Font Awesome:**
+If you want to use your own icons or a version of Font Awesome that is not supported,
+you can disable the built in Font Awesome. If you decide to add your own,
 you will need a yml list of icons.
 
 ```yml
@@ -98,42 +112,13 @@ FontawesomeIcons:
 ```
 
 
-**If you decide to scrap FA yourself:**
-You can use one of the useful scripts below and then use that to create
-a yml file of icons
-
-for the solid tab here: https://fontawesome.com/cheatsheet/free/solid
-
-```javascript
-var names = new Set();
-var icons = document.getElementsByClassName('icon');
-for (const icon of icons) {
-const name = "fas fa-" + icon.getElementsByTagName('dd')[0].innerText;
-names.add(name);
-}
-console.log(JSON.stringify(Array.from(names)));
-```
-
-for the regular tab here: https://fontawesome.com/cheatsheet/free/regular
-
-```javascript
-var names = new Set();
-var icons = document.getElementsByClassName('icon');
-for (const icon of icons) {
-const name = "far fa-" + icon.getElementsByTagName('dd')[0].innerText;
-names.add(name);
-}
-console.log(JSON.stringify(Array.from(names)));
-```
-
-for the brands tab here: https://fontawesome.com/cheatsheet/free/brands
-
-```javascript
-var names = new Set();
-var icons = document.getElementsByClassName('icon');
-for (const icon of icons) {
-const name = "fab fa-" + icon.getElementsByTagName('dd')[0].innerText;
-names.add(name);
-}
-console.log(JSON.stringify(Array.from(names)));
-```
+### What's New
+- Ability to filter by icon type
+- The icons that populate the picker are now generated in php
+- The generated icon list is now cached
+- Updated to Font Awesome 5.14.0
+- Support for Font Awesome Pro
+- The icon's name is now displayed below the icon
+- The icon's size have been slightly increased
+- The icon's view area is now larger
+- Easier use on mobile
