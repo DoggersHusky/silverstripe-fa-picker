@@ -9,6 +9,8 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\Requirements;
+use SilverStripe\View\SSViewer;
+use SilverStripe\View\ThemeResourceLoader;
 
 class FAPickerField extends TextField implements Flushable
 {
@@ -38,7 +40,11 @@ class FAPickerField extends TextField implements Flushable
         }
 
         if ($this->getIsProVersion()) {
-            Requirements::css($this->getProVersionCss());
+            $loader = ThemeResourceLoader::inst();
+            //get a list of themes
+            $themes = Config::inst()->get(SSViewer::class, 'themes');
+            //load the requirements
+            Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
         }
 
         //add the extra requirements if need be
