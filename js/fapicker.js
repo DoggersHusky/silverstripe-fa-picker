@@ -54,7 +54,7 @@
             //trigger search
             timeout = setTimeout(function () {
               self.doSearch();
-            }, 1000);
+            }, 500);
           });
 
         //type selector
