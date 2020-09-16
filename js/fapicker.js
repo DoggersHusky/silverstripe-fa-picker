@@ -5,6 +5,7 @@
       onmatch: function () {
         //reference
         let self = $(this);
+        let timeout = null;
         let activeIcon = $(this)
           .find("input.fapicker.text")
           .val()
@@ -47,7 +48,13 @@
         $(this)
           .find(".fapicker-icons__search-holder input")
           .keyup(function () {
-            self.doSearch();
+            //clear the time out
+            clearTimeout(timeout);
+
+            //trigger search
+            timeout = setTimeout(function () {
+              self.doSearch();
+            }, 1000);
           });
 
         //type selector
