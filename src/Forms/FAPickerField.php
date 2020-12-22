@@ -6,6 +6,7 @@ use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\Requirements;
@@ -16,6 +17,10 @@ class FAPickerField extends TextField implements Flushable
 {
 
     private $iconAmount = null;
+
+    protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_STRING;
+
+    protected $schemaComponent = 'FAPickerField';
 
     private static $casting = [
         'getIconList' => 'HTMLFragment',
@@ -28,8 +33,8 @@ class FAPickerField extends TextField implements Flushable
      */
     public function Field($properties = array())
     {
-        Requirements::javascript("buckleshusky/fontawesomeiconpicker:js/fapicker.js");
-        Requirements::css("buckleshusky/fontawesomeiconpicker:css/fa-styles.css");
+        // Requirements::javascript("buckleshusky/fontawesomeiconpicker:js/fapicker.js");
+        // Requirements::css("buckleshusky/fontawesomeiconpicker:css/fa-styles.css");
 
         //should we disable the built in fontawesome
         if (!$extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
@@ -190,5 +195,28 @@ class FAPickerField extends TextField implements Flushable
     public static function flush()
     {
         Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker')->clear();
+    }
+
+    public function getSchemaDataDefaults()
+    {
+        $defaults = parent::getSchemaDataDefaults();
+        $defaults['data'] += [
+            'icon' => $this->value,
+        ];
+        return $defaults;
+    }
+
+    public function getAttributes()
+    {
+        $attributes = array(
+            'class' => $this->extraClass(),
+            'id' => $this->ID(),
+            'data-schema' => json_encode($this->getSchemaData()),
+            'data-state' => json_encode($this->getSchemaState()),
+        );
+
+        $attributes = array_merge($attributes, $this->attributes);
+
+        return $attributes;
     }
 }
