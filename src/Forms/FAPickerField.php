@@ -200,9 +200,9 @@ class FAPickerField extends TextField implements Flushable
     public function getSchemaDataDefaults()
     {
         $defaults = parent::getSchemaDataDefaults();
-        $defaults['data'] += [
-            'icon' => $this->value,
-        ];
+        // $defaults['data'] += [
+        //     'icon' => $this->value,
+        // ];
         return $defaults;
     }
 

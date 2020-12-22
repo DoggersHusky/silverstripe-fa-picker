@@ -18,7 +18,7 @@ jQuery.entwine('ss', ($) => {
     getContainer() {
       let container = this.siblings('.fa-holder')[0];
       if (!container) {
-        const newContainer = $('<div class=".fa-holder"></div>');
+        const newContainer = $('<div class="fa-holder"></div>');
         this.before(newContainer);
 
         container = newContainer[0];
