@@ -32,6 +32,7 @@
     "expose": [
       "css",
       "js",
+      "javascript",
       "external"
     ]
   }
