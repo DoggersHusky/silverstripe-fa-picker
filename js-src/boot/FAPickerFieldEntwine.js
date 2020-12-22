@@ -54,11 +54,18 @@ jQuery.entwine('ss', ($) => {
     refresh() {
       const props = this.getAttributes();
       const form = $(this).closest('form');
-      const onChange = () => {
-        // Trigger change detection (see jquery.changetracker.js)
-        setTimeout(() => {
-          form.trigger('change');
-        }, 0);
+      // This is our "polyfill" for `onAutoFill`
+      const setValue = (fieldName, value) => {
+        // We'll find the input by name, we shouldn't ever have the same input
+        // with the same name or form state will be messed up
+        const input = $('#' + fieldName);
+
+        // If there's no input field then we'll return early
+        if (!input) {
+          return;
+        }
+        // Now we can set the field value
+        input.val(value);
       };
 
       const FAPickerField = this.getComponent();
@@ -67,7 +74,7 @@ jQuery.entwine('ss', ($) => {
       ReactDOM.render(
         <FAPickerField
           {...props}
-          onChange={onChange}
+          onAutofill={setValue}
           noHolder
         />,
         this.getContainer()

@@ -17,14 +17,15 @@ class FAPickerField extends Component {
     }
 
     handleChange({value}) {
+        const { onAutofill } = this.props;
         this.setState({
             value: value,
         });
 
         const newValue = value;
 
-        console.log(newValue);
-        this.props.onChange({ id: this.props.id, value: newValue });
+        //this.props.onChange({ id: this.props.id, value: newValue });
+        onAutofill(this.props.id, newValue);
     }
 
     render() {
