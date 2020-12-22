@@ -13,3 +13,9 @@ SilverStripe\Core\Injector\Injector:
     factory: SilverStripe\Core\Cache\CacheFactory
     constructor:
       namespace: "fontawesomeiconpicker"
+
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_javascript:
+    - 'buckleshusky/fontawesomeiconpicker: javascript/boot/boot.js'
+#  extra_requirements_css:
+#    - 'jonom/focuspoint: client/dist/styles/main.css'
