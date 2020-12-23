@@ -17,5 +17,5 @@ SilverStripe\Core\Injector\Injector:
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_javascript:
     - 'buckleshusky/fontawesomeiconpicker: javascript/boot/boot.js'
-#  extra_requirements_css:
-#    - 'jonom/focuspoint: client/dist/styles/main.css'
+  extra_requirements_css:
+    - 'buckleshusky/fontawesomeiconpicker: css/fa-styles.css'

@@ -17,7 +17,7 @@ class FAPickerField extends Component {
     }
 
     handleChange({value}) {
-        const { onAutofill } = this.props;
+        const { onAutofill, name } = this.props;
         this.setState({
             value: value,
         });
@@ -25,38 +25,52 @@ class FAPickerField extends Component {
         const newValue = value;
 
         //this.props.onChange({ id: this.props.id, value: newValue });
-        onAutofill(this.props.id, newValue);
+        if (typeof onAutofill === 'function') {
+            //use to update jquery side
+            onAutofill(this.props.id, newValue);
+            
+            //onAutofill(`${name}`, newValue);
+        }
+
+        this.props.onChange(null, { id: this.props.id, value: newValue });
     }
 
     render() {
         const {value} = this.state;
+        const {FieldGroup} = this.props;
+        const newProps = {
+            ...this.props,
+            className: classNames('fapicker-field')
+          };
 
         return (
-            <div class="fapicker-icons">
-                <div class="fapicker-icons__search-holder">
-                    <span class="fapicker-icons__holder__icon"><i class={value}></i></span><input type="text" class="text" placeholder="Filter..."/>
+            <FieldGroup {...newProps}>
+                <div class="fapicker-icons">
+                    <div class="fapicker-icons__search-holder">
+                        <span class="fapicker-icons__holder__icon"><i class={value}></i></span><input type="text" class="text" placeholder="Filter..."/>
+                    </div>
+            
+                    <ul class="fapicker-icons__type-selector">
+                        <li data-type="" class="active">All</li>
+                        <li data-type="fas">Solid</li>
+                        <li data-type="far">Regular</li>
+                            <li data-type="fal">Light</li>
+                            <li data-type="fad">Duotone</li>
+                        <li data-type="fab">Brands</li>
+                    </ul>
+            
+                    <ul class="fapicker-icons__holder">
+                        <FAPickerIcon className="fapicker-icons__holder__icon" iconValue="fas fa-bicycle" onChange={this.handleChange}/>
+                        <FAPickerIcon className="fapicker-icons__holder__icon" iconValue="fas fa-church" onChange={this.handleChange}/>
+                        <FAPickerIcon className="fapicker-icons__holder__icon" iconValue="fas fa-moon" onChange={this.handleChange}/>
+                    </ul>
+            
+                    <div class="fapicker-icons__bottom">
+                        <span class="small version">Version <strong>$VersionNumber</strong></span>
+                        <span class="small icons"><strong>$IconAmount</strong> Icons</span>
+                    </div>
                 </div>
-        
-                <ul class="fapicker-icons__type-selector">
-                    <li data-type="" class="active">All</li>
-                    <li data-type="fas">Solid</li>
-                    <li data-type="far">Regular</li>
-                        <li data-type="fal">Light</li>
-                        <li data-type="fad">Duotone</li>
-                    <li data-type="fab">Brands</li>
-                </ul>
-        
-                <ul class="fapicker-icons__holder">
-                    <FAPickerIcon className="focuspoint-field__picker" iconValue="fas fa-bicycle" onChange={this.handleChange}/>
-                    <FAPickerIcon className="focuspoint-field__picker" iconValue="fas fa-church" onChange={this.handleChange}/>
-                    <FAPickerIcon className="focuspoint-field__picker" iconValue="fas fa-moon" onChange={this.handleChange}/>
-                </ul>
-        
-                <div class="fapicker-icons__bottom">
-                    <span class="small version">Version <strong>$VersionNumber</strong></span>
-                    <span class="small icons"><strong>$IconAmount</strong> Icons</span>
-                </div>
-            </div>
+            </FieldGroup>
         )
       }
 
@@ -75,7 +89,13 @@ FAPickerField.propTypes = {
     name: PropTypes.string.isRequired,
     children: PropTypes.array.isRequired,
     onAutofill: PropTypes.func,
+    onChange: PropTypes.func,
     readOnly: PropTypes.bool
 };
 
-export default FAPickerField;
+//export default FAPickerField;
+export { FAPickerField as Component };
+
+export default inject(
+    ['FieldGroup']
+  )(FAPickerField);

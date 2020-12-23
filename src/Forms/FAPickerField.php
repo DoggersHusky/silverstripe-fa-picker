@@ -18,7 +18,7 @@ class FAPickerField extends TextField implements Flushable
 
     private $iconAmount = null;
 
-    protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_STRING;
+    protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_TEXT;
 
     protected $schemaComponent = 'FAPickerField';
 
