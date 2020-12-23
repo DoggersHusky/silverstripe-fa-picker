@@ -8,7 +8,7 @@ class FAPickerField extends Component {
 
     constructor(props) {
         super(props);
-    
+
         this.state = {
             value: props.value ? props.value : "",
         };
@@ -24,15 +24,9 @@ class FAPickerField extends Component {
 
         const newValue = value;
 
-        //this.props.onChange({ id: this.props.id, value: newValue });
         if (typeof onAutofill === 'function') {
-            //use to update jquery side
-            onAutofill(this.props.id, newValue);
-            
-            //onAutofill(`${name}`, newValue);
+            onAutofill(`${name}`, newValue);
         }
-
-        this.props.onChange(null, { id: this.props.id, value: newValue });
     }
 
     render() {
@@ -72,9 +66,7 @@ class FAPickerField extends Component {
                 </div>
             </FieldGroup>
         )
-      }
-
-
+    }
 
 }
 
@@ -90,6 +82,7 @@ FAPickerField.propTypes = {
     children: PropTypes.array.isRequired,
     onAutofill: PropTypes.func,
     onChange: PropTypes.func,
+    value: PropTypes.string,
     readOnly: PropTypes.bool
 };
 

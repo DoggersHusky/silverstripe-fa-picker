@@ -58,7 +58,8 @@ jQuery.entwine('ss', ($) => {
       const setValue = (fieldName, value) => {
         // We'll find the input by name, we shouldn't ever have the same input
         // with the same name or form state will be messed up
-        const input = $('#' + fieldName);
+        //const input = $('#' + fieldName);
+        const input = $('input[name="'+fieldName+'"]');
 
         // If there's no input field then we'll return early
         if (!input) {
