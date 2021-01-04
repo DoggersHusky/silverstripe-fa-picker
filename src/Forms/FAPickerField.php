@@ -33,17 +33,6 @@ class FAPickerField extends TextField implements Flushable
      */
     public function Field($properties = array())
     {
-        // Requirements::javascript("buckleshusky/fontawesomeiconpicker:js/fapicker.js");
-        // Requirements::css("buckleshusky/fontawesomeiconpicker:css/fa-styles.css");
-
-        //should we disable the built in fontawesome
-        if (!$extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
-            //if the pro version is set, don't load the free version
-            if (!$this->getIsProVersion()) {
-                Requirements::css("buckleshusky/fontawesomeiconpicker:external/css/all.min.css");
-            }
-        }
-
         if ($this->getIsProVersion()) {
             $loader = ThemeResourceLoader::inst();
             //get a list of themes
@@ -218,5 +207,4 @@ class FAPickerField extends TextField implements Flushable
 
         return $attributes;
     }
-
 }
