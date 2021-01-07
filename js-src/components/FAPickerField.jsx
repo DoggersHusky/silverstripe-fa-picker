@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { inject } from 'lib/Injector';
 import PropTypes from 'prop-types';
 import FAPickerIcon from '../components/FAPickerIcon.jsx';
+import PaginationList from 'react-pagination-list';
 
 class FAPickerField extends Component {
 
@@ -128,9 +129,15 @@ class FAPickerField extends Component {
                         <li onClick={() => this.handleFilterTypeClick('fab')} class={this.state.activeFilterType == 'fab' ? 'active': null}>Brands</li>
                     </ul>
             
-                    <ul class="fapicker-icons__holder">
-                        {listItems}
-                    </ul>
+                    <div class="fapicker-icons__holder">
+                        <PaginationList 
+                            data={filteredList}
+                            pageSize={100}
+                            renderItem={(icon, key) => (
+                                <FAPickerIcon className={this.state.value == icon.fullName ? 'active' : null} iconValue={icon} onChange={this.handleChange}/>
+                            )}
+                        />
+                    </div>
             
                     <div class="fapicker-icons__bottom">
                         <span class="small version">Version <strong>{iconVersion}</strong></span>

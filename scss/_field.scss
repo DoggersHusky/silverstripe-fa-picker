@@ -2,26 +2,6 @@ input.fapicker.text {
     display: none;
 }
 
-.fapicker-icons__holder {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-
-    height: 350px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-
-    padding-left: 20px;
-    padding-right: 8px;
-    padding-top: 20px;
-    margin-bottom: 0px;
-
-    list-style: none;
-
-    align-items: normal;
-}
-
 .fapicker-icons {
     background-color: #fff;
     border: 1px solid;
@@ -46,8 +26,8 @@ input.fapicker.text {
     position: relative;
     z-index: 2;
 
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,20 +47,50 @@ input.fapicker.text {
 }
 
 .fapicker-icons__holder__icon i {
-    font-size: 35px;
+    font-size: 50px;
 }
 
-.fapicker-icons__holder li {
+.fapicker-icons__holder > div {
     position: relative;
     max-width: calc(60px + 12px);
+    padding: 0 !important;
+    align-items: center;
 }
 
-.fapicker-icons__holder li div:last-child {
+.fapicker-icons__holder > div,
+.fapicker-icons__holder > div > div {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.fapicker-icons__holder > div > div {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    height: 350px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    padding-left: 20px;
+    padding-right: 8px;
+    padding-top: 20px;
+    margin-bottom: 0px;
+
+    list-style: none;
+
+    align-items: normal;
+}
+
+.fapicker-icons__holder__fullicon div:last-child {
     margin: 0px 12px 12px 0px;
     text-align: center;
     font-size: 75%;
     box-shadow: 0 0 0 1px #ddd;
-    padding: 2px;
+    width: 100%;
+    max-width: 80px;
 }
 
 .fapicker-icons__holder__icon.active {
