@@ -164,6 +164,11 @@ class FAPickerField extends TextField implements Flushable
 
     public function getIconAmount()
     {
+        if ($this->iconAmount == null) {
+            $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
+            return $cache->get('iconAmount');
+
+        }
         return $this->iconAmount;
     }
 
@@ -184,6 +189,7 @@ class FAPickerField extends TextField implements Flushable
         //@todo needs to send over version, icon total, and pro enabled
         $defaults['data']['iconList'] = $iconList;
         $defaults['data']['iconVersion'] = $this->getVersionNumber();
+        $defaults['data']['iconTotal'] = $this->getIconAmount();
 
         return $defaults;
     }

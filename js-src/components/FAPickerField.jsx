@@ -14,6 +14,7 @@ class FAPickerField extends Component {
             iconList: props.data.iconList ? props.data.iconList : null,
             filteredList: props.data.iconList ? props.data.iconList : null,
             iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
+            iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
             activeFilter: "all",
         };
 
@@ -67,7 +68,7 @@ class FAPickerField extends Component {
     }
 
     render() {
-        const {value,filteredList,iconVersion} = this.state;
+        const {value,filteredList,iconVersion,iconTotal} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
@@ -98,7 +99,7 @@ class FAPickerField extends Component {
             
                     <div class="fapicker-icons__bottom">
                         <span class="small version">Version <strong>{iconVersion}</strong></span>
-                        <span class="small icons"><strong>$IconAmount</strong> Icons</span>
+                        <span class="small icons"><strong>{iconTotal}</strong> Icons</span>
                     </div>
                 </div>
             </FieldGroup>
