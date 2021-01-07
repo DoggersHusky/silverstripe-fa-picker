@@ -27,7 +27,7 @@ class FocusPointPicker extends Component {
 
         return (
             <li>
-                <div className={classNames(className, "focuspoint-picker")} title={tooltip} onClick={() => this.handleClick(iconValue.fullName)}>
+                <div className={classNames(className, "fapicker-icons__holder__icon")} title={tooltip} onClick={() => this.handleClick(iconValue.fullName)}>
                     <i class={iconValue.fullName}></i>
                 </div>
                 <div>
