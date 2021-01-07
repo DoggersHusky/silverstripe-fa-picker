@@ -13,7 +13,6 @@ class FocusPointPicker extends Component {
     }
 
     handleClick(icon) {
-        console.log(icon);
         if (typeof this.props.onChange === 'function') {
             this.props.onChange({
               value: icon,

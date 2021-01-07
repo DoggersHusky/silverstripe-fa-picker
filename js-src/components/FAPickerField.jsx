@@ -79,7 +79,6 @@ class FAPickerField extends Component {
     }
 
     searchIcons(value) {
-        console.log(value);
         let newList = "";
 
         //check to see if we have a value to filter by
