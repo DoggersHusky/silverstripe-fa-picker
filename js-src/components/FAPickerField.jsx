@@ -21,6 +21,8 @@ class FAPickerField extends Component {
         this.handleChange = this.handleChange.bind(this);
         //handle clicking on a filter all, bold, etc
         this.handleFilterClick = this.handleFilterClick.bind(this);
+        //handle search icons
+        this.searchIcons = this.searchIcons.bind(this);
     }
 
     /**
@@ -30,6 +32,10 @@ class FAPickerField extends Component {
         console.log('hello world');
     }
 
+    /**
+     * handle when a new icon is selected
+     * the icon click event passes to this handler
+     */
     handleChange({value}) {
         const { onAutofill, name } = this.props;
         this.setState({
@@ -67,6 +73,25 @@ class FAPickerField extends Component {
         });
     }
 
+    searchIcons(value) {
+        console.log(value);
+        let newList = "";
+
+        //check to see if we have a value to filter by
+        if (value == "") {
+            newList = this.state.iconList;
+        }else{
+            // filter the filterlist by the shortname as we don't want far,fab to be 
+            // determining factors
+            newList = this.state.filteredList.filter(icon => icon.shortName.includes(value) );
+        }
+        
+        //update the filtered list as we want to always have a reference to the full list
+        this.setState({
+            filteredList: newList,
+        });
+    }
+
     render() {
         const {value,filteredList,iconVersion,iconTotal} = this.state;
         const {FieldGroup} = this.props;
@@ -81,7 +106,7 @@ class FAPickerField extends Component {
             <FieldGroup {...newProps}>
                 <div class="fapicker-icons">
                     <div class="fapicker-icons__search-holder">
-                        <span class="fapicker-icons__holder__icon"><i class={value}></i></span><input type="text" class="text" placeholder="Filter..."/>
+                        <span class="fapicker-icons__holder__icon"><i class={value}></i></span><input type="text" class="text" placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
                     </div>
             
                     <ul class="fapicker-icons__type-selector">
