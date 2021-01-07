@@ -93,7 +93,7 @@ class FAPickerField extends Component {
         }else{
             // filter the filterlist by the shortname as we don't want far,fab to be 
             // determining factors
-            newList = this.state.filteredList.filter(icon => icon.shortName.includes(value) );
+            newList = this.filterByType(this.state.activeFilterType).filter(icon => icon.shortName.includes(value) );
         }
         
         //update the filtered list as we want to always have a reference to the full list
