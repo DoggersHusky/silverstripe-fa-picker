@@ -13,6 +13,8 @@ class FAPickerField extends Component {
             value: props.value ? props.value : "",
             iconList: props.data.iconList ? props.data.iconList : null,
             filteredList: props.data.iconList ? props.data.iconList : null,
+            iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
+            activeFilter: "all",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -45,23 +47,34 @@ class FAPickerField extends Component {
      * when all, bold, etc is clicked
      */
     handleFilterClick(value) {
-        //filter the new list
-        let newList = this.state.iconList.filter(icon => icon.fullName.includes(value) );
+
+        let newList = "";
+
+        //determine if we should default back to the list
+        if (value == "all") {
+            newList = this.state.iconList;
+        }else{
+            //filter the new list
+            newList = this.state.iconList.filter(icon => icon.fullName.includes(value) );
+        }
+
+        
         //update the filtered list as we want to always have a reference to the full list
         this.setState({
             filteredList: newList,
+            activeFilter: value,
         });
     }
 
     render() {
-        const {value,filteredList} = this.state;
+        const {value,filteredList,iconVersion} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
             className: classNames('fapicker-field')
           };
         const listItems = filteredList.map((icon) =>
-            <FAPickerIcon className="fapicker-icons__holder__icon" iconValue={icon.fullName} onChange={this.handleChange}/>
+            <FAPickerIcon className="fapicker-icons__holder__icon" iconValue={icon} onChange={this.handleChange}/>
         );
         return (
             <FieldGroup {...newProps}>
@@ -71,12 +84,12 @@ class FAPickerField extends Component {
                     </div>
             
                     <ul class="fapicker-icons__type-selector">
-                        <li data-type="" class="active">All</li>
-                        <li onClick={() => this.handleFilterClick('fas')}>Solid</li>
-                        <li data-type="far">Regular</li>
-                            <li data-type="fal">Light</li>
-                            <li data-type="fad">Duotone</li>
-                        <li onClick={() => this.handleFilterClick('fab')}>Brands</li>
+                        <li onClick={() => this.handleFilterClick('all')} class={this.state.activeFilter == 'all' ? 'active': null}>All</li>
+                        <li onClick={() => this.handleFilterClick('fas')} class={this.state.activeFilter == 'fas' ? 'active': null}>Solid</li>
+                        <li onClick={() => this.handleFilterClick('far')} class={this.state.activeFilter == 'far' ? 'active': null}>Regular</li>
+                        <li onClick={() => this.handleFilterClick('fal')} class={this.state.activeFilter == 'fal' ? 'active': null}>Light</li>
+                        <li onClick={() => this.handleFilterClick('fad')} class={this.state.activeFilter == 'fad' ? 'active': null}>Duotone</li>
+                        <li onClick={() => this.handleFilterClick('fab')} class={this.state.activeFilter == 'fab' ? 'active': null}>Brands</li>
                     </ul>
             
                     <ul class="fapicker-icons__holder">
@@ -84,7 +97,7 @@ class FAPickerField extends Component {
                     </ul>
             
                     <div class="fapicker-icons__bottom">
-                        <span class="small version">Version <strong>$VersionNumber</strong></span>
+                        <span class="small version">Version <strong>{iconVersion}</strong></span>
                         <span class="small icons"><strong>$IconAmount</strong> Icons</span>
                     </div>
                 </div>

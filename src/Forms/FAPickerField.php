@@ -9,8 +9,6 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\View\Requirements;
-use SilverStripe\View\SSViewer;
-use SilverStripe\View\ThemeResourceLoader;
 
 class FAPickerField extends TextField implements Flushable
 {
@@ -32,20 +30,20 @@ class FAPickerField extends TextField implements Flushable
      */
     public function Field($properties = array())
     {
-        if ($this->getIsProVersion()) {
-            $loader = ThemeResourceLoader::inst();
-            //get a list of themes
-            $themes = Config::inst()->get(SSViewer::class, 'themes');
-            //load the requirements
-            Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
-        }
+        // if ($this->getIsProVersion()) {
+        //     $loader = ThemeResourceLoader::inst();
+        //     //get a list of themes
+        //     $themes = Config::inst()->get(SSViewer::class, 'themes');
+        //     //load the requirements
+        //     Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
+        // }
 
-        //add the extra requirements if need be
-        if ($extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'extra_requirements_css')) {
-            foreach ($extraCSSClasses as $css) {
-                Requirements::css($css);
-            }
-        }
+        // //add the extra requirements if need be
+        // if ($extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'extra_requirements_css')) {
+        //     foreach ($extraCSSClasses as $css) {
+        //         Requirements::css($css);
+        //     }
+        // }
 
         return parent::Field($properties);
     }
@@ -185,6 +183,7 @@ class FAPickerField extends TextField implements Flushable
 
         //@todo needs to send over version, icon total, and pro enabled
         $defaults['data']['iconList'] = $iconList;
+        $defaults['data']['iconVersion'] = $this->getVersionNumber();
 
         return $defaults;
     }

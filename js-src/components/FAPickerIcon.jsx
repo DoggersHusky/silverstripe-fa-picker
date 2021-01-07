@@ -26,9 +26,14 @@ class FocusPointPicker extends Component {
         const {iconValue, className, tooltip} = this.props;
 
         return (
-            <div className={classNames(className, "focuspoint-picker")} title={tooltip} onClick={() => this.handleClick(iconValue)}>
-                <i class={iconValue}></i>
-            </div>
+            <li>
+                <div className={classNames(className, "focuspoint-picker")} title={tooltip} onClick={() => this.handleClick(iconValue.fullName)}>
+                    <i class={iconValue.fullName}></i>
+                </div>
+                <div>
+                    {iconValue.shortName}
+                </div>
+            </li>
         )
     }
 }
