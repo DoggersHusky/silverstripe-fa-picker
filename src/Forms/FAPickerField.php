@@ -107,6 +107,8 @@ class FAPickerField extends TextField implements Flushable
             foreach ($icons as $icon) {
                 //the data icon value/the name of the icon
                 $shortIconName = trim(substr($icon, strpos($icon, '-') + 1));
+
+                // @todo should also contain the type
                 array_push($iconArray, [
                     'shortName' => $shortIconName,
                     'fullName' => $icon,
@@ -181,6 +183,7 @@ class FAPickerField extends TextField implements Flushable
         $iconList = $this->getIconList();
         $defaults = parent::getSchemaDataDefaults();
 
+        //@todo needs to send over version, icon total, and pro enabled
         $defaults['data']['iconList'] = $iconList;
 
         return $defaults;

@@ -12,9 +12,19 @@ class FAPickerField extends Component {
         this.state = {
             value: props.value ? props.value : "",
             iconList: props.data.iconList ? props.data.iconList : null,
+            filteredList: props.data.iconList ? props.data.iconList : null,
         };
 
         this.handleChange = this.handleChange.bind(this);
+        //handle clicking on a filter all, bold, etc
+        this.handleFilterClick = this.handleFilterClick.bind(this);
+    }
+
+    /**
+     * when the component did mount
+     */
+    componentDidMount() {
+        console.log('hello world');
     }
 
     handleChange({value}) {
@@ -30,14 +40,27 @@ class FAPickerField extends Component {
         }
     }
 
+    /**
+     * handles filtering down the list
+     * when all, bold, etc is clicked
+     */
+    handleFilterClick(value) {
+        //filter the new list
+        let newList = this.state.iconList.filter(icon => icon.fullName.includes(value) );
+        //update the filtered list as we want to always have a reference to the full list
+        this.setState({
+            filteredList: newList,
+        });
+    }
+
     render() {
-        const {value,iconList} = this.state;
+        const {value,filteredList} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
             className: classNames('fapicker-field')
           };
-        const listItems = iconList.map((icon) =>
+        const listItems = filteredList.map((icon) =>
             <FAPickerIcon className="fapicker-icons__holder__icon" iconValue={icon.fullName} onChange={this.handleChange}/>
         );
         return (
@@ -49,11 +72,11 @@ class FAPickerField extends Component {
             
                     <ul class="fapicker-icons__type-selector">
                         <li data-type="" class="active">All</li>
-                        <li data-type="fas">Solid</li>
+                        <li onClick={() => this.handleFilterClick('fas')}>Solid</li>
                         <li data-type="far">Regular</li>
                             <li data-type="fal">Light</li>
                             <li data-type="fad">Duotone</li>
-                        <li data-type="fab">Brands</li>
+                        <li onClick={() => this.handleFilterClick('fab')}>Brands</li>
                     </ul>
             
                     <ul class="fapicker-icons__holder">
