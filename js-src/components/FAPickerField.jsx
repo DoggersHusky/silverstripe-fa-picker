@@ -16,6 +16,7 @@ class FAPickerField extends Component {
             iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
             iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
             activeFilter: "all",
+            searchValue: null,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -54,7 +55,16 @@ class FAPickerField extends Component {
      * when all, bold, etc is clicked
      */
     handleFilterClick(value) {
+        // update the filtered list as we want to always have a reference to the full list
+        // also clear the search field
+        this.setState({
+            filteredList: this.filterByType(value),
+            activeFilter: value,
+            searchValue: "",
+        });
+    }
 
+    filterByType(value) {
         let newList = "";
 
         //determine if we should default back to the list
@@ -65,12 +75,7 @@ class FAPickerField extends Component {
             newList = this.state.iconList.filter(icon => icon.fullName.includes(value) );
         }
 
-        
-        //update the filtered list as we want to always have a reference to the full list
-        this.setState({
-            filteredList: newList,
-            activeFilter: value,
-        });
+        return newList;
     }
 
     searchIcons(value) {
@@ -78,8 +83,10 @@ class FAPickerField extends Component {
         let newList = "";
 
         //check to see if we have a value to filter by
-        if (value == "") {
-            newList = this.state.iconList;
+        if (value === "") {
+            //filter list by active filter
+            newList = this.filterByType(this.state.activeFilter);
+
         }else{
             // filter the filterlist by the shortname as we don't want far,fab to be 
             // determining factors
@@ -89,11 +96,12 @@ class FAPickerField extends Component {
         //update the filtered list as we want to always have a reference to the full list
         this.setState({
             filteredList: newList,
+            searchValue: value,
         });
     }
 
     render() {
-        const {value,filteredList,iconVersion,iconTotal} = this.state;
+        const {value,filteredList,iconVersion,iconTotal,searchValue} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
@@ -106,7 +114,7 @@ class FAPickerField extends Component {
             <FieldGroup {...newProps}>
                 <div class="fapicker-icons">
                     <div class="fapicker-icons__search-holder">
-                        <span class="fapicker-icons__holder__icon"><i class={value}></i></span><input type="text" class="text" placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
+                        <span class="fapicker-icons__holder__icon"><i class={value}></i></span><input type="text" value={searchValue} class="text" placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
                     </div>
             
                     <ul class="fapicker-icons__type-selector">
