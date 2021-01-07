@@ -30,22 +30,6 @@ class FAPickerField extends TextField implements Flushable
      */
     public function Field($properties = array())
     {
-        // @todo move to left and main extension
-        // if ($this->getIsProVersion()) {
-        //     $loader = ThemeResourceLoader::inst();
-        //     //get a list of themes
-        //     $themes = Config::inst()->get(SSViewer::class, 'themes');
-        //     //load the requirements
-        //     Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
-        // }
-
-        // //add the extra requirements if need be
-        // if ($extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'extra_requirements_css')) {
-        //     foreach ($extraCSSClasses as $css) {
-        //         Requirements::css($css);
-        //     }
-        // }
-
         return parent::Field($properties);
     }
 
@@ -141,16 +125,6 @@ class FAPickerField extends TextField implements Flushable
             return true;
         }
         return false;
-    }
-
-    /**
-     * Get the pro version css location
-     *
-     * @return void
-     */
-    public function getProVersionCss()
-    {
-        return Config::inst()->get('FontawesomeIcons', 'css');
     }
 
     /**

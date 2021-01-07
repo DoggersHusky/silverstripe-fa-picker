@@ -20,3 +20,5 @@ SilverStripe\Admin\LeftAndMain:
     extra_requirements_css:
         - "buckleshusky/fontawesomeiconpicker: css/styles.css"
         - "buckleshusky/fontawesomeiconpicker: css/fontawesome.css"
+    extensions:
+        - BucklesHusky\FontAwesomeIconPicker\Extensions\LeftAndMainExtension
