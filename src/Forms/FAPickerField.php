@@ -30,6 +30,7 @@ class FAPickerField extends TextField implements Flushable
      */
     public function Field($properties = array())
     {
+        // @todo move to left and main extension
         // if ($this->getIsProVersion()) {
         //     $loader = ThemeResourceLoader::inst();
         //     //get a list of themes
