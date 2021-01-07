@@ -8,7 +8,6 @@ use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\TextField;
-use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
 use SilverStripe\View\ThemeResourceLoader;
@@ -77,7 +76,8 @@ class FAPickerField extends TextField implements Flushable
      */
     public function getIconList()
     {
-        $template = "";
+        //array of icons
+        $iconArray = [];
         $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
 
         //check to see if the icon list exist
@@ -106,37 +106,27 @@ class FAPickerField extends TextField implements Flushable
             //needs to be cached
             foreach ($icons as $icon) {
                 //the data icon value/the name of the icon
-                $dataIcon = trim(substr($icon, strpos($icon, '-') + 1));
-
-                //add the icon to the template variable
-                $template .= '<li><div class="fapicker-icons__holder__icon" data-icon="' .
-                    $icon .
-                    '" data-search-icon="' .
-                    $dataIcon .
-                    '"><i class="' .
-                    $icon .
-                    '"></i></div><div>' .
-                    $dataIcon
-                    . '</div></li>';
+                $shortIconName = trim(substr($icon, strpos($icon, '-') + 1));
+                array_push($iconArray, [
+                    'shortName' => $shortIconName,
+                    'fullName' => $icon,
+                ]);
             }
 
             //total amount icons
             $cache->set('iconAmount', count($icons));
 
             //cache the template
-            $cache->set('iconList', $template);
+            $cache->set('iconList', $iconArray);
         } else {
             //get from cache
-            $template = $cache->get('iconList');
+            $iconArray = $cache->get('iconList');
         }
 
         //store the icon amount
         $this->iconAmount = $cache->get('iconAmount');
 
-        //output to template
-        $html = DBHTMLText::create();
-        $html->setValue($template);
-        return $html;
+        return $iconArray;
     }
 
     /**
@@ -188,7 +178,11 @@ class FAPickerField extends TextField implements Flushable
 
     public function getSchemaDataDefaults()
     {
+        $iconList = $this->getIconList();
         $defaults = parent::getSchemaDataDefaults();
+
+        $defaults['data']['iconList'] = $iconList;
+
         return $defaults;
     }
 

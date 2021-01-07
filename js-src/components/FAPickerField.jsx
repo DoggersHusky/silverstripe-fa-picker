@@ -8,9 +8,10 @@ class FAPickerField extends Component {
 
     constructor(props) {
         super(props);
-
+        
         this.state = {
             value: props.value ? props.value : "",
+            iconList: props.data.iconList ? props.data.iconList : null,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -30,13 +31,15 @@ class FAPickerField extends Component {
     }
 
     render() {
-        const {value} = this.state;
+        const {value,iconList} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
             className: classNames('fapicker-field')
           };
-
+        const listItems = iconList.map((icon) =>
+            <FAPickerIcon className="fapicker-icons__holder__icon" iconValue={icon.fullName} onChange={this.handleChange}/>
+        );
         return (
             <FieldGroup {...newProps}>
                 <div class="fapicker-icons">
@@ -54,9 +57,7 @@ class FAPickerField extends Component {
                     </ul>
             
                     <ul class="fapicker-icons__holder">
-                        <FAPickerIcon className="fapicker-icons__holder__icon" iconValue="fas fa-bicycle" onChange={this.handleChange}/>
-                        <FAPickerIcon className="fapicker-icons__holder__icon" iconValue="fas fa-church" onChange={this.handleChange}/>
-                        <FAPickerIcon className="fapicker-icons__holder__icon" iconValue="fas fa-moon" onChange={this.handleChange}/>
+                        {listItems}
                     </ul>
             
                     <div class="fapicker-icons__bottom">
