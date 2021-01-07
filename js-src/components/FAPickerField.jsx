@@ -15,7 +15,7 @@ class FAPickerField extends Component {
             filteredList: props.data.iconList ? props.data.iconList : null,
             iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
             iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
-            activeFilter: "all",
+            activeFilterType: "all",
             searchValue: null,
         };
 
@@ -59,7 +59,7 @@ class FAPickerField extends Component {
         // also clear the search field
         this.setState({
             filteredList: this.filterByType(value),
-            activeFilter: value,
+            activeFilterType: value,
             searchValue: "",
         });
     }
@@ -85,7 +85,7 @@ class FAPickerField extends Component {
         //check to see if we have a value to filter by
         if (value === "") {
             //filter list by active filter
-            newList = this.filterByType(this.state.activeFilter);
+            newList = this.filterByType(this.state.activeFilterType);
 
         }else{
             // filter the filterlist by the shortname as we don't want far,fab to be 
@@ -118,12 +118,12 @@ class FAPickerField extends Component {
                     </div>
             
                     <ul class="fapicker-icons__type-selector">
-                        <li onClick={() => this.handleFilterClick('all')} class={this.state.activeFilter == 'all' ? 'active': null}>All</li>
-                        <li onClick={() => this.handleFilterClick('fas')} class={this.state.activeFilter == 'fas' ? 'active': null}>Solid</li>
-                        <li onClick={() => this.handleFilterClick('far')} class={this.state.activeFilter == 'far' ? 'active': null}>Regular</li>
-                        <li onClick={() => this.handleFilterClick('fal')} class={this.state.activeFilter == 'fal' ? 'active': null}>Light</li>
-                        <li onClick={() => this.handleFilterClick('fad')} class={this.state.activeFilter == 'fad' ? 'active': null}>Duotone</li>
-                        <li onClick={() => this.handleFilterClick('fab')} class={this.state.activeFilter == 'fab' ? 'active': null}>Brands</li>
+                        <li onClick={() => this.handleFilterClick('all')} class={this.state.activeFilterType == 'all' ? 'active': null}>All</li>
+                        <li onClick={() => this.handleFilterClick('fas')} class={this.state.activeFilterType == 'fas' ? 'active': null}>Solid</li>
+                        <li onClick={() => this.handleFilterClick('far')} class={this.state.activeFilterType == 'far' ? 'active': null}>Regular</li>
+                        <li onClick={() => this.handleFilterClick('fal')} class={this.state.activeFilterType == 'fal' ? 'active': null}>Light</li>
+                        <li onClick={() => this.handleFilterClick('fad')} class={this.state.activeFilterType == 'fad' ? 'active': null}>Duotone</li>
+                        <li onClick={() => this.handleFilterClick('fab')} class={this.state.activeFilterType == 'fab' ? 'active': null}>Brands</li>
                     </ul>
             
                     <ul class="fapicker-icons__holder">
