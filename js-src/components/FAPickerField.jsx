@@ -76,7 +76,7 @@ class FAPickerField extends Component {
             newList = this.state.iconList;
         }else{
             //filter the new list
-            newList = this.state.iconList.filter(icon => icon.fullName.includes(value) );
+            newList = this.state.iconList.filter(icon => icon.type.includes(value) );
         }
 
         return newList;

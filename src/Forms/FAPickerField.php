@@ -8,7 +8,6 @@ use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\TextField;
-use SilverStripe\View\Requirements;
 
 class FAPickerField extends TextField implements Flushable
 {
@@ -22,16 +21,6 @@ class FAPickerField extends TextField implements Flushable
     private static $casting = [
         'getIconList' => 'HTMLFragment',
     ];
-
-    /**
-     * Adds in the requirements for the field
-     * @param array $properties Array of properties for the form element (not used)
-     * @return string Rendered field template
-     */
-    public function Field($properties = array())
-    {
-        return parent::Field($properties);
-    }
 
     /**
      * Compiles all CSS-classes. Optionally includes a "form-group--no-label" class if no title was set on the
@@ -90,9 +79,11 @@ class FAPickerField extends TextField implements Flushable
             foreach ($icons as $icon) {
                 //the data icon value/the name of the icon
                 $shortIconName = trim(substr($icon, strpos($icon, '-') + 1));
+                //get the icon type
+                $iconType = trim(strtok($icon, " "));
 
-                // @todo should also contain the type
                 array_push($iconArray, [
+                    'type' => $iconType,
                     'shortName' => $shortIconName,
                     'fullName' => $icon,
                 ]);
