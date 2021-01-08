@@ -156,6 +156,7 @@ class FAPickerField extends TextField implements Flushable
         $defaults['data']['iconList'] = $iconList;
         $defaults['data']['iconVersion'] = $this->getVersionNumber();
         $defaults['data']['iconTotal'] = $this->getIconAmount();
+        $defaults['data']['pro'] = $this->getIsProVersion();
 
         return $defaults;
     }

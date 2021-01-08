@@ -18,6 +18,7 @@ class FAPickerField extends Component {
             iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
             activeFilterType: "all",
             searchValue: null,
+            pro: props.data.pro ? props.data.pro : false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -103,6 +104,24 @@ class FAPickerField extends Component {
         });
     }
 
+    getTypeMenuClasses(value) {
+        let classes = [];
+
+        //should this be active?
+        if (this.state.activeFilterType == value) {
+            classes.push('active');
+        }
+
+        //should pro classes be disabled
+        if (value == 'fal' || value == 'fad') {
+            if (this.state.pro !== true) {
+                classes.push('disabled');
+            }
+        }
+
+        return classes.join(' ');
+    }
+
     render() {
         const {value,filteredList,iconVersion,iconTotal,searchValue} = this.state;
         const {FieldGroup} = this.props;
@@ -121,12 +140,12 @@ class FAPickerField extends Component {
                     </div>
             
                     <ul class="fapicker-icons__type-selector">
-                        <li onClick={() => this.handleFilterTypeClick('all')} class={this.state.activeFilterType == 'all' ? 'active': null}>All</li>
-                        <li onClick={() => this.handleFilterTypeClick('fas')} class={this.state.activeFilterType == 'fas' ? 'active': null}>Solid</li>
-                        <li onClick={() => this.handleFilterTypeClick('far')} class={this.state.activeFilterType == 'far' ? 'active': null}>Regular</li>
-                        <li onClick={() => this.handleFilterTypeClick('fal')} class={this.state.activeFilterType == 'fal' ? 'active': null}>Light</li>
-                        <li onClick={() => this.handleFilterTypeClick('fad')} class={this.state.activeFilterType == 'fad' ? 'active': null}>Duotone</li>
-                        <li onClick={() => this.handleFilterTypeClick('fab')} class={this.state.activeFilterType == 'fab' ? 'active': null}>Brands</li>
+                        <li onClick={() => this.handleFilterTypeClick('all')} class={this.getTypeMenuClasses('all')}>All</li>
+                        <li onClick={() => this.handleFilterTypeClick('fas')} class={this.getTypeMenuClasses('fas')}>Solid</li>
+                        <li onClick={() => this.handleFilterTypeClick('far')} class={this.getTypeMenuClasses('far')}>Regular</li>
+                        <li onClick={() => this.handleFilterTypeClick('fal')} class={this.getTypeMenuClasses('fal')}>Light</li>
+                        <li onClick={() => this.handleFilterTypeClick('fad')} class={this.getTypeMenuClasses('fad')}>Duotone</li>
+                        <li onClick={() => this.handleFilterTypeClick('fab')} class={this.getTypeMenuClasses('fab')}>Brands</li>
                     </ul>
             
                     <div class="fapicker-icons__holder">
