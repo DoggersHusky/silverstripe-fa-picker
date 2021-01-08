@@ -18,10 +18,6 @@ class FAPickerField extends TextField implements Flushable
 
     protected $schemaComponent = 'FAPickerField';
 
-    private static $casting = [
-        'getIconList' => 'HTMLFragment',
-    ];
-
     /**
      * Compiles all CSS-classes. Optionally includes a "form-group--no-label" class if no title was set on the
      * FormField.
@@ -128,6 +124,11 @@ class FAPickerField extends TextField implements Flushable
         return Config::inst()->get('FontawesomeIcons', 'version');
     }
 
+    /**
+     * gets the total amount of icons
+     *
+     * @return int
+     */
     public function getIconAmount()
     {
         if ($this->iconAmount == null) {
@@ -147,6 +148,10 @@ class FAPickerField extends TextField implements Flushable
         Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker')->clear();
     }
 
+    /**
+     * @inheritDoc
+     *
+     * */
     public function getSchemaDataDefaults()
     {
         $iconList = $this->getIconList();
@@ -161,6 +166,10 @@ class FAPickerField extends TextField implements Flushable
         return $defaults;
     }
 
+    /**
+     * @inheritDoc
+     *
+     * */
     public function getAttributes()
     {
         $attributes = array(
