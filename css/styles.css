@@ -4,7 +4,10 @@ input.fapicker.text {
 .fapicker-icons {
   background-color: #fff;
   border: 1px solid;
-  border-color: #dbe0e9 #ced5e1; }
+  border-color: #dbe0e9 #ced5e1;
+  width: 100px; }
+  .fapicker-icons.expand {
+    width: 100%; }
   .fapicker-icons .hide {
     display: none !important; }
 
@@ -86,9 +89,11 @@ span.fapicker-icons__holder__icon {
   width: 60px;
   height: 60px;
   margin: 0px;
-  margin-right: 20px;
   cursor: initial;
   position: relative; }
+
+.fapicker-icons__search-holder input {
+  margin-left: 20px; }
 
 span.fapicker-icons__holder__icon i {
   font-size: 45px; }

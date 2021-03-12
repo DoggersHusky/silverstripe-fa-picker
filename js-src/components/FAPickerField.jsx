@@ -148,7 +148,7 @@ class FAPickerField extends Component {
         );
         return (
             <FieldGroup {...newProps}>
-                <div class="fapicker-icons">
+                <div className={classNames(iconHolderDisplay == "hide" ? "" : "expand", "fapicker-icons")}>
                     <div class="fapicker-icons__search-holder">
                         <span class="fapicker-icons__holder__icon">
                             <FAPickerRemove currentValue={value} onChange={this.handleChange} />
