@@ -100,15 +100,16 @@ input.fapicker.text {
 }
 
 span.fapicker-icons__holder__icon {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     margin: 0px;
     margin-right: 20px;
     cursor: initial;
+    position: relative;
 }
 
 span.fapicker-icons__holder__icon i {
-    font-size: 50px;
+    font-size: 45px;
 }
 
 span.fapicker-icons__holder__icon:hover {
@@ -164,4 +165,17 @@ span.fapicker-icons__holder__icon:hover {
 .notInSearch,
 .iconNotSearch {
     display: none;
+}
+
+.fapicker-icons__holder--remove {
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    cursor: pointer;
+}
+
+.fapicker-icons__holder--remove::before {
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    content: "\f00d";
 }

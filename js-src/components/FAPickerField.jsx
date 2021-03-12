@@ -4,6 +4,7 @@ import { inject } from 'lib/Injector';
 import PropTypes from 'prop-types';
 import FAPickerIcon from '../components/FAPickerIcon.jsx';
 import PaginationList from 'react-pagination-list';
+import FAPickerRemove from '../components/FAPickerRemove.jsx';
 
 class FAPickerField extends Component {
 
@@ -136,7 +137,11 @@ class FAPickerField extends Component {
             <FieldGroup {...newProps}>
                 <div class="fapicker-icons">
                     <div class="fapicker-icons__search-holder">
-                        <span class="fapicker-icons__holder__icon"><i class={value}></i></span><input type="text" value={searchValue} class="text" placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
+                        <span class="fapicker-icons__holder__icon">
+                            <FAPickerRemove currentValue={value} onChange={this.handleChange} />
+                            <i class={value}></i>
+                        </span>
+                        <input type="text" value={searchValue} class="text" placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
                     </div>
             
                     <ul class="fapicker-icons__type-selector">
