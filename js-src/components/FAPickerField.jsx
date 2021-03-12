@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import FAPickerIcon from '../components/FAPickerIcon.jsx';
 import PaginationList from 'react-pagination-list';
 import FAPickerRemove from '../components/FAPickerRemove.jsx';
+import FAPickerExpand from '../components/FAPickerExpand.jsx';
 
 class FAPickerField extends Component {
 
@@ -178,7 +179,7 @@ class FAPickerField extends Component {
                     <div class="fapicker-icons__bottom">
                         <span class="small version">Version <strong>{iconVersion}</strong></span>
                         <span class="small icons"><strong>{iconTotal}</strong> Icons</span>
-                        <span class="expand-button" onClick={() => this.toggleIconHolder()}><i class="fas fa-angle-double-down"></i></span>
+                        <FAPickerExpand toggleIconHolder={this.toggleIconHolder} currentValue={iconHolderDisplay} />
                     </div>
                 </div>
             </FieldGroup>
