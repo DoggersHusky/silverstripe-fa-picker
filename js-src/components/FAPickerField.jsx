@@ -6,6 +6,7 @@ import FAPickerIcon from '../components/FAPickerIcon.jsx';
 import PaginationList from 'react-pagination-list';
 import FAPickerRemove from '../components/FAPickerRemove.jsx';
 import FAPickerExpand from '../components/FAPickerExpand.jsx';
+import ReactTooltip from 'react-tooltip';
 
 class FAPickerField extends Component {
 
@@ -31,13 +32,6 @@ class FAPickerField extends Component {
         this.searchIcons = this.searchIcons.bind(this);
         //handle toggling icon holder
         this.toggleIconHolder = this.toggleIconHolder.bind(this);
-    }
-
-    /**
-     * when the component did mount
-     */
-    componentDidMount() {
-        console.log('hello world');
     }
 
     /**
@@ -148,11 +142,12 @@ class FAPickerField extends Component {
         );
         return (
             <FieldGroup {...newProps}>
+                <ReactTooltip />
                 <div className={classNames(iconHolderDisplay == "hide" ? "" : "expand", "fapicker-icons")}>
                     <div class="fapicker-icons__search-holder">
                         <span class="fapicker-icons__holder__icon">
                             <FAPickerRemove currentValue={value} onChange={this.handleChange} />
-                            <i class={value}></i>
+                            <i class={value} data-tip={value}></i>
                         </span>
                         <input type="text" value={searchValue} className={classNames(iconHolderDisplay, "text")} placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
                     </div>

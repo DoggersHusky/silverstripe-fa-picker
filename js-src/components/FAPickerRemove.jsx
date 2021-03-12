@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import classNames from 'classnames';
+import ReactTooltip from 'react-tooltip';
 
 class FAPickerRemove extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class FAPickerRemove extends Component {
         let toggleShow = currentValue !== "" ? "show" : "hide";
 
         return (
-            <span className={classNames(toggleShow, "fapicker-icons__holder--remove")} onClick={() => this.handleClick()}></span>
+            <span className={classNames(toggleShow, "fapicker-icons__holder--remove")} onClick={() => this.handleClick()} data-tip="Remove Icon"><ReactTooltip /></span>
         )
 
         

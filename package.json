@@ -5,7 +5,8 @@
     "main": "index.js",
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
-        "react-pagination-list": "^1.0.8"
+        "react-pagination-list": "^1.0.8",
+        "react-tooltip": "^4.2.15"
     },
     "devDependencies": {
         "@babel/core": "^7.11.0",

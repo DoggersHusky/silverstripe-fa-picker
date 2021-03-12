@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactTooltip from 'react-tooltip';
 
 class FAPickerExpand extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class FAPickerExpand extends Component {
         let icon = currentValue !== "hide" ? "fas fa-angle-double-up" : "fas fa-angle-double-down";
 
         return (
-            <span class="expand-button" onClick={() => this.handleClick()}><i class={icon}></i></span>
+            <span class="expand-button" onClick={() => this.handleClick()} data-tip="Expand or collapse this field."><ReactTooltip /><i class={icon}></i></span>
         )
 
         
