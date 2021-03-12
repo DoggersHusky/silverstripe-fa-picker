@@ -6,6 +6,10 @@ input.fapicker.text {
     background-color: #fff;
     border: 1px solid;
     border-color: #dbe0e9 #ced5e1;
+
+    .hide {
+        display: none !important;
+    }
 }
 
 .fapicker-icons__search-holder {

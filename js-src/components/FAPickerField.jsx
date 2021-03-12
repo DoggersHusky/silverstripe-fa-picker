@@ -156,7 +156,7 @@ class FAPickerField extends Component {
                         <input type="text" value={searchValue} class="text" placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
                     </div>
             
-                    <ul class="fapicker-icons__type-selector">
+                    <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
                         <li onClick={() => this.handleFilterTypeClick('all')} class={this.getTypeMenuClasses('all')}>All</li>
                         <li onClick={() => this.handleFilterTypeClick('fas')} class={this.getTypeMenuClasses('fas')}>Solid</li>
                         <li onClick={() => this.handleFilterTypeClick('far')} class={this.getTypeMenuClasses('far')}>Regular</li>
@@ -178,7 +178,7 @@ class FAPickerField extends Component {
                     <div class="fapicker-icons__bottom">
                         <span class="small version">Version <strong>{iconVersion}</strong></span>
                         <span class="small icons"><strong>{iconTotal}</strong> Icons</span>
-                        <span class="small expand-button" onClick={() => this.toggleIconHolder()}><i class="fas fa-angle-double-up"></i></span>
+                        <span class="expand-button" onClick={() => this.toggleIconHolder()}><i class="fas fa-angle-double-down"></i></span>
                     </div>
                 </div>
             </FieldGroup>
