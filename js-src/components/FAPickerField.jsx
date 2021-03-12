@@ -177,8 +177,8 @@ class FAPickerField extends Component {
                     </div>
             
                     <div class="fapicker-icons__bottom">
-                        <span class="small version">Version <strong>{iconVersion}</strong></span>
-                        <span class="small icons"><strong>{iconTotal}</strong> Icons</span>
+                        <span className={classNames(iconHolderDisplay, "small version")}>Version <strong>{iconVersion}</strong></span>
+                        <span className={classNames(iconHolderDisplay, "small icons")}><strong>{iconTotal}</strong> Icons</span>
                         <FAPickerExpand toggleIconHolder={this.toggleIconHolder} currentValue={iconHolderDisplay} />
                     </div>
                 </div>
