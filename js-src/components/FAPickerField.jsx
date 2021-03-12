@@ -166,6 +166,7 @@ class FAPickerField extends Component {
                     <div class="fapicker-icons__bottom">
                         <span class="small version">Version <strong>{iconVersion}</strong></span>
                         <span class="small icons"><strong>{iconTotal}</strong> Icons</span>
+                        <span class="small expand-button"><i class="fas fa-angle-double-up"></i></span>
                     </div>
                 </div>
             </FieldGroup>

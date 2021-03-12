@@ -148,5 +148,12 @@ span.fapicker-icons__holder__icon:hover {
   font-weight: 900;
   content: "\f00d"; }
 
+.fapicker-icons__bottom {
+  position: relative; }
+  .fapicker-icons__bottom .expand-button {
+    position: absolute;
+    right: 10px;
+    cursor: pointer; }
+
 
 /*# sourceMappingURL=styles.css.map*/
