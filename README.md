@@ -11,7 +11,9 @@ This will work with Fontawesome 5.14.0 pro out-of-the-box (but does not come bun
 ![Overview of Image Cropper Field](screenshots/screenshot2.PNG)
 
 **Smaller starting size!**
-The Font Awesome Icon Picker field is now much smaller to start out with. It can be expanded to show the list of icons, search, and icon type selector.
+The Font Awesome Icon Picker field is now much smaller to start out with.
+It can be expanded to show the list of icons, search, and icon type selector.
+
 ![Overview of Image Cropper Field](screenshots/screenshot3.PNG)
 
 ## Requirements
