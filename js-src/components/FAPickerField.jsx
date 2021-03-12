@@ -154,7 +154,7 @@ class FAPickerField extends Component {
                             <FAPickerRemove currentValue={value} onChange={this.handleChange} />
                             <i class={value}></i>
                         </span>
-                        <input type="text" value={searchValue} class="text" placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
+                        <input type="text" value={searchValue} className={classNames(iconHolderDisplay, "text")} placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
                     </div>
             
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
