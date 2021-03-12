@@ -20,6 +20,7 @@ class FAPickerField extends Component {
             activeFilterType: "all",
             searchValue: null,
             pro: props.data.pro ? props.data.pro : false,
+            iconHolderDisplay: "hide",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,6 +28,8 @@ class FAPickerField extends Component {
         this.handleFilterTypeClick = this.handleFilterTypeClick.bind(this);
         //handle search icons
         this.searchIcons = this.searchIcons.bind(this);
+        //handle toggling icon holder
+        this.toggleIconHolder = this.toggleIconHolder.bind(this);
     }
 
     /**
@@ -123,8 +126,17 @@ class FAPickerField extends Component {
         return classes.join(' ');
     }
 
+    toggleIconHolder() {
+        let classname = (this.state.iconHolderDisplay === "hide") ? "show" : "hide";
+        //set the state
+        this.setState({
+            iconHolderDisplay: classname,
+        });
+        console.log(this.state.iconHolderDisplay);
+    }
+
     render() {
-        const {value,filteredList,iconVersion,iconTotal,searchValue} = this.state;
+        const {value,filteredList,iconVersion,iconTotal,searchValue,iconHolderDisplay} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
@@ -153,7 +165,7 @@ class FAPickerField extends Component {
                         <li onClick={() => this.handleFilterTypeClick('fab')} class={this.getTypeMenuClasses('fab')}>Brands</li>
                     </ul>
             
-                    <div class="fapicker-icons__holder">
+                    <div className={classNames(iconHolderDisplay, "fapicker-icons__holder")}>
                         <PaginationList 
                             data={filteredList}
                             pageSize={100}
@@ -166,7 +178,7 @@ class FAPickerField extends Component {
                     <div class="fapicker-icons__bottom">
                         <span class="small version">Version <strong>{iconVersion}</strong></span>
                         <span class="small icons"><strong>{iconTotal}</strong> Icons</span>
-                        <span class="small expand-button"><i class="fas fa-angle-double-up"></i></span>
+                        <span class="small expand-button" onClick={() => this.toggleIconHolder()}><i class="fas fa-angle-double-up"></i></span>
                     </div>
                 </div>
             </FieldGroup>
