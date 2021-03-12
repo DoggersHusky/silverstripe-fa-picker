@@ -1,6 +1,8 @@
 # Font Awesome Icon Picker
 
-Adds a Font Awesome 5 icon picker to SilverStripe 4. This currently supports version 5.14.0 of Font Awesome.
+Adds a Font Awesome 5 icon picker to SilverStripe 4.
+This comes bundled with the free version of Fontawesome 5.14.0.
+This will work with Fontawesome 5.14.0 pro out of the box (but does not come bundled with it).
 
 **Free version**
 ![Overview of Image Cropper Field](screenshots/screenshot1.PNG)
@@ -9,7 +11,7 @@ Adds a Font Awesome 5 icon picker to SilverStripe 4. This currently supports ver
 ![Overview of Image Cropper Field](screenshots/screenshot2.PNG)
 
 **Smaller starting size!**
-The field is now much smaller to start out with. It can be expanded to show the list of icons, search, and icon type selector.
+The Font Awesome Icon Picker field is now much smaller to start out with. It can be expanded to show the list of icons, search, and icon type selector.
 ![Overview of Image Cropper Field](screenshots/screenshot3.PNG)
 
 ## Requirements
@@ -61,7 +63,7 @@ class TestDataObject extends DataObject
 
 ### Notes
 
-This has not been tested for use on the frontend of a site, but this version should work. Please note, the enabling the pro version does introduce some lag. Caching has been introduce to midigate some of it, however, swapping between icon types or filtering does still cause lag. This is being looked into.
+This has not been tested for use on the frontend of a site.
 
 ### Settings
 
@@ -123,3 +125,4 @@ FontawesomeIcons:
 -   you can now remove the selected icon
 -   icons are now paginated
 -   list of icons sizes are now bigger
+-   added tooltip to show the name of the selcted icon
