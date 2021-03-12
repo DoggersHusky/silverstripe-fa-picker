@@ -4,10 +4,6 @@ class FAPickerExpand extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            value: props.value,
-        };
-
         this.handleClick = this.handleClick.bind(this);
     }
 
