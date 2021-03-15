@@ -6,7 +6,7 @@ PageController:
         - BucklesHusky\FontAwesomeIconPicker\Extensions\PageControllerExtension
 
 FontawesomeIcons:
-    version: "5.14.0"
+    version: "5.15.2"
 
 SilverStripe\Core\Injector\Injector:
     Psr\SimpleCache\CacheInterface.fontawesomeiconpicker:

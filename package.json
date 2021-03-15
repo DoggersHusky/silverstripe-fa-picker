@@ -4,7 +4,7 @@
     "description": "Incubator Project",
     "main": "index.js",
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.15.1",
+        "@fortawesome/fontawesome-free": "^5.15.2",
         "react-pagination-list": "^1.0.8",
         "react-tooltip": "^4.2.15"
     },
