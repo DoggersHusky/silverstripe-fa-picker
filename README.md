@@ -1,7 +1,7 @@
 # Font Awesome Icon Picker
 
 Adds a Font Awesome 5 icon picker to SilverStripe 4.
-This comes bundled with the free version of Fontawesome 5.14.0.
+This comes bundled with the free version of Fontawesome 5.15.2.
 This will work with Fontawesome 5.14.0 pro out-of-the-box (but does not come bundled with it).
 
 **Free version**
