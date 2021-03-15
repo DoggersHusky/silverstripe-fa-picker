@@ -23,7 +23,7 @@ class FAPickerRemove extends Component {
         let toggleShow = currentValue !== "" ? "show" : "hide";
 
         return (
-            <span className={classNames(toggleShow, "fapicker-icons__holder--remove")} onClick={() => this.handleClick()} data-tip="Remove Icon"><ReactTooltip /></span>
+            <span className={classNames(toggleShow, "fapicker-icons__holder--remove")} onClick={() => this.handleClick()} data-tip="Remove Icon"><i class="fas fa-minus-circle"></i><ReactTooltip /></span>
         )
 
         

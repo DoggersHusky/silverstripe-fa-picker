@@ -150,10 +150,8 @@ span.fapicker-icons__holder__icon:hover {
   right: -5px;
   cursor: pointer; }
 
-.fapicker-icons__holder--remove::before {
-  font-family: "Font Awesome 5 Pro";
-  font-weight: 900;
-  content: "\f00d"; }
+.fapicker-icons__holder--remove i {
+  font-size: 18px !important; }
 
 .fapicker-icons__bottom {
   position: relative; }
