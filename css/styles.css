@@ -1,0 +1,164 @@
+input.fapicker.text {
+  display: none; }
+
+.fapicker-icons {
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #dbe0e9 #ced5e1;
+  width: 100px; }
+  .fapicker-icons.expand {
+    width: 100%; }
+  .fapicker-icons .hide {
+    display: none !important; }
+
+.fapicker-icons__search-holder {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: row;
+  height: 90px;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 20px; }
+
+.fapicker-icons__search-holder input {
+  width: 80% !important; }
+
+.fapicker-icons__holder__icon {
+  position: relative;
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 12px 0 0;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  box-shadow: 0 0 0 1px #ddd;
+  color: inherit;
+  background-color: #ffffff; }
+
+.fapicker-icons__holder__icon:hover {
+  background-color: #eee; }
+
+.fapicker-icons__holder__icon i {
+  font-size: 50px; }
+
+.fapicker-icons__holder > div {
+  position: relative;
+  max-width: calc(60px + 12px);
+  padding: 0 !important;
+  align-items: center; }
+
+.fapicker-icons__holder > div,
+.fapicker-icons__holder > div > div {
+  width: 100% !important;
+  max-width: 100% !important; }
+
+.fapicker-icons__holder > div > div {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: 280px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-left: 20px;
+  padding-right: 8px;
+  padding-top: 20px;
+  margin-bottom: 0px;
+  list-style: none;
+  align-items: normal; }
+
+.fapicker-icons__holder__fullicon div:last-child {
+  margin: 0px 12px 12px 0px;
+  text-align: center;
+  font-size: 85%;
+  box-shadow: 0 0 0 1px #ddd;
+  width: 100%;
+  max-width: 80px;
+  padding: 2px; }
+
+.fapicker-icons__holder__icon.active {
+  box-shadow: 0 0 0 1px #3fa142;
+  background-color: #eee; }
+
+span.fapicker-icons__holder__icon {
+  width: 60px;
+  height: 60px;
+  margin: 0px;
+  cursor: initial;
+  position: relative; }
+
+.fapicker-icons__search-holder input {
+  margin-left: 20px; }
+
+span.fapicker-icons__holder__icon i {
+  font-size: 40px; }
+
+span.fapicker-icons__holder__icon:hover {
+  background-color: #ffffff; }
+
+.fapicker-icons__bottom {
+  border-bottom: 1px solid #ebebeb;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  align-items: center;
+  justify-content: center; }
+
+.fapicker-icons__bottom span:not(:last-child) {
+  margin-right: 10px; }
+
+.fapicker-icons__type-selector {
+  border-bottom: 1px solid #ebebeb;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0px;
+  margin-bottom: 0px; }
+
+.fapicker-icons__type-selector li {
+  flex-basis: 0;
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  color: #5589a7; }
+
+.fapicker-icons__type-selector li.active {
+  background-color: #d8e4eb; }
+
+.fapicker-icons__type-selector li:hover {
+  background-color: #d8e4eb; }
+
+.fapicker-icons__type-selector li.disabled {
+  display: none; }
+
+.notInSearch,
+.iconNotSearch {
+  display: none; }
+
+.fapicker-icons__holder--remove {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  cursor: pointer; }
+
+.fapicker-icons__holder--remove i {
+  font-size: 18px !important; }
+
+.fapicker-icons__bottom {
+  position: relative; }
+  .fapicker-icons__bottom .expand-button {
+    position: absolute;
+    right: 10px;
+    cursor: pointer; }
+
+
+/*# sourceMappingURL=styles.css.map*/

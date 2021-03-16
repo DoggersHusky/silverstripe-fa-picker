@@ -6,56 +6,17 @@ use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\TextField;
-use SilverStripe\ORM\FieldType\DBHTMLText;
-use SilverStripe\View\Requirements;
-use SilverStripe\View\SSViewer;
-use SilverStripe\View\ThemeResourceLoader;
 
 class FAPickerField extends TextField implements Flushable
 {
 
     private $iconAmount = null;
 
-    private static $casting = [
-        'getIconList' => 'HTMLFragment',
-    ];
+    protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_TEXT;
 
-    /**
-     * Adds in the requirements for the field
-     * @param array $properties Array of properties for the form element (not used)
-     * @return string Rendered field template
-     */
-    public function Field($properties = array())
-    {
-        Requirements::javascript("buckleshusky/fontawesomeiconpicker:js/fapicker.js");
-        Requirements::css("buckleshusky/fontawesomeiconpicker:css/fa-styles.css");
-
-        //should we disable the built in fontawesome
-        if (!$extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
-            //if the pro version is set, don't load the free version
-            if (!$this->getIsProVersion()) {
-                Requirements::css("buckleshusky/fontawesomeiconpicker:external/css/all.min.css");
-            }
-        }
-
-        if ($this->getIsProVersion()) {
-            $loader = ThemeResourceLoader::inst();
-            //get a list of themes
-            $themes = Config::inst()->get(SSViewer::class, 'themes');
-            //load the requirements
-            Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
-        }
-
-        //add the extra requirements if need be
-        if ($extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'extra_requirements_css')) {
-            foreach ($extraCSSClasses as $css) {
-                Requirements::css($css);
-            }
-        }
-
-        return parent::Field($properties);
-    }
+    protected $schemaComponent = 'FAPickerField';
 
     /**
      * Compiles all CSS-classes. Optionally includes a "form-group--no-label" class if no title was set on the
@@ -83,7 +44,8 @@ class FAPickerField extends TextField implements Flushable
      */
     public function getIconList()
     {
-        $template = "";
+        //array of icons
+        $iconArray = [];
         $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
 
         //check to see if the icon list exist
@@ -112,37 +74,31 @@ class FAPickerField extends TextField implements Flushable
             //needs to be cached
             foreach ($icons as $icon) {
                 //the data icon value/the name of the icon
-                $dataIcon = trim(substr($icon, strpos($icon, '-') + 1));
+                $shortIconName = trim(substr($icon, strpos($icon, '-') + 1));
+                //get the icon type
+                $iconType = trim(strtok($icon, " "));
 
-                //add the icon to the template variable
-                $template .= '<li><div class="fapicker-icons__holder__icon" data-icon="' .
-                    $icon .
-                    '" data-search-icon="' .
-                    $dataIcon .
-                    '"><i class="' .
-                    $icon .
-                    '"></i></div><div>' .
-                    $dataIcon
-                    . '</div></li>';
+                array_push($iconArray, [
+                    'type' => $iconType,
+                    'shortName' => $shortIconName,
+                    'fullName' => $icon,
+                ]);
             }
 
             //total amount icons
             $cache->set('iconAmount', count($icons));
 
             //cache the template
-            $cache->set('iconList', $template);
+            $cache->set('iconList', $iconArray);
         } else {
             //get from cache
-            $template = $cache->get('iconList');
+            $iconArray = $cache->get('iconList');
         }
 
         //store the icon amount
         $this->iconAmount = $cache->get('iconAmount');
 
-        //output to template
-        $html = DBHTMLText::create();
-        $html->setValue($template);
-        return $html;
+        return $iconArray;
     }
 
     /**
@@ -159,16 +115,6 @@ class FAPickerField extends TextField implements Flushable
     }
 
     /**
-     * Get the pro version css location
-     *
-     * @return void
-     */
-    public function getProVersionCss()
-    {
-        return Config::inst()->get('FontawesomeIcons', 'css');
-    }
-
-    /**
      * get what version of fontawesome is being used
      *
      * @return string
@@ -178,8 +124,18 @@ class FAPickerField extends TextField implements Flushable
         return Config::inst()->get('FontawesomeIcons', 'version');
     }
 
+    /**
+     * gets the total amount of icons
+     *
+     * @return int
+     */
     public function getIconAmount()
     {
+        if ($this->iconAmount == null) {
+            $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
+            return $cache->get('iconAmount');
+
+        }
         return $this->iconAmount;
     }
 
@@ -190,5 +146,43 @@ class FAPickerField extends TextField implements Flushable
     public static function flush()
     {
         Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker')->clear();
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * */
+    public function getSchemaDataDefaults()
+    {
+        $iconList = $this->getIconList();
+        $defaults = parent::getSchemaDataDefaults();
+
+        //@todo needs to send over version, icon total, and pro enabled
+        $defaults['data']['iconList'] = $iconList;
+        $defaults['data']['iconVersion'] = $this->getVersionNumber();
+        $defaults['data']['iconTotal'] = $this->getIconAmount();
+        $defaults['data']['pro'] = $this->getIsProVersion();
+
+        return $defaults;
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * */
+    public function getAttributes()
+    {
+        $attributes = array(
+            'class' => $this->extraClass(),
+            'id' => $this->ID(),
+            'name' => $this->getName(),
+            'value' => $this->value(),
+            'data-schema' => json_encode($this->getSchemaData()),
+            'data-state' => json_encode($this->getSchemaState()),
+        );
+
+        $attributes = array_merge($attributes, $this->attributes);
+
+        return $attributes;
     }
 }
