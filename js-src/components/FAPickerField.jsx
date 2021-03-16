@@ -7,6 +7,7 @@ import PaginationList from 'react-pagination-list';
 import FAPickerRemove from '../components/FAPickerRemove.jsx';
 import FAPickerExpand from '../components/FAPickerExpand.jsx';
 import ReactTooltip from 'react-tooltip';
+import Cookies from 'universal-cookie';
 
 class FAPickerField extends Component {
 
@@ -40,6 +41,19 @@ class FAPickerField extends Component {
      */
     handleChange({value}) {
         const { onAutofill, name } = this.props;
+        const cookies = new Cookies();
+        let list;
+
+        //create or get the array for favorites
+        if (cookies.get('ss-fa-picker-recent') === undefined) {
+            list = [];
+        }else{
+            list = cookies.get('ss-fa-picker-recent');
+        }
+
+        //add new item to the start of the array
+        list.unshift(value);
+
         this.setState({
             value: value,
         });
@@ -49,6 +63,10 @@ class FAPickerField extends Component {
         if (typeof onAutofill === 'function') {
             onAutofill(`${name}`, newValue);
         }
+
+        //set the cookie
+        cookies.set('ss-fa-picker-recent', list);
+        console.log(cookies.get('ss-fa-picker-recent'));
     }
 
     /**
