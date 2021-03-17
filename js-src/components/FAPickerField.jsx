@@ -63,7 +63,7 @@ class FAPickerField extends Component {
 
         //remove from recent array
         recentIndex = recentList.indexOf(value);
-        if (recentIndex == -1) {
+        if (recentIndex == -1 && value !== "") {
             //add new item to the start of the recent array
             recentList.unshift(value);
 
