@@ -170,8 +170,9 @@ span.fapicker-icons__holder__icon:hover {
     font-size: 20px; }
 
 .fapicker-icons .fapicker-icons__recent-icon-list {
+  min-width: 100px;
   position: absolute;
-  top: 65px;
+  top: 70px;
   z-index: 20;
   right: 0px;
   display: none;
@@ -184,7 +185,8 @@ span.fapicker-icons__holder__icon:hover {
   border-left-style: solid;
   border-bottom-color: #dbe0e9;
   border-bottom-width: 1px;
-  border-bottom-style: solid; }
+  border-bottom-style: solid;
+  box-shadow: -11px 13px 3px -9px rgba(0, 0, 0, 0.14); }
   .fapicker-icons .fapicker-icons__recent-icon-list.list-open {
     display: block; }
   .fapicker-icons .fapicker-icons__recent-icon-list .fapicker-icons__holder__icon {
