@@ -179,6 +179,7 @@ class FAPickerField extends Component {
                             <i class={value} data-tip={value}></i>
                         </span>
                         <input type="text" value={searchValue} className={classNames(iconHolderDisplay, "text")} placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
+                        <span className={classNames(iconHolderDisplay, "fapicker-icons__recent-icons")} data-tip="Recently used icons"><i class="fas fa-redo"></i></span>
                     </div>
             
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
