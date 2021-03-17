@@ -82,6 +82,7 @@ class FAPickerField extends Component {
         this.setState({
             value: value,
             recentList: recentList,
+            recentListHolderToggle: false,
         });
 
         const newValue = value;
