@@ -167,7 +167,7 @@ class FAPickerField extends Component {
             <FAPickerIcon className={this.state.value == icon.fullName ? 'active' : null} iconValue={icon} onChange={this.handleChange}/>
         );
         const recentIconRenderedList = recentList.map((icon) =>
-            <div>{icon}</div>
+            <FAPickerIcon fullIconName={icon} onChange={this.handleChange}/>
         );
         return (
             <FieldGroup {...newProps}>
@@ -179,7 +179,10 @@ class FAPickerField extends Component {
                             <i class={value} data-tip={value}></i>
                         </span>
                         <input type="text" value={searchValue} className={classNames(iconHolderDisplay, "text")} placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
-                        <span className={classNames(iconHolderDisplay, "fapicker-icons__recent-icons")} data-tip="Recently used icons"><i class="fas fa-redo"></i></span>
+                        <span className={classNames(iconHolderDisplay, "fapicker-icons__recent-icon-button")} data-tip="Recently used icons"><i class="fas fa-redo"></i></span>
+                        <div className={classNames(iconHolderDisplay, "fapicker-icons__recent-icon-list")}>
+                            {recentIconRenderedList}
+                        </div>
                     </div>
             
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
@@ -206,7 +209,6 @@ class FAPickerField extends Component {
                         <span className={classNames(iconHolderDisplay, "small icons")}><strong>{iconTotal}</strong> Icons</span>
                         <FAPickerExpand toggleIconHolder={this.toggleIconHolder} currentValue={iconHolderDisplay} />
                     </div>
-                    {recentIconRenderedList}
                 </div>
             </FieldGroup>
         )

@@ -18,7 +18,8 @@ input.fapicker.text {
   height: 90px;
   align-items: center;
   justify-content: center;
-  padding: 0px 20px; }
+  padding: 0px 20px;
+  position: relative; }
 
 .fapicker-icons__search-holder input {
   width: 80% !important; }
@@ -161,12 +162,18 @@ span.fapicker-icons__holder__icon:hover {
     right: 10px;
     cursor: pointer; }
 
-.fapicker-icons .fapicker-icons__recent-icons {
+.fapicker-icons .fapicker-icons__recent-icon-button {
   display: inline-block;
   margin-left: 20px;
   cursor: pointer; }
-  .fapicker-icons .fapicker-icons__recent-icons i {
+  .fapicker-icons .fapicker-icons__recent-icon-button i {
     font-size: 20px; }
+
+.fapicker-icons .fapicker-icons__recent-icon-list {
+  position: absolute;
+  top: 62px;
+  z-index: 20;
+  right: 0px; }
 
 
 /*# sourceMappingURL=styles.css.map*/
