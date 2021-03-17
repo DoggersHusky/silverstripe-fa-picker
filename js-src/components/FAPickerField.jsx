@@ -62,18 +62,16 @@ class FAPickerField extends Component {
 
         //remove from recent array
         recentIndex = recentList.indexOf(value);
-        if (recentIndex > -1) {
-            recentList.splice(recentIndex, 1);
-        }
+        if (recentIndex == -1) {
+            //add new item to the start of the recent array
+            recentList.unshift(value);
 
-        //if there is more than 12 items in the recent array
-        //delete the last one
-        if (recentList.length >= 12) {
-            recentList.splice(11, 1);
+            //if there is more than 12 items in the recent array
+            //delete the last one
+            if (recentList.length >= 12) {
+                recentList.splice(11, 1);
+            }
         }
-        
-        //add new item to the start of the recent array
-        recentList.unshift(value);
 
         //set the cookie
         cookies.set('ss-fa-picker-recent', recentList);
@@ -204,7 +202,7 @@ class FAPickerField extends Component {
             <FAPickerIcon className={this.state.value == icon.fullName ? 'active' : null} iconValue={icon} onChange={this.handleChange}/>
         );
         const recentIconRenderedList = recentList.map((icon) =>
-            <FAPickerIcon fullIconName={icon} onChange={this.handleChange}/>
+            <FAPickerIcon className={this.state.value == icon ? 'active' : null} fullIconName={icon} onChange={this.handleChange}/>
         );
         return (
             <FieldGroup {...newProps}>
