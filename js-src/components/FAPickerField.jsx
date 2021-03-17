@@ -69,8 +69,8 @@ class FAPickerField extends Component {
 
             //if there is more than 12 items in the recent array
             //delete the last one
-            if (recentList.length >= 12) {
-                recentList.splice(11, 1);
+            if (recentList.length >= 25) {
+                recentList.splice(24, 1);
             }
         }
 

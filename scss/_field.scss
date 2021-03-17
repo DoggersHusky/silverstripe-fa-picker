@@ -236,5 +236,16 @@ span.fapicker-icons__holder__icon:hover {
         &.list-open {
             display: block;
         }
+
+        .fapicker-icons__holder__icon {
+            min-width: 50px;
+            width: 50px;
+            min-height: 50px;
+            height: 50px;
+
+            i {
+                font-size: 25px;
+            }
+        }
     }
 }

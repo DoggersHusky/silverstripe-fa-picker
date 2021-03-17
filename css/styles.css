@@ -187,6 +187,13 @@ span.fapicker-icons__holder__icon:hover {
   border-bottom-style: solid; }
   .fapicker-icons .fapicker-icons__recent-icon-list.list-open {
     display: block; }
+  .fapicker-icons .fapicker-icons__recent-icon-list .fapicker-icons__holder__icon {
+    min-width: 50px;
+    width: 50px;
+    min-height: 50px;
+    height: 50px; }
+    .fapicker-icons .fapicker-icons__recent-icon-list .fapicker-icons__holder__icon i {
+      font-size: 25px; }
 
 
 /*# sourceMappingURL=styles.css.map*/
