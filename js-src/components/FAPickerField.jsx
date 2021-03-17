@@ -55,7 +55,14 @@ class FAPickerField extends Component {
         const { onAutofill, name } = this.props;
         const cookies = new Cookies();
         let {recentList} = this.state;
+        let recentIndex = -1;
 
+
+        //remove from array
+        recentIndex = recentList.indexOf(value);
+        if (recentIndex > -1) {
+            recentList.splice(recentIndex, 1);
+        }
         
         //add new item to the start of the array
         recentList.unshift(value);
