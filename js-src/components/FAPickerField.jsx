@@ -58,19 +58,19 @@ class FAPickerField extends Component {
         let recentIndex = -1;
 
 
-        //remove from array
+        //remove from recent array
         recentIndex = recentList.indexOf(value);
         if (recentIndex > -1) {
             recentList.splice(recentIndex, 1);
         }
 
-        //if there is more than 12 items
+        //if there is more than 12 items in the recent array
         //delete the last one
         if (recentList.length >= 12) {
             recentList.splice(11, 1);
         }
         
-        //add new item to the start of the array
+        //add new item to the start of the recent array
         recentList.unshift(value);
 
         //set the cookie
