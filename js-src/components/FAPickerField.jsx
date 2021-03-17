@@ -13,7 +13,18 @@ class FAPickerField extends Component {
 
     constructor(props) {
         super(props);
-        
+
+        //for recent list
+        const cookies = new Cookies();
+        let recentIconList;
+
+        //create or get the array for favorites
+        if (cookies.get('ss-fa-picker-recent') === undefined) {
+            recentIconList = [];
+        }else{
+            recentIconList = cookies.get('ss-fa-picker-recent');
+        }
+
         this.state = {
             value: props.value ? props.value : "",
             iconList: props.data.iconList ? props.data.iconList : null,
@@ -24,6 +35,7 @@ class FAPickerField extends Component {
             searchValue: null,
             pro: props.data.pro ? props.data.pro : false,
             iconHolderDisplay: "hide",
+            recentList: recentIconList,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -42,20 +54,20 @@ class FAPickerField extends Component {
     handleChange({value}) {
         const { onAutofill, name } = this.props;
         const cookies = new Cookies();
-        let list;
+        let {recentList} = this.state;
 
-        //create or get the array for favorites
-        if (cookies.get('ss-fa-picker-recent') === undefined) {
-            list = [];
-        }else{
-            list = cookies.get('ss-fa-picker-recent');
-        }
-
+        
         //add new item to the start of the array
-        list.unshift(value);
+        recentList.unshift(value);
 
+        //set the cookie
+        cookies.set('ss-fa-picker-recent', recentList);
+        console.log(cookies.get('ss-fa-picker-recent'));
+
+        //update the state
         this.setState({
             value: value,
+            recentList: recentList,
         });
 
         const newValue = value;
@@ -63,10 +75,6 @@ class FAPickerField extends Component {
         if (typeof onAutofill === 'function') {
             onAutofill(`${name}`, newValue);
         }
-
-        //set the cookie
-        cookies.set('ss-fa-picker-recent', list);
-        console.log(cookies.get('ss-fa-picker-recent'));
     }
 
     /**
@@ -149,7 +157,7 @@ class FAPickerField extends Component {
     }
 
     render() {
-        const {value,filteredList,iconVersion,iconTotal,searchValue,iconHolderDisplay} = this.state;
+        const {value,filteredList,iconVersion,iconTotal,searchValue,iconHolderDisplay,recentList} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
@@ -157,6 +165,9 @@ class FAPickerField extends Component {
           };
         const listItems = filteredList.map((icon) =>
             <FAPickerIcon className={this.state.value == icon.fullName ? 'active' : null} iconValue={icon} onChange={this.handleChange}/>
+        );
+        const recentIconRenderedList = recentList.map((icon) =>
+            <div>{icon}</div>
         );
         return (
             <FieldGroup {...newProps}>
@@ -194,6 +205,7 @@ class FAPickerField extends Component {
                         <span className={classNames(iconHolderDisplay, "small icons")}><strong>{iconTotal}</strong> Icons</span>
                         <FAPickerExpand toggleIconHolder={this.toggleIconHolder} currentValue={iconHolderDisplay} />
                     </div>
+                    {recentIconRenderedList}
                 </div>
             </FieldGroup>
         )
