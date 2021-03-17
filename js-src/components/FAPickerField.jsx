@@ -45,6 +45,8 @@ class FAPickerField extends Component {
         this.searchIcons = this.searchIcons.bind(this);
         //handle toggling icon holder
         this.toggleIconHolder = this.toggleIconHolder.bind(this);
+        //handle clicking on recent icon list button
+        this.handleClickRecentList = this.handleClickRecentList.bind(this);
     }
 
     /**
@@ -88,6 +90,28 @@ class FAPickerField extends Component {
         if (typeof onAutofill === 'function') {
             onAutofill(`${name}`, newValue);
         }
+    }
+
+    /**
+     * handles what happens when the recent list
+     * button is clicked
+     */
+    handleClickRecentList() {
+        const cookies = new Cookies();
+        let recentIconList;
+        console.log('test');
+
+        //create or get the array for favorites
+        if (cookies.get('ss-fa-picker-recent') === undefined) {
+            recentIconList = [];
+        }else{
+            recentIconList = cookies.get('ss-fa-picker-recent');
+        }
+
+        //update the state
+        this.setState({
+            recentList: recentIconList,
+        });
     }
 
     /**
@@ -192,7 +216,7 @@ class FAPickerField extends Component {
                             <i class={value} data-tip={value}></i>
                         </span>
                         <input type="text" value={searchValue} className={classNames(iconHolderDisplay, "text")} placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
-                        <span className={classNames(iconHolderDisplay, "fapicker-icons__recent-icon-button")} data-tip="Recently used icons"><i class="fas fa-redo"></i></span>
+                        <span className={classNames(iconHolderDisplay, "fapicker-icons__recent-icon-button")} data-tip="Recently used icons" onClick={() => this.handleClickRecentList()}><i class="fas fa-redo"></i></span>
                         <div className={classNames(iconHolderDisplay, "fapicker-icons__recent-icon-list")}>
                             {recentIconRenderedList}
                         </div>
