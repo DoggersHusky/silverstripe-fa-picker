@@ -36,6 +36,7 @@ class FAPickerField extends Component {
             pro: props.data.pro ? props.data.pro : false,
             iconHolderDisplay: "hide",
             recentList: recentIconList,
+            recentListHolderToggle: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -96,8 +97,8 @@ class FAPickerField extends Component {
      */
     handleClickRecentList() {
         const cookies = new Cookies();
+        const {recentListHolderToggle} = this.state;
         let recentIconList;
-        console.log('test');
 
         //create or get the array for favorites
         if (cookies.get('ss-fa-picker-recent') === undefined) {
@@ -109,6 +110,7 @@ class FAPickerField extends Component {
         //update the state
         this.setState({
             recentList: recentIconList,
+            recentListHolderToggle: recentListHolderToggle == false ? true : false,
         });
     }
 
@@ -192,7 +194,7 @@ class FAPickerField extends Component {
     }
 
     render() {
-        const {value,filteredList,iconVersion,iconTotal,searchValue,iconHolderDisplay,recentList} = this.state;
+        const {value,filteredList,iconVersion,iconTotal,searchValue,iconHolderDisplay,recentList,recentListHolderToggle} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
@@ -215,7 +217,7 @@ class FAPickerField extends Component {
                         </span>
                         <input type="text" value={searchValue} className={classNames(iconHolderDisplay, "text")} placeholder="Filter..." onChange={(e) => this.searchIcons(e.target.value)}/>
                         <span className={classNames(iconHolderDisplay, "fapicker-icons__recent-icon-button")} data-tip="Recently used icons" onClick={() => this.handleClickRecentList()}><i class="fas fa-redo"></i></span>
-                        <div className={classNames(iconHolderDisplay, "fapicker-icons__recent-icon-list")}>
+                        <div className={classNames(recentListHolderToggle == true ? "list-open" : "hide", iconHolderDisplay, "fapicker-icons__recent-icon-list")}>
                             {recentIconRenderedList}
                         </div>
                     </div>

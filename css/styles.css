@@ -173,7 +173,10 @@ span.fapicker-icons__holder__icon:hover {
   position: absolute;
   top: 62px;
   z-index: 20;
-  right: 0px; }
+  right: 0px;
+  display: none; }
+  .fapicker-icons .fapicker-icons__recent-icon-list.list-open {
+    display: block; }
 
 
 /*# sourceMappingURL=styles.css.map*/

@@ -219,5 +219,10 @@ span.fapicker-icons__holder__icon:hover {
         top: 62px;
         z-index: 20;
         right: 0px;
+        display: none;
+
+        &.list-open {
+            display: block;
+        }
     }
 }
