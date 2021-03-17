@@ -82,7 +82,7 @@ input.fapicker.text {
   padding: 2px; }
 
 .fapicker-icons__holder__icon.active {
-  box-shadow: 0 0 0 1px #3fa142;
+  box-shadow: 0 0 0 1px #3fa142 !important;
   background-color: #eee; }
 
 span.fapicker-icons__holder__icon {
@@ -175,13 +175,16 @@ span.fapicker-icons__holder__icon:hover {
   z-index: 20;
   right: 0px;
   display: none;
-  height: 353px;
+  height: 385px;
   overflow-y: scroll;
   padding: 10px;
   background-color: #f7f7f7;
   border-left-color: #dbe0e9;
   border-left-width: 1px;
-  border-left-style: solid; }
+  border-left-style: solid;
+  border-bottom-color: #dbe0e9;
+  border-bottom-width: 1px;
+  border-bottom-style: solid; }
   .fapicker-icons .fapicker-icons__recent-icon-list.list-open {
     display: block; }
 
