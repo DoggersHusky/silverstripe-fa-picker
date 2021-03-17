@@ -85,6 +85,8 @@ input.fapicker.text {
   background-color: #eee; }
 
 span.fapicker-icons__holder__icon {
+  min-width: 60px;
+  min-height: 60px;
   width: 60px;
   height: 60px;
   margin: 0px;
@@ -158,6 +160,13 @@ span.fapicker-icons__holder__icon:hover {
     position: absolute;
     right: 10px;
     cursor: pointer; }
+
+.fapicker-icons .fapicker-icons__recent-icons {
+  display: inline-block;
+  margin-left: 20px;
+  cursor: pointer; }
+  .fapicker-icons .fapicker-icons__recent-icons i {
+    font-size: 20px; }
 
 
 /*# sourceMappingURL=styles.css.map*/

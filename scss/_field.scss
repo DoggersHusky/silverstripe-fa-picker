@@ -108,6 +108,8 @@ input.fapicker.text {
 }
 
 span.fapicker-icons__holder__icon {
+    min-width: 60px;
+    min-height: 60px;
     width: 60px;
     height: 60px;
     margin: 0px;
@@ -185,7 +187,7 @@ span.fapicker-icons__holder__icon:hover {
     cursor: pointer;
 }
 
-.fapicker-icons__holder--remove i{
+.fapicker-icons__holder--remove i {
     font-size: 18px !important;
 }
 
@@ -196,5 +198,17 @@ span.fapicker-icons__holder__icon:hover {
         position: absolute;
         right: 10px;
         cursor: pointer;
+    }
+}
+
+.fapicker-icons {
+    .fapicker-icons__recent-icons {
+        display: inline-block;
+        margin-left: 20px;
+        cursor: pointer;
+
+        i {
+            font-size: 20px;
+        }
     }
 }
