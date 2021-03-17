@@ -75,7 +75,7 @@ class FAPickerField extends Component {
         }
 
         //set the cookie
-        cookies.set('ss-fa-picker-recent', recentList);
+        cookies.set('ss-fa-picker-recent', recentList, { path: '/' });
         console.log(cookies.get('ss-fa-picker-recent'));
 
         //update the state
