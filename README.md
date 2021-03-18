@@ -7,7 +7,7 @@ This will work with Fontawesome 5.15.2 pro out-of-the-box (but does not come bun
 **With the Free version of Font Awesome**
 ![Overview of Image Cropper Field](screenshots/screenshot1.PNG)
 
-**With the Pro Version of Font Awesome**
+**With the Pro version of Font Awesome**
 ![Overview of Image Cropper Field](screenshots/screenshot2.PNG)
 
 **Smaller starting size!**
