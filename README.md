@@ -16,6 +16,12 @@ It can be expanded to show the list of icons, search, and icon type selector.
 
 ![Overview of Image Cropper Field](screenshots/screenshot3.PNG)
 
+**NEW Recently used icon list!**
+By clicking the button in the screenshot below, it will open a recently used dropdown list.
+This list carries over between fields, so you can quickly select icons that you recently used.
+
+![Overview of Image Cropper Field](screenshots/screenshot3.PNG)
+
 ## Requirements
 
 -   SilverStripe 4.x
