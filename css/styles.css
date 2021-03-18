@@ -72,12 +72,15 @@ input.fapicker.text {
   align-items: normal; }
 
 .fapicker-icons__holder__fullicon {
-  margin: 0px 12px 12px 0px;
+  padding: 0px 12px 12px 0px;
   display: flex;
   flex-direction: column;
   max-height: 150px; }
 
 .fapicker-icons__holder__fullicon div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   font-size: 85%;
   box-shadow: 0 0 0 1px #ddd;
