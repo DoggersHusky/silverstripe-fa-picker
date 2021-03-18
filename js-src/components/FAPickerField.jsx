@@ -7,7 +7,6 @@ import PaginationList from 'react-pagination-list';
 import FAPickerRemove from '../components/FAPickerRemove.jsx';
 import FAPickerExpand from '../components/FAPickerExpand.jsx';
 import ReactTooltip from 'react-tooltip';
-import Cookies from 'universal-cookie';
 
 class FAPickerField extends Component {
 
@@ -15,14 +14,13 @@ class FAPickerField extends Component {
         super(props);
 
         //for recent list
-        const cookies = new Cookies();
         let recentIconList;
 
         //create or get the array for favorites
-        if (cookies.get('ss-fa-picker-recent') === undefined) {
+        if (localStorage.getItem("ss-fa-picker-recent") === null) {
             recentIconList = [];
         }else{
-            recentIconList = cookies.get('ss-fa-picker-recent');
+            recentIconList = JSON.parse(localStorage.getItem("ss-fa-picker-recent"));
         }
 
         this.state = {
@@ -56,12 +54,11 @@ class FAPickerField extends Component {
      */
     handleChange({value}) {
         const { onAutofill, name } = this.props;
-        const cookies = new Cookies();
         let {recentList} = this.state;
         let recentIndex = -1;
 
-
-        //remove from recent array
+        //if item clicked is not in the array add
+        //to the begin of array.
         recentIndex = recentList.indexOf(value);
         if (recentIndex == -1 && value !== "") {
             //add new item to the start of the recent array
@@ -72,11 +69,10 @@ class FAPickerField extends Component {
             if (recentList.length >= 25) {
                 recentList.splice(24, 1);
             }
-        }
 
-        //set the cookie
-        cookies.set('ss-fa-picker-recent', recentList, { path: '/' });
-        console.log(cookies.get('ss-fa-picker-recent'));
+            //set the local storage
+            localStorage.setItem("ss-fa-picker-recent", JSON.stringify(recentList));
+        }
 
         //update the state
         this.setState({
@@ -97,15 +93,14 @@ class FAPickerField extends Component {
      * button is clicked
      */
     handleClickRecentList() {
-        const cookies = new Cookies();
         const {recentListHolderToggle} = this.state;
         let recentIconList;
 
         //create or get the array for favorites
-        if (cookies.get('ss-fa-picker-recent') === undefined) {
+        if (localStorage.getItem("ss-fa-picker-recent") === null) {
             recentIconList = [];
         }else{
-            recentIconList = cookies.get('ss-fa-picker-recent');
+            recentIconList = JSON.parse(localStorage.getItem("ss-fa-picker-recent"));
         }
 
         //update the state
