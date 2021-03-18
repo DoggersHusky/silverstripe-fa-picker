@@ -120,6 +120,7 @@ FontawesomeIcons:
 
 ### What's New
 
+-   new recent icons list
 -   completely react driven
 -   fontawesome pro now loads much faster
 -   it now works in react sections of silverstripe (File section)
