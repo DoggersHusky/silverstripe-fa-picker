@@ -121,6 +121,7 @@ class FAPickerField extends Component {
             filteredList: this.filterByType(value),
             activeFilterType: value,
             searchValue: "",
+            recentListHolderToggle: false,
         });
     }
 
