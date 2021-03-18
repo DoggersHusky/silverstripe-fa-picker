@@ -4,19 +4,23 @@ Adds a Font Awesome 5 icon picker to SilverStripe 4.
 This comes bundled with the free version of Fontawesome 5.15.2.
 This will work with Fontawesome 5.15.2 pro out-of-the-box (but does not come bundled with it).
 
-**With the Free version of Font Awesome**
+### With the Free version of Font Awesome
+
 ![Overview of Image Cropper Field](screenshots/screenshot1.PNG)
 
-**With the Pro version of Font Awesome**
+### With the Pro version of Font Awesome
+
 ![Overview of Image Cropper Field](screenshots/screenshot2.PNG)
 
-**Smaller starting size!**
+### Smaller starting size!
+
 The Font Awesome Icon Picker field is now much smaller to start out with.
 It can be expanded to show the list of icons, search, and icon type selector.
 
 ![Overview of Image Cropper Field](screenshots/screenshot3.PNG)
 
-**NEW Recently used icon list!**
+### NEW Recently used icon list!
+
 By clicking the button in the screenshot below, it will open a recently used dropdown list.
 This list carries over between fields, so you can quickly select icons that you recently used.
 
