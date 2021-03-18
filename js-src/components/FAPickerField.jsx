@@ -186,7 +186,6 @@ class FAPickerField extends Component {
         this.setState({
             iconHolderDisplay: classname,
         });
-        console.log(this.state.iconHolderDisplay);
     }
 
     render() {
