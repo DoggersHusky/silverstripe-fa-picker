@@ -11,6 +11,11 @@ use SilverStripe\View\ThemeResourceLoader;
 class LeftAndMainExtension extends Extension
 {
 
+    public function init()
+    {
+        Requirements::add_i18n_javascript('buckleshusky/fontawesomeiconpicker: javascript/lang');
+    }
+
     public function onBeforeInit()
     {
         if ($this->getIsProVersion()) {

@@ -202,6 +202,15 @@ class FAPickerField extends Component {
         const recentIconRenderedList = recentList.map((icon) =>
             <FAPickerIcon className={this.state.value == icon ? 'active' : null} fullIconName={icon} onChange={this.handleChange}/>
         );
+
+        //translations
+        const allTranslated = ss.i18n._t('FontAwesomeIconPicker.ALL', 'All');
+        const solidTranslated = ss.i18n._t('FontAwesomeIconPicker.SOLID', 'Solid');
+        const regularTranslated = ss.i18n._t('FontAwesomeIconPicker.REGULAR', 'Regular');
+        const lightTranslated = ss.i18n._t('FontAwesomeIconPicker.LIGHT', 'Light');
+        const duotoneTranslated = ss.i18n._t('FontAwesomeIconPicker.DUOTONE', 'Duotone');
+        const brandsTranslated = ss.i18n._t('FontAwesomeIconPicker.BRANDS', 'Brands');
+
         return (
             <FieldGroup {...newProps}>
                 <ReactTooltip />
@@ -219,12 +228,12 @@ class FAPickerField extends Component {
                     </div>
             
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
-                        <li onClick={() => this.handleFilterTypeClick('all')} class={this.getTypeMenuClasses('all')}>All</li>
-                        <li onClick={() => this.handleFilterTypeClick('fas')} class={this.getTypeMenuClasses('fas')}>Solid</li>
-                        <li onClick={() => this.handleFilterTypeClick('far')} class={this.getTypeMenuClasses('far')}>Regular</li>
-                        <li onClick={() => this.handleFilterTypeClick('fal')} class={this.getTypeMenuClasses('fal')}>Light</li>
-                        <li onClick={() => this.handleFilterTypeClick('fad')} class={this.getTypeMenuClasses('fad')}>Duotone</li>
-                        <li onClick={() => this.handleFilterTypeClick('fab')} class={this.getTypeMenuClasses('fab')}>Brands</li>
+                        <li onClick={() => this.handleFilterTypeClick('all')} class={this.getTypeMenuClasses('all')}>{allTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('fas')} class={this.getTypeMenuClasses('fas')}>{solidTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('far')} class={this.getTypeMenuClasses('far')}>{regularTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('fal')} class={this.getTypeMenuClasses('fal')}>{lightTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('fad')} class={this.getTypeMenuClasses('fad')}>{duotoneTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('fab')} class={this.getTypeMenuClasses('fab')}>{brandsTranslated}</li>
                     </ul>
             
                     <div className={classNames(iconHolderDisplay, "fapicker-icons__holder")}>
