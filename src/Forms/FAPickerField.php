@@ -147,6 +147,9 @@ class FAPickerField extends TextField implements Flushable
      *
      * php:
      * `FAPickerField::addSourceMode('my_custom_icons');`
+     * to add the icon source to the default, or
+     * `FAPickerField::setSourceMode(['my_custom_icons']);`
+     * to override the source and use only custom icons.
      *
      * @var array
      */
