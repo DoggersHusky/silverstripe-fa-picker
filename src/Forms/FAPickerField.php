@@ -183,10 +183,14 @@ class FAPickerField extends TextField implements Flushable
     /**
      * Override the source modes array.
      *
-     * @param array $sourceModes
+     * @param $sourceModes
      */
-    public function setSourceModes(array $sourceModes)
+    public function setSourceModes($sourceModes)
     {
+        if (is_string($sourceModes)) {
+            $sourceModes = [$sourceModes];
+        }
+
         $this->sourceModes = $sourceModes;
 
         return $this;
