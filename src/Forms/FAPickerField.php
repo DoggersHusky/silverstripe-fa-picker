@@ -203,6 +203,11 @@ class FAPickerField extends TextField implements Flushable
         return $this;
     }
 
+    public function getIconConfig($name)
+    {
+        return Config::inst()->get('FontawesomeIcons', $name);
+    }
+
     /**
      * get a list of icons to add to the array to be displayed in the field
      *
@@ -210,7 +215,6 @@ class FAPickerField extends TextField implements Flushable
      */
     public function getIconList()
     {
-        //array of icons
         $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
         $listCacheKey = $this->getSourceModesCacheKey('iconList');
         $amountCacheKey = $this->getSourceModesCacheKey('iconAmount');
@@ -232,7 +236,22 @@ class FAPickerField extends TextField implements Flushable
             }
         }
 
-        //remove icons
+        // Modify icon list according to modified module implementation.
+        $icons = $this->modifyIcons($icons);
+
+        //cache the template
+        $cache->set($listCacheKey, $icons);
+
+        //store the icon amount
+        $count = count($icons);
+        $cache->set($amountCacheKey, count($icons));
+        $this->iconAmount = $count;
+
+        return $icons;
+    }
+
+    public function modifyIcons($icons)
+    {
         if ($removeIcons = $this->getIconConfig('remove')) {
             foreach ($removeIcons as $ri) {
                 if (($key = array_search($ri, $icons)) !== false) {
@@ -241,7 +260,7 @@ class FAPickerField extends TextField implements Flushable
             }
         }
 
-        $iconArray = [];
+        $modified = [];
         //needs to be cached
         foreach ($icons as $icon) {
             //the data icon value/the name of the icon
@@ -249,26 +268,13 @@ class FAPickerField extends TextField implements Flushable
             //get the icon type
             $iconType = trim(strtok($icon, " "));
 
-            array_push($iconArray, [
+            $modified[] = [
                 'type'      => $iconType,
                 'shortName' => $shortIconName,
                 'fullName'  => $icon,
-            ]);
+            ];
         }
 
-        //cache the template
-        $cache->set($listCacheKey, $iconArray);
-
-        //store the icon amount
-        $count = count($icons);
-        $cache->set($amountCacheKey, count($icons));
-        $this->iconAmount = $count;
-
-        return $iconArray;
-    }
-
-    public function getIconConfig($name)
-    {
-        return Config::inst()->get('FontawesomeIcons', $name);
+        return $modified;
     }
 }
