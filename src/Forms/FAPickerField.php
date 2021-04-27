@@ -236,7 +236,7 @@ class FAPickerField extends TextField implements Flushable
             }
         }
 
-        // Modify icon list according to modified module implementation.
+        // Modify icon list according to module implementation.
         $icons = $this->modifyIcons($icons);
 
         //cache the template
