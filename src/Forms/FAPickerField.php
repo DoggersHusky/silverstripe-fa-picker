@@ -14,7 +14,7 @@ class FAPickerField extends TextField implements Flushable
     //region Module implementation
 
     // NOTE: Apart from the getIconList() function,
-    //      the module implementation has not been altered.
+    //  the module implementation has not been altered.
 
     private $iconAmount = null;
     protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_TEXT;
@@ -169,6 +169,12 @@ class FAPickerField extends TextField implements Flushable
         return $modes;
     }
 
+    /**
+     * Get the cache key for the appropriate field and source modes combination.
+     *
+     * @param $prefix
+     * @return string
+     */
     public function getSourceModesCacheKey($prefix)
     {
         return $prefix . '_' . implode('_', $this->getSourceModes());
@@ -205,14 +211,15 @@ class FAPickerField extends TextField implements Flushable
         $listCacheKey = $this->getSourceModesCacheKey('iconList');
         $amountCacheKey = $this->getSourceModesCacheKey('iconAmount');
 
-        $icons = [];
-
+        // Check the cache first.
         if ($cache->has($listCacheKey)) {
             $this->iconAmount = $cache->get($amountCacheKey);
 
             return $cache->get($listCacheKey);
         }
 
+        $icons = [];
+        // Consolidate icons based on declared source modes.
         $modes = $this->getSourceModes();
         foreach ($modes as $mode) {
             $iconSource = $this->getIconConfig($mode);
@@ -220,18 +227,6 @@ class FAPickerField extends TextField implements Flushable
                 $icons = array_merge($icons, $iconSource);
             }
         }
-
-//        //check to see which icon list to use
-//        if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
-//            //get pro icons
-//            $icons = Config::inst()->get('FontawesomeIcons', 'pro_icons');
-//        } elseif (Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
-//            //get the icon list from the users yml file
-//            $icons = Config::inst()->get('FontawesomeIcons', 'my_icons');
-//        } else {
-//            //get free icons
-//            $icons = Config::inst()->get('FontawesomeIcons', 'icons');
-//        }
 
         //remove icons
         if ($removeIcons = $this->getIconConfig('remove')) {
