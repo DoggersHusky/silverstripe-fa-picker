@@ -11,11 +11,13 @@ use SilverStripe\Forms\TextField;
 
 class FAPickerField extends TextField implements Flushable
 {
+    //region Module implementation
+
+    // NOTE: Apart from the getIconList() function,
+    //  the module implementation has not been altered.
 
     private $iconAmount = null;
-
     protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_TEXT;
-
     protected $schemaComponent = 'FAPickerField';
 
     /**
@@ -38,70 +40,6 @@ class FAPickerField extends TextField implements Flushable
     }
 
     /**
-     * get a list of icons to add to the array to be displayed in the field
-     *
-     * @return array
-     */
-    public function getIconList()
-    {
-        //array of icons
-        $iconArray = [];
-        $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
-
-        //check to see if the icon list exist
-        if (!$cache->has('iconList')) {
-            //check to see which icon list to use
-            if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
-                //get pro icons
-                $icons = Config::inst()->get('FontawesomeIcons', 'pro_icons');
-            } elseif (Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
-                //get the icon list from the users yml file
-                $icons = Config::inst()->get('FontawesomeIcons', 'my_icons');
-            } else {
-                //get free icons
-                $icons = Config::inst()->get('FontawesomeIcons', 'icons');
-            }
-
-            //remove icons
-            if ($removeIcons = Config::inst()->get('FontawesomeIcons', 'remove')) {
-                foreach ($removeIcons as $ri) {
-                    if (($key = array_search($ri, $icons)) !== false) {
-                        unset($icons[$key]);
-                    }
-                }
-            }
-
-            //needs to be cached
-            foreach ($icons as $icon) {
-                //the data icon value/the name of the icon
-                $shortIconName = trim(substr($icon, strpos($icon, '-') + 1));
-                //get the icon type
-                $iconType = trim(strtok($icon, " "));
-
-                array_push($iconArray, [
-                    'type' => $iconType,
-                    'shortName' => $shortIconName,
-                    'fullName' => $icon,
-                ]);
-            }
-
-            //total amount icons
-            $cache->set('iconAmount', count($icons));
-
-            //cache the template
-            $cache->set('iconList', $iconArray);
-        } else {
-            //get from cache
-            $iconArray = $cache->get('iconList');
-        }
-
-        //store the icon amount
-        $this->iconAmount = $cache->get('iconAmount');
-
-        return $iconArray;
-    }
-
-    /**
      * Determine if the iconpicker should use the pro version of fontawesome
      *
      * @return boolean
@@ -111,6 +49,7 @@ class FAPickerField extends TextField implements Flushable
         if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
             return true;
         }
+
         return false;
     }
 
@@ -133,9 +72,11 @@ class FAPickerField extends TextField implements Flushable
     {
         if ($this->iconAmount == null) {
             $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
+
             return $cache->get('iconAmount');
 
         }
+
         return $this->iconAmount;
     }
 
@@ -173,16 +114,173 @@ class FAPickerField extends TextField implements Flushable
     public function getAttributes()
     {
         $attributes = array(
-            'class' => $this->extraClass(),
-            'id' => $this->ID(),
-            'name' => $this->getName(),
-            'value' => $this->value(),
+            'class'       => $this->extraClass(),
+            'id'          => $this->ID(),
+            'name'        => $this->getName(),
+            'value'       => $this->value(),
             'data-schema' => json_encode($this->getSchemaData()),
-            'data-state' => json_encode($this->getSchemaState()),
+            'data-state'  => json_encode($this->getSchemaState()),
         );
 
         $attributes = array_merge($attributes, $this->attributes);
 
         return $attributes;
+    }
+
+    //endregion Module implementation
+
+    /**
+     * Defaults to using the built-in FontAwesome icons.
+     * May include any of:
+     *  - icons
+     *  - pro_icons
+     *
+     * It is also possible to declare a custom icon array
+     * using the FontawesomeIcons config name and adding the icons:
+     *
+     * yml:
+     * FontawesomeIcons:
+     *   my_custom_icons:
+     *     - icon_1
+     *     - icon_2
+     *     - icon_3
+     *
+     * php:
+     * `FAPickerField::addSourceMode('my_custom_icons');`
+     * to add the icon source to the default, or
+     * `FAPickerField::setSourceMode(['my_custom_icons']);`
+     * to override the source and use only custom icons.
+     *
+     * @var array
+     */
+    protected $sourceModes = ['icons'];
+
+    /**
+     * Ensure source modes are sorted alphabetically by default
+     * so all similar references will be identical.
+     *
+     * @return array
+     */
+    public function getSourceModes(): array
+    {
+        $modes = $this->sourceModes;
+        sort($modes);
+
+        return $modes;
+    }
+
+    /**
+     * Get the cache key for the appropriate field and source modes combination.
+     *
+     * @param $prefix
+     * @return string
+     */
+    public function getSourceModesCacheKey($prefix)
+    {
+        return $prefix . '_' . implode('_', $this->getSourceModes());
+    }
+
+    /**
+     * Override the source modes array.
+     *
+     * @param array $sourceModes
+     */
+    public function setSourceModes(array $sourceModes)
+    {
+        $this->sourceModes = $sourceModes;
+
+        return $this;
+    }
+
+    /**
+     * Override the source modes array with a single mode.
+     *
+     * @param string $sourceModes
+     */
+    public function setSourceMode(string $sourceMode)
+    {
+        return $this->setSourceModes([$sourceMode]);
+    }
+
+    public function addSourceMode($mode)
+    {
+        $this->sourceModes[] = $mode;
+
+        return $this;
+    }
+
+    public function getIconConfig($name)
+    {
+        return Config::inst()->get('FontawesomeIcons', $name);
+    }
+
+    /**
+     * get a list of icons to add to the array to be displayed in the field
+     *
+     * @return array
+     */
+    public function getIconList()
+    {
+        $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
+        $listCacheKey = $this->getSourceModesCacheKey('iconList');
+        $amountCacheKey = $this->getSourceModesCacheKey('iconAmount');
+
+        // Check the cache first.
+        if ($cache->has($listCacheKey)) {
+            $this->iconAmount = $cache->get($amountCacheKey);
+
+            return $cache->get($listCacheKey);
+        }
+
+        $icons = [];
+        // Consolidate icons based on declared source modes.
+        $modes = $this->getSourceModes();
+        foreach ($modes as $mode) {
+            $iconSource = $this->getIconConfig($mode);
+            if ($iconSource && count($iconSource) > 0) {
+                $icons = array_merge($icons, $iconSource);
+            }
+        }
+
+        // Modify icon list according to module implementation.
+        $icons = $this->modifyIcons($icons);
+
+        //cache the template
+        $cache->set($listCacheKey, $icons);
+
+        //store the icon amount
+        $count = count($icons);
+        $cache->set($amountCacheKey, count($icons));
+        $this->iconAmount = $count;
+
+        return $icons;
+    }
+
+    public function modifyIcons($icons)
+    {
+        if ($removeIcons = $this->getIconConfig('remove')) {
+            foreach ($removeIcons as $ri) {
+                if (($key = array_search($ri, $icons)) !== false) {
+                    unset($icons[$key]);
+                }
+            }
+        }
+
+        $modified = [];
+        //needs to be cached
+        foreach ($icons as $icon) {
+            //the data icon value/the name of the icon
+            $shortIconName = trim(substr($icon, strpos($icon, '-') + 1));
+            //get the icon type
+            $iconType = trim(strtok($icon, " "));
+
+            $modified[] = [
+                'type'      => $iconType,
+                'shortName' => $shortIconName,
+                'fullName'  => $icon,
+            ];
+        }
+
+        return $modified;
     }
 }
