@@ -53,13 +53,13 @@ class FAPickerField extends TextField implements Flushable
             //check to see which icon list to use
             if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
                 //get pro icons
-                $icons = Config::inst()->get('FontawesomeIcons', 'pro_icons');
+                $icons = Config::inst()->get('FontawesomeIcons-PRO');
             } elseif (Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
                 //get the icon list from the users yml file
-                $icons = Config::inst()->get('FontawesomeIcons', 'my_icons');
+                $icons = Config::inst()->get('FontawesomeIcons-PRO');
             } else {
                 //get free icons
-                $icons = Config::inst()->get('FontawesomeIcons', 'icons');
+                $icons = Config::inst()->get('FontawesomeIcons-PRO');
             }
 
             //remove icons
@@ -73,15 +73,22 @@ class FAPickerField extends TextField implements Flushable
 
             //needs to be cached
             foreach ($icons as $icon) {
-                //the data icon value/the name of the icon
-                $shortIconName = trim(substr($icon, strpos($icon, '-') + 1));
-                //get the icon type
-                $iconType = trim(strtok($icon, " "));
+                $supportedTypes = [];
+
+                // @todo should switch to either free or pro depending
+                $iconType = $icon['familyStylesByLicense']['pro'];
+                foreach($iconType as $type) {
+                    // returns [
+                    //     'family' => classic/sharp,
+                    //     'style' => regular/solid/etc...
+                    // ]
+                    $supportedTypes[] =  $type;
+                }
 
                 array_push($iconArray, [
-                    'type' => $iconType,
-                    'shortName' => $shortIconName,
-                    'fullName' => $icon,
+                    'types' => $supportedTypes,
+                    'shortName' => $icon['label'],
+                    'fullName' => 'fa-' . str_replace(' ', '-', $icon['label']),
                 ]);
             }
 

@@ -196,9 +196,9 @@ class FAPickerField extends Component {
             ...this.props,
             className: classNames('fapicker-field')
           };
-        const listItems = filteredList.map((icon) =>
-            <FAPickerIcon className={this.state.value == icon.fullName ? 'active' : null} iconValue={icon} onChange={this.handleChange}/>
-        );
+        // const listItems = filteredList.map((icon) =>
+        //     <FAPickerIcon className={this.state.value == icon.fullName ? 'active' : null} iconValue={icon} onChange={this.handleChange} />
+        // );
         const recentIconRenderedList = recentList.map((icon) =>
             <FAPickerIcon className={this.state.value == icon ? 'active' : null} fullIconName={icon} onChange={this.handleChange}/>
         );
