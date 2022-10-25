@@ -10,14 +10,20 @@ use SilverStripe\View\ThemeResourceLoader;
 
 class LeftAndMainExtension extends Extension
 {
-
+    /**
+     * @inheritDoc
+     */
     public function init()
     {
         Requirements::add_i18n_javascript('buckleshusky/fontawesomeiconpicker: javascript/lang');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function onBeforeInit()
     {
+        // if we are using the proversion get the pro version css from theme   
         if ($this->getIsProVersion()) {
             //Block jquery, jquery-ui, and jquery.entwine
             Requirements::block('buckleshusky/fontawesomeiconpicker: css/fontawesome.css');
@@ -27,6 +33,9 @@ class LeftAndMainExtension extends Extension
             $themes = Config::inst()->get(SSViewer::class, 'themes');
             //load the requirements
             Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
+        } else {
+            // get the free version
+            Requirements::css('https://use.fontawesome.com/releases/v6.2.0/css/all.css');
         }
 
         //add the extra requirements if need be
@@ -35,7 +44,6 @@ class LeftAndMainExtension extends Extension
                 Requirements::css($css);
             }
         }
-
     }
 
     /**
@@ -58,7 +66,7 @@ class LeftAndMainExtension extends Extension
      */
     public function getProVersionCss()
     {
-        return Config::inst()->get('FontawesomeIcons', 'css');
+        return Config::inst()->get('FontawesomeIcons', 'pro_css');
     }
 
 }

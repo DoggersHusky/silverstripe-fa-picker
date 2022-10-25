@@ -57,8 +57,8 @@ class FAPickerField extends TextField implements Flushable
 
             // loop through the data
             foreach ($icons as $key => $value) {
-                // @todo should switch to either free or pro depending
-                $familyStylesByLicense = $value['familyStylesByLicense']['pro'];
+                // determine which version to look at
+                $familyStylesByLicense = $this->getIsProVersion() ? $value['familyStylesByLicense']['pro'] : $value['familyStylesByLicense']['free'];
                 
                 // set the version
                 if ($version < end($value['changes'])) {
