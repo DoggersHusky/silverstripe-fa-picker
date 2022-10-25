@@ -49,7 +49,7 @@ class FAPickerField extends TextField implements Flushable
         $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
 
         //check to see if the icon list exist
-        if (!$cache->has('iconList')) {
+        //if (!$cache->has('iconList')) {
             //check to see which icon list to use
             if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
                 //get pro icons
@@ -71,25 +71,20 @@ class FAPickerField extends TextField implements Flushable
                 }
             }
 
-            //needs to be cached
-            foreach ($icons as $icon) {
-                $supportedTypes = [];
-
+            // loop through the data
+            foreach ($icons as $key => $value) {
                 // @todo should switch to either free or pro depending
-                $iconType = $icon['familyStylesByLicense']['pro'];
-                foreach($iconType as $type) {
-                    // returns [
-                    //     'family' => classic/sharp,
-                    //     'style' => regular/solid/etc...
-                    // ]
-                    $supportedTypes[] =  $type;
-                }
+                $familyStylesByLicense = $value['familyStylesByLicense']['pro'];
 
-                array_push($iconArray, [
-                    'types' => $supportedTypes,
-                    'shortName' => $icon['label'],
-                    'fullName' => 'fa-' . str_replace(' ', '-', $icon['label']),
-                ]);
+                // loop through each license and get family and style
+                foreach ($familyStylesByLicense as $familyStyle) {
+                    array_push($iconArray, [
+                        'iconStyle' => $familyStyle['style'],
+                        'iconFamily' => $familyStyle['family'],
+                        'shortName' => $value['label'],
+                        'fullName' => 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key),
+                    ]);
+                }
             }
 
             //total amount icons
@@ -97,10 +92,10 @@ class FAPickerField extends TextField implements Flushable
 
             //cache the template
             $cache->set('iconList', $iconArray);
-        } else {
-            //get from cache
-            $iconArray = $cache->get('iconList');
-        }
+        // } else {
+        //     //get from cache
+        //     $iconArray = $cache->get('iconList');
+        // }
 
         //store the icon amount
         $this->iconAmount = $cache->get('iconAmount');
