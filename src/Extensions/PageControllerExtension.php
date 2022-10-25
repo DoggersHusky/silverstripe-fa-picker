@@ -4,6 +4,7 @@ namespace BucklesHusky\FontAwesomeIconPicker\Extensions;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
+use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\ThemeResourceLoader;
 
@@ -19,12 +20,12 @@ class PageControllerExtension extends Extension
             //get a list of themes
             $themes = Config::inst()->get(SSViewer::class, 'themes');
             //load the requirements
-            Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
+            Requirements::css(ModuleResourceLoader::resourceURL($loader->findThemedCSS($this->getProVersionCss()), $themes));
             
             // load the sharp icons css only if it's not disabled
             if (!$this->getIsSharpIconsDisabled()) {
                 //load the requirements
-                Requirements::css($loader->findThemedCSS($this->getProSharpVersionCss(), $themes));
+                Requirements::css(ModuleResourceLoader::resourceURL($loader->findThemedCSS($this->getProSharpVersionCss()), $themes));
             }
         } else {
             // get the free version
