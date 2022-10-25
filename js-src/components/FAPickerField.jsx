@@ -31,6 +31,7 @@ class FAPickerField extends Component {
             iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
             isSharpDisabled: props.data.isSharpDisabled ? props.data.isSharpDisabled : false,
             activeFilterType: "all",
+            activeFilterFamily: "classic",
             searchValue: null,
             pro: props.data.pro ? props.data.pro : false,
             iconHolderDisplay: "hide",
@@ -47,6 +48,8 @@ class FAPickerField extends Component {
         this.toggleIconHolder = this.toggleIconHolder.bind(this);
         //handle clicking on recent icon list button
         this.handleClickRecentList = this.handleClickRecentList.bind(this);
+        // handle clicking on the family type
+        this.handleFilterFamilyClick = this.handleFilterFamilyClick.bind(this);
     }
 
     /**
@@ -126,6 +129,17 @@ class FAPickerField extends Component {
         });
     }
 
+    handleFilterFamilyClick(value) {
+        // update the filtered list as we want to always have a reference to the full list
+        // also clear the search field
+        this.setState({
+            filteredList: this.filterByFamily(value),
+            activeFilterFamily: value,
+            activeFilterType: 'solid',
+            recentListHolderToggle: false,
+        });
+    }
+
     /**
      * Filter down the list based on the selected type
      * 
@@ -143,6 +157,21 @@ class FAPickerField extends Component {
             newList = this.state.iconList.filter(icon => icon.iconStyle.includes(value));
         }
 
+        // set family to classic
+        this.setState({
+            activeFilterFamily: "classic",
+        });
+
+        return newList;
+    }
+
+    
+    filterByFamily(value) {
+        let newList = "";
+
+        //filter the new list
+        newList = this.state.iconList.filter(icon => icon.iconFamily.includes(value));
+
         return newList;
     }
 
@@ -158,10 +187,12 @@ class FAPickerField extends Component {
         if (value === "") {
             //filter list by active filter
             newList = this.filterByType(this.state.activeFilterType);
-
-        }else{
+        } else if (this.state.activeFilterFamily !== 'classic') {
+            newList = this.filterByFamily(this.state.activeFilterFamily).filter(icon => icon.searchName.includes(value));
+        } else {
             // filter the filterlist by the searchName as we don't want far,fab to be 
             // determining factors
+            // this is filtering by type
             newList = this.filterByType(this.state.activeFilterType).filter(icon => icon.searchName.includes(value));
         }
         
@@ -194,6 +225,17 @@ class FAPickerField extends Component {
         }
 
         return classes.join(' ');
+    }
+
+    getFamilyMenuClasses(value) {
+        let classes = '';
+
+        //should this be active?
+        if (this.state.activeFilterFamily == value) {
+            classes = 'active-family';
+        }
+
+        return classes;
     }
 
     /**
@@ -242,7 +284,12 @@ class FAPickerField extends Component {
                             {recentIconRenderedList}
                         </div>
                     </div>
-            
+
+                    <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
+                        <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('classic')}>Classic</span>
+                        <span onClick={() => this.handleFilterFamilyClick('sharp')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp')}>Sharp</span>
+                    </div>
+
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
                         <li onClick={() => this.handleFilterTypeClick('all')} class={this.getTypeMenuClasses('all')}>{allTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('solid')} class={this.getTypeMenuClasses('solid')}>{solidTranslated}</li>

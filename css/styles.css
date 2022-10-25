@@ -205,5 +205,26 @@ span.fapicker-icons__holder__icon:hover {
     .fapicker-icons .fapicker-icons__recent-icon-list .fapicker-icons__holder__icon i {
       font-size: 25px; }
 
+.fapicker-icons .family-select-holder {
+  background-color: #f7f7f7;
+  padding: 0px 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center; }
+
+.fapicker-icons .family-select__button {
+  width: 50%;
+  border: 1px solid;
+  border-color: #dbe0e9 #ced5e1;
+  text-align: center;
+  background-color: #f7f7f7;
+  cursor: pointer;
+  padding: 5px; }
+  .fapicker-icons .family-select__button:hover {
+    background-color: #d8e4eb; }
+  .fapicker-icons .family-select__button.active-family {
+    background-color: #d8e4eb;
+    cursor: default; }
+
 
 /*# sourceMappingURL=styles.css.map*/
