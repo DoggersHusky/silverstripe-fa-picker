@@ -269,6 +269,14 @@ class FAPickerField extends Component {
         const lightTranslated = ss.i18n._t('FontAwesomeIconPicker.LIGHT', 'Light');
         const duotoneTranslated = ss.i18n._t('FontAwesomeIconPicker.DUOTONE', 'Duotone');
         const brandsTranslated = ss.i18n._t('FontAwesomeIconPicker.BRANDS', 'Brands');
+        
+        let familyToggle;
+        if (!this.state.isSharpDisabled && this.state.pro) {
+            familyToggle = <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
+                <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('classic')}>Classic</span>
+                <span onClick={() => this.handleFilterFamilyClick('sharp')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp')}>Sharp</span>
+            </div>
+        }
 
         return (
             <FieldGroup {...newProps}>
@@ -286,10 +294,7 @@ class FAPickerField extends Component {
                         </div>
                     </div>
 
-                    <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
-                        <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('classic')}>Classic</span>
-                        <span onClick={() => this.handleFilterFamilyClick('sharp')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp')}>Sharp</span>
-                    </div>
+                    {familyToggle}
 
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
                         <li onClick={() => this.handleFilterTypeClick('all')} class={this.getTypeMenuClasses('all')}>{allTranslated}</li>
