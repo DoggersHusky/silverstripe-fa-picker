@@ -26,7 +26,7 @@ class FAPickerField extends Component {
         this.state = {
             value: props.value ? props.value : "",
             iconList: props.data.iconList ? props.data.iconList : null,
-            filteredList: props.data.iconList ? props.data.iconList : null,
+            filteredList: props.data.iconList ? props.data.iconList.filter(icon => icon.iconFamily.includes('classic')) : null,
             iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
             iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
             isSharpDisabled: props.data.isSharpDisabled ? props.data.isSharpDisabled : false,
@@ -136,6 +136,7 @@ class FAPickerField extends Component {
             filteredList: this.filterByFamily(value),
             activeFilterFamily: value,
             activeFilterType: 'solid',
+            searchValue: "",
             recentListHolderToggle: false,
         });
     }
@@ -304,7 +305,7 @@ class FAPickerField extends Component {
                             data={filteredList}
                             pageSize={100}
                             renderItem={(icon, key) => (
-                                <FAPickerIcon className={this.state.value == icon.fullName ? 'active' : null} iconValue={icon} onChange={this.handleChange}/>
+                                <FAPickerIcon className={(this.state.value == icon.fullName ? 'active' : null)} iconValue={icon} onChange={this.handleChange}/>
                             )}
                         />
                     </div>
