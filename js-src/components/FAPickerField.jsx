@@ -126,7 +126,10 @@ class FAPickerField extends Component {
     }
 
     /**
-     * filter down the list based on the selected type
+     * Filter down the list based on the selected type
+     * 
+     * @param {string} value the type to filter too
+     * @returns {array} of new icons filter down by type
      */
     filterByType(value) {
         let newList = "";
@@ -142,6 +145,11 @@ class FAPickerField extends Component {
         return newList;
     }
 
+    /**
+     * Search the icons for the desired icons
+     * 
+     * @param {string} value the value to filter the icons by
+     */
     searchIcons(value) {
         let newList = "";
         
@@ -163,6 +171,12 @@ class FAPickerField extends Component {
         });
     }
 
+    /**
+     * Adds disabled to the type menu item if it needs to be disbaled
+     * 
+     * @param {string} value the class to check
+     * @returns {string} of classes
+     */
     getTypeMenuClasses(value) {
         let classes = [];
 
@@ -181,6 +195,9 @@ class FAPickerField extends Component {
         return classes.join(' ');
     }
 
+    /**
+     * Toggle the icon holder
+     */
     toggleIconHolder() {
         let classname = (this.state.iconHolderDisplay === "hide") ? "show" : "hide";
         //set the state
@@ -253,7 +270,6 @@ class FAPickerField extends Component {
             </FieldGroup>
         )
     }
-
 }
 
 FAPickerField.defaultProps = {

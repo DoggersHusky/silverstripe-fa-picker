@@ -32,7 +32,7 @@ class FocusPointPicker extends Component {
                         <i class={iconValue.fullName}></i>
                     </div>
                     <div>
-                        {iconValue.iconFamily} {iconValue.shortName}
+                        {iconValue.shortName}
                     </div>
                 </div>
             )
