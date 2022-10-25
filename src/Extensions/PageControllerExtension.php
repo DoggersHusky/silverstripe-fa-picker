@@ -20,6 +20,8 @@ class PageControllerExtension extends Extension
             $themes = Config::inst()->get(SSViewer::class, 'themes');
             //load the requirements
             Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
+            //load the requirements
+            Requirements::css($loader->findThemedCSS($this->getProSharpVersionCss(), $themes));
         } else {
             // get the free version
             Requirements::css('https://use.fontawesome.com/releases/v6.2.0/css/all.css');
@@ -54,5 +56,15 @@ class PageControllerExtension extends Extension
     public function getProVersionCss()
     {
         return Config::inst()->get('FontawesomeIcons', 'pro_css');
+    }
+
+    /**
+     * Get the pro sharp version css location
+     *
+     * @return void
+     */
+    public function getProSharpVersionCss()
+    {
+        return Config::inst()->get('FontawesomeIcons', 'pro_sharp_css');
     }
 }
