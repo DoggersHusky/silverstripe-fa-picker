@@ -8,13 +8,15 @@ class FAPickerExpand extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+    /**
+     * handles triggering the parent function
+     */
     handleClick() {
         if (typeof this.props.toggleIconHolder === 'function') {
             this.props.toggleIconHolder();
         }
     }
     
-
     render() {
         const {currentValue} = this.props;
         let icon = currentValue !== "hide" ? "fas fa-angle-double-up" : "fas fa-angle-double-down";
@@ -22,8 +24,6 @@ class FAPickerExpand extends Component {
         return (
             <span class="expand-button" onClick={() => this.handleClick()} data-tip="Expand or collapse this field."><ReactTooltip /><i class={icon}></i></span>
         )
-
-        
     }
 }
 
