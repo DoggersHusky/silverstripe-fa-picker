@@ -25,9 +25,6 @@ class LeftAndMainExtension extends Extension
     {
         // if we are using the proversion get the pro version css from theme   
         if ($this->getIsProVersion()) {
-            //Block jquery, jquery-ui, and jquery.entwine
-            Requirements::block('buckleshusky/fontawesomeiconpicker: css/fontawesome.css');
-
             $loader = ThemeResourceLoader::inst();
             //get a list of themes
             $themes = Config::inst()->get(SSViewer::class, 'themes');

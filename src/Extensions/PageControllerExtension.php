@@ -5,6 +5,7 @@ namespace BucklesHusky\FontAwesomeIconPicker\Extensions;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
 use SilverStripe\View\Requirements;
+use SilverStripe\View\ThemeResourceLoader;
 
 class PageControllerExtension extends Extension
 {
@@ -13,8 +14,14 @@ class PageControllerExtension extends Extension
      */
     public function fontAwesome()
     {
-        //should we disable the built in fontawesome
-        if (!$extraCSSClasses = Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
+        if ($this->getIsProVersion()) {
+            $loader = ThemeResourceLoader::inst();
+            //get a list of themes
+            $themes = Config::inst()->get(SSViewer::class, 'themes');
+            //load the requirements
+            Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
+        } else {
+            // get the free version
             Requirements::css('https://use.fontawesome.com/releases/v6.2.0/css/all.css');
         }
 
@@ -24,5 +31,28 @@ class PageControllerExtension extends Extension
                 Requirements::css($css);
             }
         }
+    }
+
+    /**
+     * Determine if the iconpicker should use the pro version of fontawesome
+     *
+     * @return boolean
+     */
+    public function getIsProVersion()
+    {
+        if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get the pro version css location
+     *
+     * @return void
+     */
+    public function getProVersionCss()
+    {
+        return Config::inst()->get('FontawesomeIcons', 'pro_css');
     }
 }
