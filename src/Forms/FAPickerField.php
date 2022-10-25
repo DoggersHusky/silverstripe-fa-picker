@@ -51,7 +51,7 @@ class FAPickerField extends TextField implements Flushable
         $version = '';
 
         //check to see if the icon list exist
-        //if (!$cache->has('iconList')) {
+        if (!$cache->has('iconList')) {
             // get the icon list
             $icons = Config::inst()->get('FontawesomeIconsList');
 
@@ -84,10 +84,10 @@ class FAPickerField extends TextField implements Flushable
 
             //cache the template
             $cache->set('iconList', $iconArray);
-        // } else {
-        //     //get from cache
-        //     $iconArray = $cache->get('iconList');
-        // }
+        } else {
+            //get from cache
+            $iconArray = $cache->get('iconList');
+        }
 
         //store the icon amount
         $this->iconAmount = $cache->get('iconAmount');
@@ -141,7 +141,6 @@ class FAPickerField extends TextField implements Flushable
 
     /**
      * @inheritDoc
-     *
      * */
     public static function flush()
     {
