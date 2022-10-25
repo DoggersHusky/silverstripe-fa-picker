@@ -13,6 +13,7 @@ class FAPickerField extends TextField implements Flushable
 {
 
     private $iconAmount = null;
+    private $iconVersion = null;
 
     protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_TEXT;
 
@@ -47,6 +48,7 @@ class FAPickerField extends TextField implements Flushable
         //array of icons
         $iconArray = [];
         $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
+        $version = '';
 
         //check to see if the icon list exist
         //if (!$cache->has('iconList')) {
@@ -76,6 +78,11 @@ class FAPickerField extends TextField implements Flushable
             foreach ($icons as $key => $value) {
                 // @todo should switch to either free or pro depending
                 $familyStylesByLicense = $value['familyStylesByLicense']['pro'];
+                
+                // set the version
+                if ($version < end($value['changes'])) {
+                    $version = end($value['changes']);
+                }
 
                 // loop through each license and get family and style
                 foreach ($familyStylesByLicense as $familyStyle) {
@@ -92,6 +99,8 @@ class FAPickerField extends TextField implements Flushable
             //total amount icons
             $cache->set('iconAmount', number_format(count($iconArray)));
 
+            $cache->set('iconVersion', $version);
+
             //cache the template
             $cache->set('iconList', $iconArray);
         // } else {
@@ -101,6 +110,7 @@ class FAPickerField extends TextField implements Flushable
 
         //store the icon amount
         $this->iconAmount = $cache->get('iconAmount');
+        $this->iconVersion = $cache->get('iconVersion');
 
         return $iconArray;
     }
@@ -125,7 +135,12 @@ class FAPickerField extends TextField implements Flushable
      */
     public function getVersionNumber()
     {
-        return Config::inst()->get('FontawesomeIcons', 'version');
+        if ($this->iconVersion == null) {
+            $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
+            return $cache->get('iconVersion');
+
+        }
+        return $this->iconVersion;
     }
 
     /**
