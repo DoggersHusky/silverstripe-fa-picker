@@ -65,7 +65,14 @@ class LeftAndMainExtension extends Extension
      */
     public function getProVersionCss()
     {
-        return Config::inst()->get('FontawesomeIcons', 'pro_css');
+        $proCSS = Config::inst()->get('FontawesomeIcons', 'pro_css');
+
+        // make sure this is set
+        if(empty($proCSS)) {
+            user_error('You must configure FontawesomeIcons.pro_css. This is just simply the name of the css. For example: <strong>"all.min.css"</strong>.', E_USER_ERROR);
+        }
+
+        return $proCSS;
     }
 
     /**
@@ -75,6 +82,13 @@ class LeftAndMainExtension extends Extension
      */
     public function getProSharpVersionCss()
     {
+        $proSharpCSS = Config::inst()->get('FontawesomeIcons', 'pro_sharp_css');
+
+        // make sure this is set
+        if(empty($proSharpCSS)) {
+            user_error('You must configure FontawesomeIcons.pro_sharp_css. This is just simply the name of the css. For example: <strong>"sharp-solid.min.css"</strong>.', E_USER_ERROR);
+        }
+
         return Config::inst()->get('FontawesomeIcons', 'pro_sharp_css');
     }
 }
