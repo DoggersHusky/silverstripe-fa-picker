@@ -30,8 +30,12 @@ class LeftAndMainExtension extends Extension
             $themes = Config::inst()->get(SSViewer::class, 'themes');
             //load the requirements
             Requirements::css($loader->findThemedCSS($this->getProVersionCss(), $themes));
-            //load the requirements
-            Requirements::css($loader->findThemedCSS($this->getProSharpVersionCss(), $themes));
+            
+            // load the sharp icons css only if it's not disabled
+            if (!$this->getIsSharpIconsDisabled()) {
+                //load the requirements
+                Requirements::css($loader->findThemedCSS($this->getProSharpVersionCss(), $themes));
+            }
         } else {
             // get the free version
             Requirements::css('https://use.fontawesome.com/releases/v6.2.0/css/all.css');
@@ -53,6 +57,19 @@ class LeftAndMainExtension extends Extension
     public function getIsProVersion()
     {
         if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Determine if sharp icons are disabled
+     *
+     * @return boolean
+     */
+    public function getIsSharpIconsDisabled()
+    {
+        if (Config::inst()->get('FontawesomeIcons', 'disable_sharp_icons')) {
             return true;
         }
         return false;

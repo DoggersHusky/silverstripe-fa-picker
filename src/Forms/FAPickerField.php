@@ -67,6 +67,10 @@ class FAPickerField extends TextField implements Flushable
 
                 // loop through each license and get family and style
                 foreach ($familyStylesByLicense as $familyStyle) {
+                    if ($familyStyle['family'] === 'sharp' && $this->getIsSharpIconsDisabled()) {
+                        continue;
+                    }
+
                     // the full name of the icon
                     $fullName = 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key);
 
@@ -112,6 +116,19 @@ class FAPickerField extends TextField implements Flushable
     public function getIsProVersion()
     {
         if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Determine if sharp icons are disabled
+     *
+     * @return boolean
+     */
+    public function getIsSharpIconsDisabled()
+    {
+        if (Config::inst()->get('FontawesomeIcons', 'disable_sharp_icons')) {
             return true;
         }
         return false;
@@ -169,6 +186,7 @@ class FAPickerField extends TextField implements Flushable
         $defaults['data']['iconVersion'] = $this->getVersionNumber();
         $defaults['data']['iconTotal'] = $this->getIconAmount();
         $defaults['data']['pro'] = $this->getIsProVersion();
+        $defaults['data']['isSharpDisabled'] = $this->getIsSharpIconsDisabled();
 
         return $defaults;
     }
