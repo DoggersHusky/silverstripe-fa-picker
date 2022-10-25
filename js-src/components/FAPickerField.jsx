@@ -136,7 +136,7 @@ class FAPickerField extends Component {
             newList = this.state.iconList;
         }else{
             //filter the new list
-            newList = this.state.iconList.filter(icon => icon.type.includes(value) );
+            newList = this.state.iconList.filter(icon => icon.iconStyle.includes(value));
         }
 
         return newList;
@@ -144,16 +144,16 @@ class FAPickerField extends Component {
 
     searchIcons(value) {
         let newList = "";
-
+        
         //check to see if we have a value to filter by
         if (value === "") {
             //filter list by active filter
             newList = this.filterByType(this.state.activeFilterType);
 
         }else{
-            // filter the filterlist by the shortname as we don't want far,fab to be 
+            // filter the filterlist by the searchName as we don't want far,fab to be 
             // determining factors
-            newList = this.filterByType(this.state.activeFilterType).filter(icon => icon.shortName.includes(value) );
+            newList = this.filterByType(this.state.activeFilterType).filter(icon => icon.searchName.includes(value));
         }
         
         //update the filtered list as we want to always have a reference to the full list
@@ -196,9 +196,7 @@ class FAPickerField extends Component {
             ...this.props,
             className: classNames('fapicker-field')
           };
-        // const listItems = filteredList.map((icon) =>
-        //     <FAPickerIcon className={this.state.value == icon.fullName ? 'active' : null} iconValue={icon} onChange={this.handleChange} />
-        // );
+
         const recentIconRenderedList = recentList.map((icon) =>
             <FAPickerIcon className={this.state.value == icon ? 'active' : null} fullIconName={icon} onChange={this.handleChange}/>
         );
@@ -229,11 +227,11 @@ class FAPickerField extends Component {
             
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
                         <li onClick={() => this.handleFilterTypeClick('all')} class={this.getTypeMenuClasses('all')}>{allTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('fas')} class={this.getTypeMenuClasses('fas')}>{solidTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('far')} class={this.getTypeMenuClasses('far')}>{regularTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('fal')} class={this.getTypeMenuClasses('fal')}>{lightTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('fad')} class={this.getTypeMenuClasses('fad')}>{duotoneTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('fab')} class={this.getTypeMenuClasses('fab')}>{brandsTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('solid')} class={this.getTypeMenuClasses('solid')}>{solidTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('regular')} class={this.getTypeMenuClasses('regular')}>{regularTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('light')} class={this.getTypeMenuClasses('light')}>{lightTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('duotone')} class={this.getTypeMenuClasses('duotone')}>{duotoneTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('brands')} class={this.getTypeMenuClasses('brands')}>{brandsTranslated}</li>
                     </ul>
             
                     <div className={classNames(iconHolderDisplay, "fapicker-icons__holder")}>
