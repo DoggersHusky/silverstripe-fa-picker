@@ -10,7 +10,6 @@ const config = [
         name: "theme-css",
         entry: {
             styles: rootDir + "/scss/main.scss",
-            fontawesome: rootDir + "/scss/fontawesome.scss",
         },
         output: {
             path: rootDir,
