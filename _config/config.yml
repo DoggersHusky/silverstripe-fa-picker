@@ -19,6 +19,5 @@ SilverStripe\Admin\LeftAndMain:
         - "buckleshusky/fontawesomeiconpicker: javascript/boot/boot.js"
     extra_requirements_css:
         - "buckleshusky/fontawesomeiconpicker: css/styles.css"
-        - "buckleshusky/fontawesomeiconpicker: css/fontawesome.css"
     extensions:
         - BucklesHusky\FontAwesomeIconPicker\Extensions\LeftAndMainExtension
