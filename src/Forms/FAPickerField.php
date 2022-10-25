@@ -67,12 +67,20 @@ class FAPickerField extends TextField implements Flushable
 
                 // loop through each license and get family and style
                 foreach ($familyStylesByLicense as $familyStyle) {
+                    // the full name of the icon
+                    $fullName = 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key);
+
+                    // if we are dealing with the sharp family
+                    if ($familyStyle['family'] === 'sharp') {
+                        $fullName .= ' fa-sharp';
+                    }
+
                     array_push($iconArray, [
                         'iconStyle' => $familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style'],
                         'iconFamily' => $familyStyle['family'],
                         'shortName' => $value['label'],
                         'searchName' => mb_strtolower($value['label']),
-                        'fullName' => 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key),
+                        'fullName' => $fullName,
                     ]);
                 }
             }
