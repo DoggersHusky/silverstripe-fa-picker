@@ -29,6 +29,7 @@ class FAPickerField extends Component {
             filteredList: props.data.iconList ? props.data.iconList : null,
             iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
             iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
+            isSharpDisabled: props.data.isSharpDisabled ? props.data.isSharpDisabled : false,
             activeFilterType: "all",
             searchValue: null,
             pro: props.data.pro ? props.data.pro : false,
