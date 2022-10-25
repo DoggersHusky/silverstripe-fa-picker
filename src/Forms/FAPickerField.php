@@ -51,6 +51,7 @@ class FAPickerField extends TextField implements Flushable
         //check to see if the icon list exist
         //if (!$cache->has('iconList')) {
             //check to see which icon list to use
+            // @todo this needs cleaning up
             if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
                 //get pro icons
                 $icons = Config::inst()->get('FontawesomeIcons-PRO');
@@ -79,9 +80,10 @@ class FAPickerField extends TextField implements Flushable
                 // loop through each license and get family and style
                 foreach ($familyStylesByLicense as $familyStyle) {
                     array_push($iconArray, [
-                        'iconStyle' => $familyStyle['style'],
+                        'iconStyle' => $familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style'],
                         'iconFamily' => $familyStyle['family'],
                         'shortName' => $value['label'],
+                        'searchName' => mb_strtolower($value['label']),
                         'fullName' => 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key),
                     ]);
                 }
