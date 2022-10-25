@@ -130,12 +130,13 @@ class FAPickerField extends Component {
     }
 
     handleFilterFamilyClick(value) {
+        let activeFilterType = value == 'classic' ? 'all' : 'solid';
         // update the filtered list as we want to always have a reference to the full list
         // also clear the search field
         this.setState({
             filteredList: this.filterByFamily(value),
             activeFilterFamily: value,
-            activeFilterType: 'solid',
+            activeFilterType: activeFilterType,
             searchValue: "",
             recentListHolderToggle: false,
         });
