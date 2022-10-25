@@ -28,7 +28,7 @@ class PageControllerExtension extends Extension
             }
         } else {
             // get the free version
-            Requirements::css('https://use.fontawesome.com/releases/v6.2.0/css/all.css');
+            Requirements::css('https://use.fontawesome.com/releases/v' . $this->getIsFreeVersion() . '/css/all.css');
         }
 
         //add the extra requirements if need be
@@ -37,6 +37,20 @@ class PageControllerExtension extends Extension
                 Requirements::css($css);
             }
         }
+    }
+
+    /**
+     * Get the version to pull from the CDN
+     *
+     * @return string
+     */
+    public function getIsFreeVersion()
+    {
+        if ($version = Config::inst()->get('FontawesomeIcons', 'free_css_cdn_version')) {
+            return $version;
+        }
+
+        return '6.2.0';
     }
 
     /**

@@ -38,7 +38,7 @@ class LeftAndMainExtension extends Extension
             }
         } else {
             // get the free version
-            Requirements::css('https://use.fontawesome.com/releases/v6.2.0/css/all.css');
+            Requirements::css('https://use.fontawesome.com/releases/v' . $this->getIsFreeVersion() . '/css/all.css');
         }
 
         //add the extra requirements if need be
@@ -50,6 +50,21 @@ class LeftAndMainExtension extends Extension
     }
 
     /**
+     * Get the version to pull from the CDN
+     *
+     * @return string
+     */
+    public function getIsFreeVersion()
+    {
+        if ($version = Config::inst()->get('FontawesomeIcons', 'free_css_cdn_version')) {
+            return $version;
+        }
+
+        return '6.2.0';
+    }
+    
+
+    /**
      * Determine if the iconpicker should use the pro version of fontawesome
      *
      * @return boolean
@@ -59,6 +74,7 @@ class LeftAndMainExtension extends Extension
         if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
             return true;
         }
+
         return false;
     }
 
