@@ -1,4 +1,7 @@
-FontawesomeIcons-PRO:
+---
+Name: buckleshusky-fontawesomeiconpicker-icons
+---
+FontawesomeIconsList:
   '0':
     changes:
       - 6.0.0-beta1

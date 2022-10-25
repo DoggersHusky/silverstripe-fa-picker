@@ -52,27 +52,8 @@ class FAPickerField extends TextField implements Flushable
 
         //check to see if the icon list exist
         //if (!$cache->has('iconList')) {
-            //check to see which icon list to use
-            // @todo this needs cleaning up
-            if (Config::inst()->get('FontawesomeIcons', 'unlock_pro_mode')) {
-                //get pro icons
-                $icons = Config::inst()->get('FontawesomeIcons-PRO');
-            } elseif (Config::inst()->get('FontawesomeIcons', 'disable_builtin_fontawesome')) {
-                //get the icon list from the users yml file
-                $icons = Config::inst()->get('FontawesomeIcons-PRO');
-            } else {
-                //get free icons
-                $icons = Config::inst()->get('FontawesomeIcons-PRO');
-            }
-
-            //remove icons
-            if ($removeIcons = Config::inst()->get('FontawesomeIcons', 'remove')) {
-                foreach ($removeIcons as $ri) {
-                    if (($key = array_search($ri, $icons)) !== false) {
-                        unset($icons[$key]);
-                    }
-                }
-            }
+            // get the icon list
+            $icons = Config::inst()->get('FontawesomeIconsList');
 
             // loop through the data
             foreach ($icons as $key => $value) {
@@ -138,8 +119,8 @@ class FAPickerField extends TextField implements Flushable
         if ($this->iconVersion == null) {
             $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
             return $cache->get('iconVersion');
-
         }
+
         return $this->iconVersion;
     }
 
@@ -153,8 +134,8 @@ class FAPickerField extends TextField implements Flushable
         if ($this->iconAmount == null) {
             $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
             return $cache->get('iconAmount');
-
         }
+
         return $this->iconAmount;
     }
 
