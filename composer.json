@@ -1,7 +1,7 @@
 {
     "name": "buckleshusky/fontawesomeiconpicker",
     "type": "silverstripe-vendormodule",
-    "description": "Adds a Font Awesome 5 icon picker for SilverStripe.",
+    "description": "Adds a Font Awesome 6.x icon picker for SilverStripe.",
     "keywords": [
         "silverstripe",
         "fontawesome",
