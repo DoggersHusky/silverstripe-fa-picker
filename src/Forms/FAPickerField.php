@@ -90,7 +90,7 @@ class FAPickerField extends TextField implements Flushable
             }
 
             //total amount icons
-            $cache->set('iconAmount', count($icons));
+            $cache->set('iconAmount', number_format(count($iconArray)));
 
             //cache the template
             $cache->set('iconList', $iconArray);
