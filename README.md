@@ -23,7 +23,7 @@ Sharp icons, by default, are enabled when you switch to pro:
 
 ## Requirements
 
--   SilverStripe 4.x
+-   SilverStripe 4.x or 5.x
 
 ## Installation
 
