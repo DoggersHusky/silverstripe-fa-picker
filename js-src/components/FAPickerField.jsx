@@ -130,7 +130,7 @@ class FAPickerField extends Component {
     }
 
     handleFilterFamilyClick(value) {
-        let activeFilterType = (value == 'classic' ? 'all' : 'solid');
+        // let activeFilterType = (value == 'classic' ? 'all' : 'solid');
 
         console.log('clicked: handleFilterFamilyClick');
         console.log(value);
@@ -140,7 +140,7 @@ class FAPickerField extends Component {
         this.setState({
             filteredList: this.filterByFamily(value),
             activeFilterFamily: value,
-            activeFilterType: activeFilterType,
+            // activeFilterType: activeFilterType,
             searchValue: "",
             recentListHolderToggle: false,
         });

@@ -1073,13 +1073,11 @@ var FAPickerField = function (_Component) {
   }, {
     key: "handleFilterFamilyClick",
     value: function handleFilterFamilyClick(value) {
-      var activeFilterType = value == 'classic' ? 'all' : 'solid';
       console.log('clicked: handleFilterFamilyClick');
       console.log(value);
       this.setState({
         filteredList: this.filterByFamily(value),
         activeFilterFamily: value,
-        activeFilterType: activeFilterType,
         searchValue: "",
         recentListHolderToggle: false
       });
