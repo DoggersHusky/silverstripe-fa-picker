@@ -1074,7 +1074,8 @@ var FAPickerField = function (_Component) {
     key: "handleFilterFamilyClick",
     value: function handleFilterFamilyClick(value) {
       var activeFilterType = value == 'classic' ? 'all' : 'solid';
-      console.log(activeFilterType);
+      console.log('clicked: handleFilterFamilyClick');
+      console.log(value);
       this.setState({
         filteredList: this.filterByFamily(value),
         activeFilterFamily: value,
@@ -1087,6 +1088,8 @@ var FAPickerField = function (_Component) {
     key: "filterByType",
     value: function filterByType(value) {
       var newList = "";
+      console.log('triggered: filterByType');
+      console.log('value: ' + value);
       if (value == "all") {
         newList = this.state.iconList;
       } else {

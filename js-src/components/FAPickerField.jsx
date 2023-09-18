@@ -130,8 +130,11 @@ class FAPickerField extends Component {
     }
 
     handleFilterFamilyClick(value) {
-        let activeFilterType = value == 'classic' ? 'all' : 'solid';
-        console.log(activeFilterType);
+        let activeFilterType = (value == 'classic' ? 'all' : 'solid');
+
+        console.log('clicked: handleFilterFamilyClick');
+        console.log(value);
+
         // update the filtered list as we want to always have a reference to the full list
         // also clear the search field
         this.setState({
@@ -151,6 +154,9 @@ class FAPickerField extends Component {
      */
     filterByType(value) {
         let newList = "";
+
+        console.log('triggered: filterByType');
+        console.log('value: ' + value);
 
         //determine if we should default back to the list
         if (value == "all") {
