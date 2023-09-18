@@ -16,7 +16,7 @@ const config = [
             devtoolModuleFilenameTemplate: "../[resource-path]?[hash]",
             devtoolFallbackModuleFilenameTemplate: "../[resource-path]?[hash]",
         },
-        devtool: "nosources-source-map",
+        devtool: 'nosources-source-map',
         module: moduleCSS(rootDir),
         plugins: [...pluginCSS(rootDir)],
         optimization: {
@@ -79,7 +79,7 @@ const config = [
                 return "webpack:///" + opts.resourcePath + "?" + opts.loaders;
             },
         },
-        devtool: "nosources-source-map",
+        devtool: 'nosources-source-map',
         module: {
             rules: [
                 {

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { inject } from 'lib/Injector';
 import PropTypes from 'prop-types';
 import FAPickerIcon from '../components/FAPickerIcon.jsx';
-import PaginationList from 'react-pagination-list';
+import { PaginatedList } from 'react-paginated-list';
 import FAPickerRemove from '../components/FAPickerRemove.jsx';
 import FAPickerExpand from '../components/FAPickerExpand.jsx';
 import ReactTooltip from 'react-tooltip';
@@ -131,6 +131,7 @@ class FAPickerField extends Component {
 
     handleFilterFamilyClick(value) {
         let activeFilterType = value == 'classic' ? 'all' : 'solid';
+        console.log(activeFilterType);
         // update the filtered list as we want to always have a reference to the full list
         // also clear the search field
         this.setState({
@@ -144,7 +145,7 @@ class FAPickerField extends Component {
 
     /**
      * Filter down the list based on the selected type
-     * 
+     *
      * @param {string} value the type to filter too
      * @returns {array} of new icons filter down by type
      */
@@ -167,7 +168,7 @@ class FAPickerField extends Component {
         return newList;
     }
 
-    
+
     filterByFamily(value) {
         let newList = "";
 
@@ -179,12 +180,12 @@ class FAPickerField extends Component {
 
     /**
      * Search the icons for the desired icons
-     * 
+     *
      * @param {string} value the value to filter the icons by
      */
     searchIcons(value) {
         let newList = "";
-        
+
         //check to see if we have a value to filter by
         if (value === "") {
             //filter list by active filter
@@ -192,12 +193,12 @@ class FAPickerField extends Component {
         } else if (this.state.activeFilterFamily !== 'classic') {
             newList = this.filterByFamily(this.state.activeFilterFamily).filter(icon => icon.searchName.includes(value));
         } else {
-            // filter the filterlist by the searchName as we don't want far,fab to be 
+            // filter the filterlist by the searchName as we don't want far,fab to be
             // determining factors
             // this is filtering by type
             newList = this.filterByType(this.state.activeFilterType).filter(icon => icon.searchName.includes(value));
         }
-        
+
         //update the filtered list as we want to always have a reference to the full list
         this.setState({
             filteredList: newList,
@@ -207,7 +208,7 @@ class FAPickerField extends Component {
 
     /**
      * Adds disabled to the type menu item if it needs to be disbaled
-     * 
+     *
      * @param {string} value the class to check
      * @returns {string} of classes
      */
@@ -270,7 +271,7 @@ class FAPickerField extends Component {
         const lightTranslated = ss.i18n._t('FontAwesomeIconPicker.LIGHT', 'Light');
         const duotoneTranslated = ss.i18n._t('FontAwesomeIconPicker.DUOTONE', 'Duotone');
         const brandsTranslated = ss.i18n._t('FontAwesomeIconPicker.BRANDS', 'Brands');
-        
+
         let familyToggle;
         if (!this.state.isSharpDisabled && this.state.pro) {
             familyToggle = <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
@@ -305,17 +306,32 @@ class FAPickerField extends Component {
                         <li onClick={() => this.handleFilterTypeClick('duotone')} class={this.getTypeMenuClasses('duotone')}>{duotoneTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('brands')} class={this.getTypeMenuClasses('brands')}>{brandsTranslated}</li>
                     </ul>
-            
+
                     <div className={classNames(iconHolderDisplay, "fapicker-icons__holder")}>
-                        <PaginationList 
-                            data={filteredList}
-                            pageSize={100}
-                            renderItem={(icon, key) => (
-                                <FAPickerIcon className={(this.state.value == icon.fullName ? 'active' : null)} iconValue={icon} onChange={this.handleChange}/>
+                        <div>
+                        <PaginatedList
+                            list={filteredList}
+                            itemsPerPage={100}
+
+                            renderList={(icons, key) => (
+                                icons.map((icon, id) => {
+                                    return <FAPickerIcon className={(this.state.value == icon.fullName ? 'active' : null)} iconValue={icon} onChange={this.handleChange}/>
+                                })
                             )}
+
+                            // renderList={(icons) => (
+                            //     <>
+                            //       {icons.map((icon, id) => {
+                            //         return (
+                            //             <FAPickerIcon className={(this.state.value == icon.fullName ? 'active' : null)} iconValue={icon} onChange={this.handleChange}/>
+                            //         );
+                            //       })}
+                            //     </>
+                            //   )}
                         />
+                        </div>
                     </div>
-            
+
                     <div class="fapicker-icons__bottom">
                         <span className={classNames(iconHolderDisplay, "small version")}>Version <strong>{iconVersion}</strong></span>
                         <span className={classNames(iconHolderDisplay, "small icons")}><strong>{iconTotal}</strong> Icons</span>
@@ -331,7 +347,7 @@ FAPickerField.defaultProps = {
     extraClass: '',
     value: ''
 };
-  
+
 FAPickerField.propTypes = {
     extraClass: PropTypes.string,
     id: PropTypes.string,

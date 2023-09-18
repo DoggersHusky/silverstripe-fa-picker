@@ -18,15 +18,14 @@ module.exports = (ROOT) => {
             },
         },
         {
-            loader: Path.resolve(ROOT, 'webpack-config/css/map-path-fix-loader.js'),
-        },
-        {
             loader: 'postcss-loader',
             options: {
                 sourceMap: true,
-                plugins: [
-                    autoprefixer(),
-                ],
+                postcssOptions: {
+                    plugins: [
+                        autoprefixer(),
+                    ],
+                },
             },
         },
     ].filter(loader => loader);
@@ -34,6 +33,9 @@ module.exports = (ROOT) => {
         ...cssLoaders,
         {
             loader: 'resolve-url-loader',
+            options: {
+                sourceMap: true
+            }
         },
         {
             loader: 'sass-loader',
@@ -41,7 +43,7 @@ module.exports = (ROOT) => {
                 sassOptions: {
                     indentWidth: 2,
                     includePaths: [
-                        Path.resolve(ROOT, 'sass'),
+                        Path.resolve(ROOT, 'scss'),
                     ],
                 },
                 sourceMap: true,

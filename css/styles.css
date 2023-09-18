@@ -1,15 +1,22 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[0].use[3]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[4]!./scss/main.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
 input.fapicker.text {
-  display: none; }
+  display: none;
+}
 
 .fapicker-icons {
   background-color: #fff;
   border: 1px solid;
   border-color: #dbe0e9 #ced5e1;
-  width: 100px; }
-  .fapicker-icons.expand {
-    width: 100%; }
-  .fapicker-icons .hide {
-    display: none !important; }
+  width: 100px;
+}
+.fapicker-icons.expand {
+  width: 100%;
+}
+.fapicker-icons .hide {
+  display: none !important;
+}
 
 .fapicker-icons__search-holder {
   background-color: #f7f7f7;
@@ -19,10 +26,12 @@ input.fapicker.text {
   align-items: center;
   justify-content: center;
   padding: 0px 20px;
-  position: relative; }
+  position: relative;
+}
 
 .fapicker-icons__search-holder input {
-  width: 80% !important; }
+  width: 80% !important;
+}
 
 .fapicker-icons__holder__icon {
   position: relative;
@@ -36,24 +45,29 @@ input.fapicker.text {
   font-size: 14px;
   box-shadow: 0 0 0 1px #ddd;
   color: inherit;
-  background-color: #ffffff; }
+  background-color: #ffffff;
+}
 
 .fapicker-icons__holder__icon:hover {
-  background-color: #eee; }
+  background-color: #eee;
+}
 
 .fapicker-icons__holder__icon i {
-  font-size: 50px; }
+  font-size: 50px;
+}
 
 .fapicker-icons__holder > div {
   position: relative;
-  max-width: calc(60px + 12px);
+  max-width: 72px;
   padding: 0 !important;
-  align-items: center; }
+  align-items: center;
+}
 
 .fapicker-icons__holder > div,
 .fapicker-icons__holder > div > div {
   width: 100% !important;
-  max-width: 100% !important; }
+  max-width: 100% !important;
+}
 
 .fapicker-icons__holder > div > div {
   display: flex;
@@ -69,13 +83,15 @@ input.fapicker.text {
   padding-top: 20px;
   margin-bottom: 0px;
   list-style: none;
-  align-items: normal; }
+  align-items: normal;
+}
 
 .fapicker-icons__holder__fullicon {
   padding: 0px 12px 12px 0px;
   display: flex;
   flex-direction: column;
-  max-height: 150px; }
+  max-height: 150px;
+}
 
 .fapicker-icons__holder__fullicon div:last-child {
   display: flex;
@@ -87,11 +103,13 @@ input.fapicker.text {
   width: 100%;
   max-width: 80px;
   padding: 2px;
-  flex-grow: 1; }
+  flex-grow: 1;
+}
 
 .fapicker-icons__holder__icon.active {
   box-shadow: 0 0 0 1px #3fa142 !important;
-  background-color: #eee; }
+  background-color: #eee;
+}
 
 span.fapicker-icons__holder__icon {
   min-width: 60px;
@@ -100,16 +118,20 @@ span.fapicker-icons__holder__icon {
   height: 60px;
   margin: 0px;
   cursor: initial;
-  position: relative; }
+  position: relative;
+}
 
 .fapicker-icons__search-holder input {
-  margin-left: 20px; }
+  margin-left: 20px;
+}
 
 span.fapicker-icons__holder__icon i {
-  font-size: 40px; }
+  font-size: 40px;
+}
 
 span.fapicker-icons__holder__icon:hover {
-  background-color: #ffffff; }
+  background-color: #ffffff;
+}
 
 .fapicker-icons__bottom {
   border-bottom: 1px solid #ebebeb;
@@ -118,10 +140,12 @@ span.fapicker-icons__holder__icon:hover {
   flex-direction: row;
   height: 30px;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+}
 
 .fapicker-icons__bottom span:not(:last-child) {
-  margin-right: 10px; }
+  margin-right: 10px;
+}
 
 .fapicker-icons__type-selector {
   border-bottom: 1px solid #ebebeb;
@@ -131,7 +155,8 @@ span.fapicker-icons__holder__icon:hover {
   justify-content: space-between;
   list-style: none;
   padding: 0px;
-  margin-bottom: 0px; }
+  margin-bottom: 0px;
+}
 
 .fapicker-icons__type-selector li {
   flex-basis: 0;
@@ -139,44 +164,54 @@ span.fapicker-icons__holder__icon:hover {
   padding: 10px;
   text-align: center;
   cursor: pointer;
-  color: #5589a7; }
+  color: #5589a7;
+}
 
 .fapicker-icons__type-selector li.active {
-  background-color: #d8e4eb; }
+  background-color: #d8e4eb;
+}
 
 .fapicker-icons__type-selector li:hover {
-  background-color: #d8e4eb; }
+  background-color: #d8e4eb;
+}
 
 .fapicker-icons__type-selector li.disabled {
-  display: none; }
+  display: none;
+}
 
 .notInSearch,
 .iconNotSearch {
-  display: none; }
+  display: none;
+}
 
 .fapicker-icons__holder--remove {
   position: absolute;
   top: -10px;
   right: -5px;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .fapicker-icons__holder--remove i {
-  font-size: 18px !important; }
+  font-size: 18px !important;
+}
 
 .fapicker-icons__bottom {
-  position: relative; }
-  .fapicker-icons__bottom .expand-button {
-    position: absolute;
-    right: 10px;
-    cursor: pointer; }
+  position: relative;
+}
+.fapicker-icons__bottom .expand-button {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
 
 .fapicker-icons .fapicker-icons__recent-icon-button {
   display: inline-block;
   margin-left: 20px;
-  cursor: pointer; }
-  .fapicker-icons .fapicker-icons__recent-icon-button i {
-    font-size: 20px; }
-
+  cursor: pointer;
+}
+.fapicker-icons .fapicker-icons__recent-icon-button i {
+  font-size: 20px;
+}
 .fapicker-icons .fapicker-icons__recent-icon-list {
   min-width: 100px;
   position: absolute;
@@ -194,24 +229,28 @@ span.fapicker-icons__holder__icon:hover {
   border-bottom-color: #dbe0e9;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  box-shadow: -11px 13px 3px -9px rgba(0, 0, 0, 0.14); }
-  .fapicker-icons .fapicker-icons__recent-icon-list.list-open {
-    display: block; }
-  .fapicker-icons .fapicker-icons__recent-icon-list .fapicker-icons__holder__icon {
-    min-width: 50px;
-    width: 50px;
-    min-height: 50px;
-    height: 50px; }
-    .fapicker-icons .fapicker-icons__recent-icon-list .fapicker-icons__holder__icon i {
-      font-size: 25px; }
+  box-shadow: -11px 13px 3px -9px rgba(0, 0, 0, 0.14);
+}
+.fapicker-icons .fapicker-icons__recent-icon-list.list-open {
+  display: block;
+}
+.fapicker-icons .fapicker-icons__recent-icon-list .fapicker-icons__holder__icon {
+  min-width: 50px;
+  width: 50px;
+  min-height: 50px;
+  height: 50px;
+}
+.fapicker-icons .fapicker-icons__recent-icon-list .fapicker-icons__holder__icon i {
+  font-size: 25px;
+}
 
 .fapicker-icons .family-select-holder {
   background-color: #f7f7f7;
   padding: 0px 20px;
   padding-bottom: 20px;
   display: flex;
-  justify-content: center; }
-
+  justify-content: center;
+}
 .fapicker-icons .family-select__button {
   width: 50%;
   border: 1px solid;
@@ -219,12 +258,12 @@ span.fapicker-icons__holder__icon:hover {
   text-align: center;
   background-color: #f7f7f7;
   cursor: pointer;
-  padding: 5px; }
-  .fapicker-icons .family-select__button:hover {
-    background-color: #d8e4eb; }
-  .fapicker-icons .family-select__button.active-family {
-    background-color: #d8e4eb;
-    cursor: default; }
-
-
-/*# sourceMappingURL=styles.css.map*/
+  padding: 5px;
+}
+.fapicker-icons .family-select__button:hover {
+  background-color: #d8e4eb;
+}
+.fapicker-icons .family-select__button.active-family {
+  background-color: #d8e4eb;
+  cursor: default;
+}

@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Path = require('path');
-const MiniCssExtractPluginCleanup = require(Path.resolve(__dirname, 'mini-css-cleanup.js'));
+const MiniCssExtractPluginCleanup = require('./mini-css-cleanup.js');
 
 /**
  * Exports the settings for plugins in webpack.config
