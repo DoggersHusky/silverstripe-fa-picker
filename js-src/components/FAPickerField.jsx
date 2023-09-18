@@ -309,26 +309,16 @@ class FAPickerField extends Component {
 
                     <div className={classNames(iconHolderDisplay, "fapicker-icons__holder")}>
                         <div>
-                        <PaginatedList
-                            list={filteredList}
-                            itemsPerPage={100}
+                            <PaginatedList
+                                list={filteredList}
+                                itemsPerPage={100}
 
-                            renderList={(icons, key) => (
-                                icons.map((icon, id) => {
-                                    return <FAPickerIcon className={(this.state.value == icon.fullName ? 'active' : null)} iconValue={icon} onChange={this.handleChange}/>
-                                })
-                            )}
-
-                            // renderList={(icons) => (
-                            //     <>
-                            //       {icons.map((icon, id) => {
-                            //         return (
-                            //             <FAPickerIcon className={(this.state.value == icon.fullName ? 'active' : null)} iconValue={icon} onChange={this.handleChange}/>
-                            //         );
-                            //       })}
-                            //     </>
-                            //   )}
-                        />
+                                renderList={(icons, key) => (
+                                    icons.map((icon, id) => {
+                                        return <FAPickerIcon className={(this.state.value == icon.fullName ? 'active' : null)} iconValue={icon} onChange={this.handleChange}/>
+                                    })
+                                )}
+                            />
                         </div>
                     </div>
 

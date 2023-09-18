@@ -90,6 +90,7 @@ input.fapicker.text {
     list-style: none;
 
     align-items: normal;
+    margin-bottom: 60px;
 }
 
 .fapicker-icons__holder__fullicon {
@@ -291,5 +292,13 @@ span.fapicker-icons__holder__icon:hover {
             background-color: #d8e4eb;
             cursor: default;
         }
+    }
+}
+
+// pagination styles
+.fa-holder {
+    .pagination {
+        position: absolute;
+        bottom: -61px;
     }
 }
