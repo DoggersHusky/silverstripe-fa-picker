@@ -130,8 +130,6 @@ class FAPickerField extends Component {
     }
 
     handleFilterFamilyClick(value) {
-        // let activeFilterType = (value == 'classic' ? 'all' : 'solid');
-
         console.log('clicked: handleFilterFamilyClick');
         console.log(value);
 
@@ -140,7 +138,8 @@ class FAPickerField extends Component {
         this.setState({
             filteredList: this.filterByFamily(value),
             activeFilterFamily: value,
-            // activeFilterType: activeFilterType,
+            // set filter type to all
+            activeFilterType: 'all',
             searchValue: "",
             recentListHolderToggle: false,
         });
@@ -157,19 +156,22 @@ class FAPickerField extends Component {
 
         console.log('triggered: filterByType');
         console.log('value: ' + value);
+        console.log('family: ' + this.state.activeFilterFamily);
 
         //determine if we should default back to the list
         if (value == "all") {
             newList = this.state.iconList;
-        }else{
-            //filter the new list
-            newList = this.state.iconList.filter(icon => icon.iconStyle.includes(value));
+        } else if (this.state.activeFilterFamily == 'sharp') {
+            // filter the new list to only show sharp icons and the type selected
+            newList = this.state.iconList.filter((icon) => {
+                return icon.iconStyle.includes(value) && icon.iconFamily.includes('sharp')
+            });
+        } else {
+            //filter the new list to exclude sharp and return only classic icons
+            newList = this.state.iconList.filter((icon) => {
+                return icon.iconStyle.includes(value) && !icon.iconFamily.includes('sharp')
+            });
         }
-
-        // set family to classic
-        this.setState({
-            activeFilterFamily: "classic",
-        });
 
         return newList;
     }
@@ -191,6 +193,10 @@ class FAPickerField extends Component {
      */
     searchIcons(value) {
         let newList = "";
+
+        console.log('triggered: searchIcons');
+        console.log('value: ' + value);
+        console.log('family: ' + this.state.activeFilterFamily);
 
         //check to see if we have a value to filter by
         if (value === "") {

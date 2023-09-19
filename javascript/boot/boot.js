@@ -1078,6 +1078,7 @@ var FAPickerField = function (_Component) {
       this.setState({
         filteredList: this.filterByFamily(value),
         activeFilterFamily: value,
+        activeFilterType: 'all',
         searchValue: "",
         recentListHolderToggle: false
       });
@@ -1088,16 +1089,18 @@ var FAPickerField = function (_Component) {
       var newList = "";
       console.log('triggered: filterByType');
       console.log('value: ' + value);
+      console.log('family: ' + this.state.activeFilterFamily);
       if (value == "all") {
         newList = this.state.iconList;
+      } else if (this.state.activeFilterFamily == 'sharp') {
+        newList = this.state.iconList.filter(function (icon) {
+          return icon.iconStyle.includes(value) && icon.iconFamily.includes('sharp');
+        });
       } else {
         newList = this.state.iconList.filter(function (icon) {
-          return icon.iconStyle.includes(value);
+          return icon.iconStyle.includes(value) && !icon.iconFamily.includes('sharp');
         });
       }
-      this.setState({
-        activeFilterFamily: "classic"
-      });
       return newList;
     }
   }, {
@@ -1113,6 +1116,9 @@ var FAPickerField = function (_Component) {
     key: "searchIcons",
     value: function searchIcons(value) {
       var newList = "";
+      console.log('triggered: searchIcons');
+      console.log('value: ' + value);
+      console.log('family: ' + this.state.activeFilterFamily);
       if (value === "") {
         newList = this.filterByType(this.state.activeFilterType);
       } else if (this.state.activeFilterFamily !== 'classic') {
