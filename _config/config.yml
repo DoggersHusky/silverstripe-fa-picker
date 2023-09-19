@@ -3,7 +3,7 @@ Name: buckleshusky-fontawesomeiconpicker
 ---
 PageController:
     extensions:
-        - BucklesHusky\FontAwesomeIconPicker\Extensions\PageControllerExtension
+        FontAwesomeIconPicker: 'BucklesHusky\FontAwesomeIconPicker\Extensions\PageControllerExtension'
 
 SilverStripe\Core\Injector\Injector:
     Psr\SimpleCache\CacheInterface.fontawesomeiconpicker:
