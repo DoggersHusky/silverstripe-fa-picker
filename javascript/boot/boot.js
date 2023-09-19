@@ -810,10 +810,16 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().entwine('ss', function ($) {
       var form = $(this).closest('form');
       var setValue = function setValue(fieldName, value) {
         var input = $('input[name="' + fieldName + '"]');
+        var master = input.closest('.display-logic-dispatcher');
         if (!input) {
           return;
         }
         input.val(value);
+        if (master.length > 0) {
+          setTimeout(function () {
+            master.notify();
+          });
+        }
       };
       var FAPickerField = this.getComponent();
       react_dom__WEBPACK_IMPORTED_MODULE_2___default().render(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(FAPickerField, _extends({}, props, {

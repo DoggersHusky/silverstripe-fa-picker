@@ -60,6 +60,7 @@ jQuery.entwine('ss', ($) => {
         // with the same name or form state will be messed up
         //const input = $('#' + fieldName);
         const input = $('input[name="'+fieldName+'"]');
+        const master = input.closest('.display-logic-dispatcher');
 
         // If there's no input field then we'll return early
         if (!input) {
@@ -67,6 +68,12 @@ jQuery.entwine('ss', ($) => {
         }
         // Now we can set the field value
         input.val(value);
+
+        if (master.length > 0) {
+          setTimeout(() => {
+              master.notify();
+          });
+        }
       };
 
       const FAPickerField = this.getComponent();
