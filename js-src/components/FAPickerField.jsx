@@ -158,24 +158,34 @@ class FAPickerField extends Component {
         console.log('value: ' + value);
         console.log('family: ' + this.state.activeFilterFamily);
 
-        //determine if we should default back to the list
-        //@todo this still needs to account for family when all is selected
-        if (value == "all") {
-            newList = this.state.iconList;
-        } else if (this.state.activeFilterFamily == 'sharp') {
+        // determine if we should default back to the list
+        if (this.state.activeFilterFamily == 'sharp') {
             // filter the new list to only show sharp icons and the type selected
             newList = this.state.iconList.filter((icon) => {
-                return icon.iconStyle.includes(value) && icon.iconFamily.includes('sharp')
+                if (value == "all") {
+                    return icon.iconFamily.includes('sharp');
+                } else {
+                    return icon.iconStyle.includes(value) && icon.iconFamily.includes('sharp');
+                }
             });
         } else if (this.state.activeFilterFamily == 'duotone') {
             // filter the new list to only show duotone icons and the type selected
             newList = this.state.iconList.filter((icon) => {
-                return icon.iconStyle.includes(value) && icon.iconFamily.includes('duotone')
+                if (value == "all") {
+                    return icon.iconFamily.includes('duotone')
+                } else {
+                    return icon.iconStyle.includes(value) && icon.iconFamily.includes('duotone')
+                }
             });
         } else {
             //filter the new list to exclude sharp and return only classic icons
             newList = this.state.iconList.filter((icon) => {
-                return icon.iconStyle.includes(value) && (!icon.iconFamily.includes('sharp') && !icon.iconFamily.includes('duotone'))
+                if (value == "all") {
+                    return (!icon.iconFamily.includes('sharp') && !icon.iconFamily.includes('duotone'))
+                } else {
+                    return icon.iconStyle.includes(value) && (!icon.iconFamily.includes('sharp') && !icon.iconFamily.includes('duotone'))
+                }
+
             });
         }
 

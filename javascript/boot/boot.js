@@ -1090,19 +1090,29 @@ var FAPickerField = function (_Component) {
       console.log('triggered: filterByType');
       console.log('value: ' + value);
       console.log('family: ' + this.state.activeFilterFamily);
-      if (value == "all") {
-        newList = this.state.iconList;
-      } else if (this.state.activeFilterFamily == 'sharp') {
+      if (this.state.activeFilterFamily == 'sharp') {
         newList = this.state.iconList.filter(function (icon) {
-          return icon.iconStyle.includes(value) && icon.iconFamily.includes('sharp');
+          if (value == "all") {
+            return icon.iconFamily.includes('sharp');
+          } else {
+            return icon.iconStyle.includes(value) && icon.iconFamily.includes('sharp');
+          }
         });
       } else if (this.state.activeFilterFamily == 'duotone') {
         newList = this.state.iconList.filter(function (icon) {
-          return icon.iconStyle.includes(value) && icon.iconFamily.includes('duotone');
+          if (value == "all") {
+            return icon.iconFamily.includes('duotone');
+          } else {
+            return icon.iconStyle.includes(value) && icon.iconFamily.includes('duotone');
+          }
         });
       } else {
         newList = this.state.iconList.filter(function (icon) {
-          return icon.iconStyle.includes(value) && !icon.iconFamily.includes('sharp') && !icon.iconFamily.includes('duotone');
+          if (value == "all") {
+            return !icon.iconFamily.includes('sharp') && !icon.iconFamily.includes('duotone');
+          } else {
+            return icon.iconStyle.includes(value) && !icon.iconFamily.includes('sharp') && !icon.iconFamily.includes('duotone');
+          }
         });
       }
       return newList;
