@@ -59,7 +59,7 @@ class FAPickerField extends TextField implements Flushable
             foreach ($icons as $key => $value) {
                 // determine which version to look at
                 $familyStylesByLicense = $this->getIsProVersion() ? $value['familyStylesByLicense']['pro'] : $value['familyStylesByLicense']['free'];
-                
+
                 // set the version
                 if ($version < end($value['changes'])) {
                     $version = end($value['changes']);
@@ -80,7 +80,7 @@ class FAPickerField extends TextField implements Flushable
                     }
 
                     array_push($iconArray, [
-                        'iconStyle' => $familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style'],
+                        'iconStyle' => $familyStyle['style'],
                         'iconFamily' => $familyStyle['family'],
                         'shortName' => $value['label'],
                         'searchName' => mb_strtolower($value['label']),
