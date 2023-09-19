@@ -1121,7 +1121,6 @@ var FAPickerField = function (_Component) {
     key: "filterByFamily",
     value: function filterByFamily(value) {
       var newList = "";
-      console.log('filter by family: ' + value);
       newList = this.state.iconList.filter(function (icon) {
         return icon.iconFamily.includes(value);
       });

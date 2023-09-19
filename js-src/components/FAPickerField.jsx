@@ -194,7 +194,6 @@ class FAPickerField extends Component {
 
     filterByFamily(value) {
         let newList = "";
-        console.log('filter by family: ' + value);
 
         // filter the new list
         newList = this.state.iconList.filter((icon) => {
