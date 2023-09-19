@@ -53,7 +53,7 @@ class FAPickerField extends TextField implements Flushable
         //check to see if the icon list exist
         if (!$cache->has('iconList')) {
             // get the icon list
-            $icons = Config::inst()->get('FontawesomeIconsList');
+            $icons = Config::inst()->get('FontawesomeIconsListCustom') ? Config::inst()->get('FontawesomeIconsListCustom') : Config::inst()->get('FontawesomeIconsList');
 
             // loop through the data
             foreach ($icons as $key => $value) {
