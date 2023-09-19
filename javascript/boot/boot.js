@@ -1139,11 +1139,17 @@ var FAPickerField = function (_Component) {
     key: "getTypeMenuClasses",
     value: function getTypeMenuClasses(value) {
       var classes = [];
+      console.log('Menu generating');
       if (this.state.activeFilterType == value) {
         classes.push('active');
       }
       if (value == 'light' || value == 'duotone') {
         if (this.state.pro !== true) {
+          classes.push('disabled');
+        }
+      }
+      if (value == 'brands' || value == 'duotone') {
+        if (this.state.activeFilterFamily == 'sharp') {
           classes.push('disabled');
         }
       }

@@ -227,14 +227,23 @@ class FAPickerField extends Component {
     getTypeMenuClasses(value) {
         let classes = [];
 
-        //should this be active?
+        console.log('Menu generating');
+
+        // should this be active?
         if (this.state.activeFilterType == value) {
             classes.push('active');
         }
 
-        //should pro classes be disabled
+        // should pro classes be disabled
         if (value == 'light' || value == 'duotone') {
             if (this.state.pro !== true) {
+                classes.push('disabled');
+            }
+        }
+
+        // should this be disable for sharp?
+        if (value == 'brands' || value == 'duotone') {
+            if (this.state.activeFilterFamily == 'sharp') {
                 classes.push('disabled');
             }
         }
