@@ -153,13 +153,23 @@ class FAPickerField extends Component {
      */
     filterByType(value) {
         let newList = "";
+        // account for brands
+        let activeFilterFamily = (this.state.activeFilterFamily != 'classic' && value == 'brands') ?  'classic' : this.state.activeFilterFamily;
+        // account for brands
+        value = (value == "all" && this.state.activeFilterType == 'brands') ? 'brands' : value;
 
         console.log('triggered: filterByType');
         console.log('value: ' + value);
-        console.log('family: ' + this.state.activeFilterFamily);
+        console.log('family: ' + activeFilterFamily);
+
+        // set the state
+        this.setState({
+            activeFilterFamily: activeFilterFamily,
+            activeFilterType: 'brands',
+        });
 
         // determine if we should default back to the list
-        if (this.state.activeFilterFamily == 'sharp') {
+        if (activeFilterFamily == 'sharp') {
             // filter the new list to only show sharp icons and the type selected
             newList = this.state.iconList.filter((icon) => {
                 if (value == "all") {
@@ -168,7 +178,7 @@ class FAPickerField extends Component {
                     return icon.iconStyle.includes(value) && icon.iconFamily.includes('sharp');
                 }
             });
-        } else if (this.state.activeFilterFamily == 'duotone') {
+        } else if (activeFilterFamily == 'duotone') {
             // filter the new list to only show duotone icons and the type selected
             newList = this.state.iconList.filter((icon) => {
                 if (value == "all") {
@@ -251,6 +261,11 @@ class FAPickerField extends Component {
             classes.push('active');
         }
 
+        // account for brands
+        if (this.state.activeFilterType == 'brands' && this.state.activeFilterFamily == 'classic') {
+            classes.push('active');
+        }
+
         // should pro classes be disabled
         if (value == 'light' || value == 'duotone' || value == 'thin') {
             if (this.state.pro !== true) {
@@ -266,8 +281,8 @@ class FAPickerField extends Component {
         }
 
         // should this be disable for duotone?
-        if (value == 'regular' || value == 'light' || value == 'thin' || value == 'brands' || value == 'solid') {
-            if (this.state.activeFilterFamily == 'duotone') {
+        if (value == 'regular' || value == 'light' || value == 'thin' || value == 'brands' || value == 'solid' || value == 'all') {
+            if (this.state.activeFilterFamily == 'duotone' || this.state.activeFilterType == 'brands') {
                 classes.push('disabled');
             }
         }
@@ -279,7 +294,12 @@ class FAPickerField extends Component {
         let classes = '';
 
         //should this be active?
-        if (this.state.activeFilterFamily == value) {
+        if (this.state.activeFilterFamily == value && this.state.activeFilterType != 'brands') {
+            classes = 'active-family';
+        }
+
+        // if we have brands click, which is not a family but being treated as one, activate button
+        if (this.state.activeFilterType == 'brands' && value == 'brands') {
             classes = 'active-family';
         }
 
@@ -324,6 +344,8 @@ class FAPickerField extends Component {
                 <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('classic')}>Classic</span>
                 <span onClick={() => this.handleFilterFamilyClick('sharp')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp')}>Sharp</span>
                 <span onClick={() => this.handleFilterFamilyClick('duotone')} className={'family-select__button ' + this.getFamilyMenuClasses('duotone')}>{duotoneTranslated}</span>
+                {/* the below is actually a type, but because fontawesome treats it as a family, we moved it to the family bar */}
+                <span onClick={() => this.handleFilterTypeClick('brands')} className={'family-select__button ' + this.getFamilyMenuClasses('brands')}>{brandsTranslated}</span>
             </div>
         }
 
@@ -351,7 +373,6 @@ class FAPickerField extends Component {
                         <li onClick={() => this.handleFilterTypeClick('regular')} class={this.getTypeMenuClasses('regular')}>{regularTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('light')} class={this.getTypeMenuClasses('light')}>{lightTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('thin')} class={this.getTypeMenuClasses('thin')}>{thinTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('brands')} class={this.getTypeMenuClasses('brands')}>{brandsTranslated}</li>
                     </ul>
 
                     <div className={classNames(iconHolderDisplay, "fapicker-icons__holder")}>

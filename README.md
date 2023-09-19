@@ -173,6 +173,7 @@ FontawesomeIconsListCustom:
 - clicking sharp now allows you to select type
 - Duotone has been moved from the type bar to the family bar
 - when you click a family, the type buttons are filtered down to only show you what's available
+- added support for display logic
 - updated documentation
 
 ### Future

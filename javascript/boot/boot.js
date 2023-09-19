@@ -1093,10 +1093,16 @@ var FAPickerField = function (_Component) {
     key: "filterByType",
     value: function filterByType(value) {
       var newList = "";
+      var activeFilterFamily = this.state.activeFilterFamily != 'classic' && value == 'brands' ? 'classic' : this.state.activeFilterFamily;
+      value = value == "all" && this.state.activeFilterType == 'brands' ? 'brands' : value;
       console.log('triggered: filterByType');
       console.log('value: ' + value);
-      console.log('family: ' + this.state.activeFilterFamily);
-      if (this.state.activeFilterFamily == 'sharp') {
+      console.log('family: ' + activeFilterFamily);
+      this.setState({
+        activeFilterFamily: activeFilterFamily,
+        activeFilterType: 'brands'
+      });
+      if (activeFilterFamily == 'sharp') {
         newList = this.state.iconList.filter(function (icon) {
           if (value == "all") {
             return icon.iconFamily.includes('sharp');
@@ -1104,7 +1110,7 @@ var FAPickerField = function (_Component) {
             return icon.iconStyle.includes(value) && icon.iconFamily.includes('sharp');
           }
         });
-      } else if (this.state.activeFilterFamily == 'duotone') {
+      } else if (activeFilterFamily == 'duotone') {
         newList = this.state.iconList.filter(function (icon) {
           if (value == "all") {
             return icon.iconFamily.includes('duotone');
@@ -1163,6 +1169,9 @@ var FAPickerField = function (_Component) {
       if (this.state.activeFilterType == value) {
         classes.push('active');
       }
+      if (this.state.activeFilterType == 'brands' && this.state.activeFilterFamily == 'classic') {
+        classes.push('active');
+      }
       if (value == 'light' || value == 'duotone' || value == 'thin') {
         if (this.state.pro !== true) {
           classes.push('disabled');
@@ -1173,8 +1182,8 @@ var FAPickerField = function (_Component) {
           classes.push('disabled');
         }
       }
-      if (value == 'regular' || value == 'light' || value == 'thin' || value == 'brands' || value == 'solid') {
-        if (this.state.activeFilterFamily == 'duotone') {
+      if (value == 'regular' || value == 'light' || value == 'thin' || value == 'brands' || value == 'solid' || value == 'all') {
+        if (this.state.activeFilterFamily == 'duotone' || this.state.activeFilterType == 'brands') {
           classes.push('disabled');
         }
       }
@@ -1184,7 +1193,10 @@ var FAPickerField = function (_Component) {
     key: "getFamilyMenuClasses",
     value: function getFamilyMenuClasses(value) {
       var classes = '';
-      if (this.state.activeFilterFamily == value) {
+      if (this.state.activeFilterFamily == value && this.state.activeFilterType != 'brands') {
+        classes = 'active-family';
+      }
+      if (this.state.activeFilterType == 'brands' && value == 'brands') {
         classes = 'active-family';
       }
       return classes;
@@ -1247,7 +1259,12 @@ var FAPickerField = function (_Component) {
             return _this2.handleFilterFamilyClick('duotone');
           },
           className: 'family-select__button ' + this.getFamilyMenuClasses('duotone')
-        }, duotoneTranslated));
+        }, duotoneTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+          onClick: function onClick() {
+            return _this2.handleFilterTypeClick('brands');
+          },
+          className: 'family-select__button ' + this.getFamilyMenuClasses('brands')
+        }, brandsTranslated));
       }
       return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(FieldGroup, newProps, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_tooltip__WEBPACK_IMPORTED_MODULE_8__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay == "hide" ? "" : "expand", "fapicker-icons")
@@ -1306,12 +1323,7 @@ var FAPickerField = function (_Component) {
           return _this2.handleFilterTypeClick('thin');
         },
         "class": this.getTypeMenuClasses('thin')
-      }, thinTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        onClick: function onClick() {
-          return _this2.handleFilterTypeClick('brands');
-        },
-        "class": this.getTypeMenuClasses('brands')
-      }, brandsTranslated)), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, thinTranslated)), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__holder")
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_paginated_list__WEBPACK_IMPORTED_MODULE_5__.PaginatedList, {
         list: filteredList,
