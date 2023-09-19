@@ -43,7 +43,6 @@ class LeftAndMainExtension extends Extension
 
                     foreach ($folder as $item) {
                         if (str_contains($item, 'sharp-')) {
-                            // Requirements::css(ModuleResourceLoader::resourceURL($loader->findThemedCSS($this->getProSharpVersionCssFolder() . '/' . $item ), $themes));
                             Requirements::themedCSS($this->getProSharpVersionCssFolder() . '/' . $item);
                         }
                     }
@@ -133,9 +132,7 @@ class LeftAndMainExtension extends Extension
      */
     public function getProSharpVersionCss()
     {
-        $proSharpCSS = Config::inst()->get('FontawesomeIcons', 'pro_sharp_css');
-
-        return $proSharpCSS;
+        return Config::inst()->get('FontawesomeIcons', 'pro_sharp_css');
     }
 
     /**
@@ -145,8 +142,6 @@ class LeftAndMainExtension extends Extension
      */
     public function getProSharpVersionCssFolder()
     {
-        $proSharpCSS = Config::inst()->get('FontawesomeIcons', 'pro_sharp_css_folder');
-
-        return $proSharpCSS;
+        return Config::inst()->get('FontawesomeIcons', 'pro_sharp_css_folder');
     }
 }
