@@ -1157,7 +1157,7 @@ var FAPickerField = function (_Component) {
       if (this.state.activeFilterType == value) {
         classes.push('active');
       }
-      if (value == 'light' || value == 'duotone') {
+      if (value == 'light' || value == 'duotone' || value == 'thin') {
         if (this.state.pro !== true) {
           classes.push('disabled');
         }

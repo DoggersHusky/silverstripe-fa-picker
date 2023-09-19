@@ -252,7 +252,7 @@ class FAPickerField extends Component {
         }
 
         // should pro classes be disabled
-        if (value == 'light' || value == 'duotone') {
+        if (value == 'light' || value == 'duotone' || value == 'thin') {
             if (this.state.pro !== true) {
                 classes.push('disabled');
             }
