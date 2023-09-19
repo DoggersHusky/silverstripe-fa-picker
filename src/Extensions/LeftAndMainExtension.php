@@ -24,18 +24,35 @@ class LeftAndMainExtension extends Extension
      */
     public function onBeforeInit()
     {
-        // if we are using the proversion get the pro version css from theme   
+        // if we are using the proversion get the pro version css from theme
         if ($this->getIsProVersion()) {
             $loader = ThemeResourceLoader::inst();
             //get a list of themes
             $themes = Config::inst()->get(SSViewer::class, 'themes');
             //load the requirements
             Requirements::css(ModuleResourceLoader::resourceURL($loader->findThemedCSS($this->getProVersionCss()), $themes));
-            
+
             // load the sharp icons css only if it's not disabled
             if (!$this->getIsSharpIconsDisabled()) {
-                //load the requirements
-                Requirements::css(ModuleResourceLoader::resourceURL($loader->findThemedCSS($this->getProSharpVersionCss()), $themes));
+                // path to the folder relative to this folder
+                $folder = __DIR__ . '../../../../../../' . $loader->findThemedResource($this->getProSharpVersionCssFolder());
+
+                // attempt to find the folder
+                if ($this->getProSharpVersionCssFolder() && file_exists($folder)) {
+                    $folder = scandir($folder);
+
+                    foreach ($folder as $item) {
+                        if (str_contains($item, 'sharp-')) {
+                            // Requirements::css(ModuleResourceLoader::resourceURL($loader->findThemedCSS($this->getProSharpVersionCssFolder() . '/' . $item ), $themes));
+                            Requirements::themedCSS($this->getProSharpVersionCssFolder() . '/' . $item);
+                        }
+                    }
+                } else if ($this->getProSharpVersionCss()) {
+                    // default back to one file
+                    Requirements::css(ModuleResourceLoader::resourceURL($loader->findThemedCSS($this->getProSharpVersionCss()), $themes));
+                } else {
+                    user_error('You must configure FontawesomeIcons.pro_sharp_css. This is just simply the name of the css. For example: <strong>"sharp-solid.min.css"</strong>.', E_USER_ERROR);
+                }
             }
         } else {
             // get the free version
@@ -63,7 +80,7 @@ class LeftAndMainExtension extends Extension
 
         return '6.2.0';
     }
-    
+
 
     /**
      * Determine if the iconpicker should use the pro version of fontawesome
@@ -118,11 +135,18 @@ class LeftAndMainExtension extends Extension
     {
         $proSharpCSS = Config::inst()->get('FontawesomeIcons', 'pro_sharp_css');
 
-        // make sure this is set
-        if(empty($proSharpCSS)) {
-            user_error('You must configure FontawesomeIcons.pro_sharp_css. This is just simply the name of the css. For example: <strong>"sharp-solid.min.css"</strong>.', E_USER_ERROR);
-        }
+        return $proSharpCSS;
+    }
 
-        return Config::inst()->get('FontawesomeIcons', 'pro_sharp_css');
+    /**
+     * Get the pro sharp version css location
+     *
+     * @return void
+     */
+    public function getProSharpVersionCssFolder()
+    {
+        $proSharpCSS = Config::inst()->get('FontawesomeIcons', 'pro_sharp_css_folder');
+
+        return $proSharpCSS;
     }
 }
