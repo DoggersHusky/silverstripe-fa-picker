@@ -242,7 +242,7 @@ class FAPickerField extends Component {
         }
 
         // should this be disable for sharp?
-        if (value == 'brands' || value == 'duotone') {
+        if (value == 'brands' || value == 'duotone' || value == 'thin') {
             if (this.state.activeFilterFamily == 'sharp') {
                 classes.push('disabled');
             }
@@ -292,6 +292,7 @@ class FAPickerField extends Component {
         const lightTranslated = ss.i18n._t('FontAwesomeIconPicker.LIGHT', 'Light');
         const duotoneTranslated = ss.i18n._t('FontAwesomeIconPicker.DUOTONE', 'Duotone');
         const brandsTranslated = ss.i18n._t('FontAwesomeIconPicker.BRANDS', 'Brands');
+        const thinTranslated = ss.i18n._t('FontAwesomeIconPicker.THIN', 'Thin');
 
         let familyToggle;
         if (!this.state.isSharpDisabled && this.state.pro) {
@@ -324,6 +325,7 @@ class FAPickerField extends Component {
                         <li onClick={() => this.handleFilterTypeClick('solid')} class={this.getTypeMenuClasses('solid')}>{solidTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('regular')} class={this.getTypeMenuClasses('regular')}>{regularTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('light')} class={this.getTypeMenuClasses('light')}>{lightTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('thin')} class={this.getTypeMenuClasses('thin')}>{thinTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('duotone')} class={this.getTypeMenuClasses('duotone')}>{duotoneTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('brands')} class={this.getTypeMenuClasses('brands')}>{brandsTranslated}</li>
                     </ul>

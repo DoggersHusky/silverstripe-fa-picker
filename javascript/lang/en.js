@@ -8,5 +8,6 @@ if(typeof(ss) == 'undefined' || typeof(ss.i18n) == 'undefined') {
       'FontAwesomeIconPicker.LIGHT' : "Light",
       'FontAwesomeIconPicker.DUOTONE' : "Duotone",
       'FontAwesomeIconPicker.BRANDS' : "Brands",
+      'FontAwesomeIconPicker.THIN' : "Thin",
     });
   }

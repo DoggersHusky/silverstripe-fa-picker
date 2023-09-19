@@ -1148,7 +1148,7 @@ var FAPickerField = function (_Component) {
           classes.push('disabled');
         }
       }
-      if (value == 'brands' || value == 'duotone') {
+      if (value == 'brands' || value == 'duotone' || value == 'thin') {
         if (this.state.activeFilterFamily == 'sharp') {
           classes.push('disabled');
         }
@@ -1202,6 +1202,7 @@ var FAPickerField = function (_Component) {
       var lightTranslated = ss.i18n._t('FontAwesomeIconPicker.LIGHT', 'Light');
       var duotoneTranslated = ss.i18n._t('FontAwesomeIconPicker.DUOTONE', 'Duotone');
       var brandsTranslated = ss.i18n._t('FontAwesomeIconPicker.BRANDS', 'Brands');
+      var thinTranslated = ss.i18n._t('FontAwesomeIconPicker.THIN', 'Thin');
       var familyToggle;
       if (!this.state.isSharpDisabled && this.state.pro) {
         familyToggle = react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1271,6 +1272,11 @@ var FAPickerField = function (_Component) {
         },
         "class": this.getTypeMenuClasses('light')
       }, lightTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        onClick: function onClick() {
+          return _this2.handleFilterTypeClick('thin');
+        },
+        "class": this.getTypeMenuClasses('thin')
+      }, thinTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
           return _this2.handleFilterTypeClick('duotone');
         },
