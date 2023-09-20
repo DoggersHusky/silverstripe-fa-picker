@@ -312,7 +312,32 @@ class FAPickerField extends Component {
      * Toggle the icon holder
      */
     toggleIconHolder() {
+        console.log('icon holder has been open with toggleIconHolder');
         let classname = (this.state.iconHolderDisplay === "hide") ? "show" : "hide";
+        let families = ['classic', 'sharp', 'brands'];
+        let activeIcon = this.state.value;
+        let activeFamily = '';
+
+        // if holder is being open
+        if (classname == 'show' && activeIcon) {
+            console.log('active icon: ' + this.state.value);
+
+            families.forEach(element => {
+                if (activeIcon.includes(element)) {
+                    activeFamily = element;
+                }
+            });
+
+            console.log('active family: ' + activeFamily);
+        }
+
+        if (activeFamily == 'brands') {
+            this.handleFilterTypeClick(activeFamily)
+        } else {
+            this.handleFilterFamilyClick(activeFamily)
+        }
+
+
         //set the state
         this.setState({
             iconHolderDisplay: classname,

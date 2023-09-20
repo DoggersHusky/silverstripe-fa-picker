@@ -1204,7 +1204,25 @@ var FAPickerField = function (_Component) {
   }, {
     key: "toggleIconHolder",
     value: function toggleIconHolder() {
+      console.log('icon holder has been open with toggleIconHolder');
       var classname = this.state.iconHolderDisplay === "hide" ? "show" : "hide";
+      var families = ['classic', 'sharp', 'brands'];
+      var activeIcon = this.state.value;
+      var activeFamily = '';
+      if (classname == 'show' && activeIcon) {
+        console.log('active icon: ' + this.state.value);
+        families.forEach(function (element) {
+          if (activeIcon.includes(element)) {
+            activeFamily = element;
+          }
+        });
+        console.log('active family: ' + activeFamily);
+      }
+      if (activeFamily == 'brands') {
+        this.handleFilterTypeClick(activeFamily);
+      } else {
+        this.handleFilterFamilyClick(activeFamily);
+      }
       this.setState({
         iconHolderDisplay: classname
       });
