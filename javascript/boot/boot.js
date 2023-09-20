@@ -1069,24 +1069,34 @@ var FAPickerField = function (_Component) {
   }, {
     key: "handleFilterTypeClick",
     value: function handleFilterTypeClick(value) {
+      var _this2 = this;
       this.setState({
-        filteredList: this.filterByType(value),
-        activeFilterType: value,
-        searchValue: "",
-        recentListHolderToggle: false
+        filteredList: []
+      }, function () {
+        _this2.setState({
+          filteredList: _this2.filterByType(value),
+          activeFilterType: value,
+          searchValue: "",
+          recentListHolderToggle: false
+        });
       });
     }
   }, {
     key: "handleFilterFamilyClick",
     value: function handleFilterFamilyClick(value) {
+      var _this3 = this;
       console.log('clicked: handleFilterFamilyClick');
       console.log(value);
       this.setState({
-        filteredList: this.filterByFamily(value),
-        activeFilterFamily: value,
-        activeFilterType: 'all',
-        searchValue: "",
-        recentListHolderToggle: false
+        filteredList: []
+      }, function () {
+        _this3.setState({
+          filteredList: _this3.filterByFamily(value),
+          activeFilterFamily: value,
+          activeFilterType: 'all',
+          searchValue: "",
+          recentListHolderToggle: false
+        });
       });
     }
   }, {
@@ -1236,7 +1246,7 @@ var FAPickerField = function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this4 = this;
       var _this$state = this.state,
         value = _this$state.value,
         filteredList = _this$state.filteredList,
@@ -1252,9 +1262,9 @@ var FAPickerField = function (_Component) {
       });
       var recentIconRenderedList = recentList.map(function (icon) {
         return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_FAPickerIcon_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          className: _this2.state.value == icon ? 'active' : null,
+          className: _this4.state.value == icon ? 'active' : null,
           fullIconName: icon,
-          onChange: _this2.handleChange
+          onChange: _this4.handleChange
         });
       });
       var allTranslated = ss.i18n._t('FontAwesomeIconPicker.ALL', 'All');
@@ -1270,17 +1280,17 @@ var FAPickerField = function (_Component) {
           className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, 'family-select-holder')
         }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           onClick: function onClick() {
-            return _this2.handleFilterFamilyClick('classic');
+            return _this4.handleFilterFamilyClick('classic');
           },
           className: 'family-select__button ' + this.getFamilyMenuClasses('classic')
         }, "Classic"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           onClick: function onClick() {
-            return _this2.handleFilterFamilyClick('sharp');
+            return _this4.handleFilterFamilyClick('sharp');
           },
           className: 'family-select__button ' + this.getFamilyMenuClasses('sharp')
         }, "Sharp"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           onClick: function onClick() {
-            return _this2.handleFilterTypeClick('brands');
+            return _this4.handleFilterTypeClick('brands');
           },
           className: 'family-select__button ' + this.getFamilyMenuClasses('brands')
         }, brandsTranslated));
@@ -1303,13 +1313,13 @@ var FAPickerField = function (_Component) {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "text"),
         placeholder: "Filter...",
         onChange: function onChange(e) {
-          return _this2.searchIcons(e.target.value);
+          return _this4.searchIcons(e.target.value);
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__recent-icon-button"),
         "data-tip": "Recently used icons",
         onClick: function onClick() {
-          return _this2.handleClickRecentList();
+          return _this4.handleClickRecentList();
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
         "class": "fas fa-redo"
@@ -1319,32 +1329,32 @@ var FAPickerField = function (_Component) {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__type-selector")
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
-          return _this2.handleFilterTypeClick('all');
+          return _this4.handleFilterTypeClick('all');
         },
         "class": this.getTypeMenuClasses('all')
       }, allTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
-          return _this2.handleFilterTypeClick('solid');
+          return _this4.handleFilterTypeClick('solid');
         },
         "class": this.getTypeMenuClasses('solid')
       }, solidTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
-          return _this2.handleFilterTypeClick('regular');
+          return _this4.handleFilterTypeClick('regular');
         },
         "class": this.getTypeMenuClasses('regular')
       }, regularTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
-          return _this2.handleFilterTypeClick('light');
+          return _this4.handleFilterTypeClick('light');
         },
         "class": this.getTypeMenuClasses('light')
       }, lightTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
-          return _this2.handleFilterTypeClick('thin');
+          return _this4.handleFilterTypeClick('thin');
         },
         "class": this.getTypeMenuClasses('thin')
       }, thinTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
-          return _this2.handleFilterTypeClick('duotone');
+          return _this4.handleFilterTypeClick('duotone');
         },
         "class": this.getTypeMenuClasses('duotone')
       }, duotoneTranslated)), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1355,9 +1365,9 @@ var FAPickerField = function (_Component) {
         renderList: function renderList(icons, key) {
           return icons.map(function (icon, id) {
             return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_FAPickerIcon_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              className: _this2.state.value == icon.fullName ? 'active' : null,
+              className: _this4.state.value == icon.fullName ? 'active' : null,
               iconValue: icon,
-              onChange: _this2.handleChange
+              onChange: _this4.handleChange
             });
           });
         }

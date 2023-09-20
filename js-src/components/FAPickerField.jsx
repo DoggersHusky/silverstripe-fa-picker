@@ -121,13 +121,18 @@ class FAPickerField extends Component {
      * when all, bold, etc is clicked
      */
     handleFilterTypeClick(value) {
-        // update the filtered list as we want to always have a reference to the full list
-        // also clear the search field
         this.setState({
-            filteredList: this.filterByType(value),
-            activeFilterType: value,
-            searchValue: "",
-            recentListHolderToggle: false,
+            filteredList: [],
+        },
+        () => {
+            // update the filtered list as we want to always have a reference to the full list
+            // also clear the search field
+            this.setState({
+                filteredList: this.filterByType(value),
+                activeFilterType: value,
+                searchValue: "",
+                recentListHolderToggle: false,
+            })
         });
     }
 
@@ -135,15 +140,20 @@ class FAPickerField extends Component {
         console.log('clicked: handleFilterFamilyClick');
         console.log(value);
 
-        // update the filtered list as we want to always have a reference to the full list
-        // also clear the search field
         this.setState({
-            filteredList: this.filterByFamily(value),
-            activeFilterFamily: value,
-            // set filter type to all
-            activeFilterType: 'all',
-            searchValue: "",
-            recentListHolderToggle: false,
+            filteredList: [],
+        },
+        () => {
+            // update the filtered list as we want to always have a reference to the full list
+            // also clear the search field
+            this.setState({
+                filteredList: this.filterByFamily(value),
+                activeFilterFamily: value,
+                // set filter type to all
+                activeFilterType: 'all',
+                searchValue: "",
+                recentListHolderToggle: false,
+            });
         });
     }
 
