@@ -114,22 +114,22 @@ FontawesomeIcons:
 
 **How to setup the PRO version of fontawesome?**
 - You will need to download a kit from the [fontawesome site](https://fontawesome.com/sessions/sign-in?next=%2F).
-- Grab the css file for `all.min.css` and `sharp-solid.min.css` and place it in your theme's css folder.
+- Grab the css file for `all.min.css` and `sharp-[x].min.css` (where x is the different variants of sharp) and place it in your theme's css folder.
 - Grab the `webfonts` folder and place it in your theme's folder. Example `themes\simple`.
 - update your config:
     ```yml
     FontawesomeIcons:
         unlock_pro_mode: false
         # the css of all and sharp-solid
-        pro_css: 'all.min.css'
+        pro_css: 'webfonts/fontawesome/css/all.min.css'
         # not needed if sharp is disabled
-        pro_sharp_css: 'sharp-solid.min.css'
+        pro_sharp_css_folder: 'webfonts/fontawesome/css/'
     ```
 
 **How do I use a newer version of Fontawesome?**
 - Get a copy of `icon-families.yml`.
     - You can obtain this from their [github](https://github.com/FortAwesome/Font-Awesome/blob/6.x/metadata/icon-families.yml).
-    - for pro, you will get this file when you download pro from fontawesome
+    - for **pro**, you will get this file when you download pro from fontawesome
 - Place this file into your `app\_config` folder.
 - Open the file.
 - Indent everything in the file by 2 spaces and save.
@@ -169,11 +169,12 @@ FontawesomeIconsListCustom:
 
 ### What's New
 
-- switched to use FontawesomeIconsListCustom yml config to prevent duplicate icons
+- switched to use **FontawesomeIconsListCustom** yml config to prevent duplicate icons
 - clicking sharp now allows you to select type
-- Duotone has been moved from the type bar to the family bar
 - when you click a family, the type buttons are filtered down to only show you what's available
 - added support for display logic
+- added support for all sharp icons not just sharp solid
+- pagination no longer remembers the page when choose a family/type
 - updated documentation
 
 ### Future
