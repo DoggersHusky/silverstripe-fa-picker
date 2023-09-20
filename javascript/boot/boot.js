@@ -1212,7 +1212,7 @@ var FAPickerField = function (_Component) {
       var classname = this.state.iconHolderDisplay === "hide" ? "show" : "hide";
       var families = ['classic', 'sharp', 'brands'];
       var activeIcon = this.state.value;
-      var activeFamily = '';
+      var activeFamily = null;
       if (classname == 'show' && activeIcon) {
         console.log('active icon: ' + this.state.value);
         families.forEach(function (element) {
@@ -1222,10 +1222,12 @@ var FAPickerField = function (_Component) {
         });
         console.log('active family: ' + activeFamily);
       }
-      if (activeFamily == 'brands') {
-        this.handleFilterTypeClick(activeFamily);
-      } else {
-        this.handleFilterFamilyClick(activeFamily);
+      if (activeFamily) {
+        if (activeFamily == 'brands') {
+          this.handleFilterTypeClick(activeFamily);
+        } else {
+          this.handleFilterFamilyClick(activeFamily);
+        }
       }
       this.setState({
         iconHolderDisplay: classname
