@@ -80,7 +80,7 @@ class FAPickerField extends TextField implements Flushable
                     }
 
                     array_push($iconArray, [
-                        'iconStyle' => $familyStyle['style'],
+                        'iconStyle' => $familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style'],
                         'iconFamily' => $familyStyle['family'],
                         'shortName' => $value['label'],
                         'searchName' => mb_strtolower($value['label']),
