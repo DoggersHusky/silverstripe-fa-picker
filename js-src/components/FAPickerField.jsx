@@ -27,7 +27,7 @@ class FAPickerField extends Component {
             value: props.value ? props.value : "",
             iconList: props.data.iconList ? props.data.iconList : null,
             filteredList: props.data.iconList ? props.data.iconList.filter((icon) => {
-                return !icon.iconFamily.includes('sharp') || !icon.iconStyle.includes('brands');
+                return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
             }) : null,
             iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
             iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
@@ -203,7 +203,7 @@ class FAPickerField extends Component {
             //filter the new list to exclude sharp and return only classic icons
             newList = this.state.iconList.filter((icon) => {
                 if (value == "all") {
-                    return !icon.iconFamily.includes('sharp') || !icon.iconStyle.includes('brands')
+                    return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands')
                 } else {
                     return icon.iconStyle.includes(value) && (!icon.iconFamily.includes('sharp'))
                 }
@@ -216,11 +216,11 @@ class FAPickerField extends Component {
 
     filterByFamily(value) {
         let newList = "";
-
+        console.log('family: ' + value);
         // filter the new list
         newList = this.state.iconList.filter((icon) => {
             if (value == 'classic') {
-                return !icon.iconFamily.includes('sharp') || !icon.iconStyle.includes('brands');
+                return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
             } else {
                 return icon.iconFamily.includes(value);
             }

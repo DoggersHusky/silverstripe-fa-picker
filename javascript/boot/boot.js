@@ -1003,7 +1003,7 @@ var FAPickerField = function (_Component) {
       value: props.value ? props.value : "",
       iconList: props.data.iconList ? props.data.iconList : null,
       filteredList: props.data.iconList ? props.data.iconList.filter(function (icon) {
-        return !icon.iconFamily.includes('sharp') || !icon.iconStyle.includes('brands');
+        return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
       }) : null,
       iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
       iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
@@ -1131,7 +1131,7 @@ var FAPickerField = function (_Component) {
       } else {
         newList = this.state.iconList.filter(function (icon) {
           if (value == "all") {
-            return !icon.iconFamily.includes('sharp') || !icon.iconStyle.includes('brands');
+            return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
           } else {
             return icon.iconStyle.includes(value) && !icon.iconFamily.includes('sharp');
           }
@@ -1143,9 +1143,10 @@ var FAPickerField = function (_Component) {
     key: "filterByFamily",
     value: function filterByFamily(value) {
       var newList = "";
+      console.log('family: ' + value);
       newList = this.state.iconList.filter(function (icon) {
         if (value == 'classic') {
-          return !icon.iconFamily.includes('sharp') || !icon.iconStyle.includes('brands');
+          return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
         } else {
           return icon.iconFamily.includes(value);
         }
