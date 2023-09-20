@@ -175,6 +175,7 @@ FontawesomeIconsListCustom:
 - added support for display logic
 - added support for all sharp icons not just sharp solid
 - pagination no longer remembers the page when choose a family/type
+- when you expand the field, it will get the family and switch to the proper tab
 - updated documentation
 
 ### Future
