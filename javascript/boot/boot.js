@@ -1134,7 +1134,11 @@ var FAPickerField = function (_Component) {
     value: function filterByFamily(value) {
       var newList = "";
       newList = this.state.iconList.filter(function (icon) {
-        return icon.iconFamily.includes(value);
+        if (value == 'classic') {
+          return !icon.iconFamily.includes('sharp') || !icon.iconStyle.includes('brands');
+        } else {
+          return icon.iconFamily.includes(value);
+        }
       });
       return newList;
     }

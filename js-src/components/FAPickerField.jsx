@@ -209,7 +209,11 @@ class FAPickerField extends Component {
 
         // filter the new list
         newList = this.state.iconList.filter((icon) => {
-            return icon.iconFamily.includes(value);
+            if (value == 'classic') {
+                return !icon.iconFamily.includes('sharp') || !icon.iconStyle.includes('brands');
+            } else {
+                return icon.iconFamily.includes(value);
+            }
         });
 
         return newList;
