@@ -14,6 +14,7 @@ class FAPickerField extends TextField implements Flushable
 
     private $iconAmount = null;
     private $iconVersion = null;
+    private static $icons = null;
 
     protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_TEXT;
 
@@ -51,61 +52,59 @@ class FAPickerField extends TextField implements Flushable
         $version = '';
 
         //check to see if the icon list exist
-        if (!$cache->has('iconList')) {
-            // get the icon list
-            $icons = Config::inst()->get('FontawesomeIconsListCustom') ? Config::inst()->get('FontawesomeIconsListCustom') : Config::inst()->get('FontawesomeIconsList');
+        if (self::$icons == null) {
+            if (!$cache->has('iconList')) {
+                // get the icon list
+                $icons = Config::inst()->get('FontawesomeIconsListCustom') ? Config::inst()->get('FontawesomeIconsListCustom') : Config::inst()->get('FontawesomeIconsList');
 
-            // loop through the data
-            foreach ($icons as $key => $value) {
-                // determine which version to look at
-                $familyStylesByLicense = $this->getIsProVersion() ? $value['familyStylesByLicense']['pro'] : $value['familyStylesByLicense']['free'];
+                // loop through the data
+                foreach ($icons as $key => $value) {
+                    // determine which version to look at
+                    $familyStylesByLicense = $this->getIsProVersion() ? $value['familyStylesByLicense']['pro'] : $value['familyStylesByLicense']['free'];
 
-                // set the version
-                if ($version < end($value['changes'])) {
-                    $version = end($value['changes']);
-                }
-
-                // loop through each license and get family and style
-                foreach ($familyStylesByLicense as $familyStyle) {
-                    if ($familyStyle['family'] === 'sharp' && $this->getIsSharpIconsDisabled()) {
-                        continue;
+                    // set the version
+                    if ($version < end($value['changes'])) {
+                        $version = end($value['changes']);
                     }
 
-                    // the full name of the icon
-                    $fullName = 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key);
+                    // loop through each license and get family and style
+                    foreach ($familyStylesByLicense as $familyStyle) {
+                        if ($familyStyle['family'] === 'sharp' && $this->getIsSharpIconsDisabled()) {
+                            continue;
+                        }
 
-                    // if we are dealing with the sharp family
-                    if ($familyStyle['family'] === 'sharp') {
-                        $fullName .= ' fa-sharp';
+                        // the full name of the icon
+                        $fullName = 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key);
+
+                        // if we are dealing with the sharp family
+                        if ($familyStyle['family'] === 'sharp') {
+                            $fullName .= ' fa-sharp';
+                        }
+
+                        array_push($iconArray, [
+                            'iconStyle' => $familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style'],
+                            'iconFamily' => $familyStyle['family'],
+                            'shortName' => $value['label'],
+                            'searchName' => mb_strtolower($value['label']),
+                            'fullName' => $fullName,
+                        ]);
                     }
-
-                    array_push($iconArray, [
-                        'iconStyle' => $familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style'],
-                        'iconFamily' => $familyStyle['family'],
-                        'shortName' => $value['label'],
-                        'searchName' => mb_strtolower($value['label']),
-                        'fullName' => $fullName,
-                    ]);
                 }
+
+                //total amount icons
+                $cache->set('iconAmount', number_format(count($iconArray)));
+
+                $cache->set('iconVersion', $version);
+
+                //cache the template
+                $cache->set('iconList', $iconArray);
+            } else {
+                //get from cache
+                self::$icons = $cache->get('iconList');
             }
-
-            //total amount icons
-            $cache->set('iconAmount', number_format(count($iconArray)));
-
-            $cache->set('iconVersion', $version);
-
-            //cache the template
-            $cache->set('iconList', $iconArray);
-        } else {
-            //get from cache
-            $iconArray = $cache->get('iconList');
         }
 
-        //store the icon amount
-        $this->iconAmount = $cache->get('iconAmount');
-        $this->iconVersion = $cache->get('iconVersion');
-
-        return $iconArray;
+        return $iconArray ?? self::$icons;
     }
 
     /**
