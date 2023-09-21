@@ -2,6 +2,7 @@
 
 namespace BucklesHusky\FontAwesomeIconPicker\Extensions;
 
+use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Manifest\ModuleResourceLoader;
@@ -35,7 +36,7 @@ class LeftAndMainExtension extends Extension
             // load the sharp icons css only if it's not disabled
             if (!$this->getIsSharpIconsDisabled()) {
                 // path to the folder relative to this folder
-                $folder = __DIR__ . '../../../../../../' . $loader->findThemedResource($this->getProSharpVersionCssFolder());
+                $folder = Director::baseFolder() . '\\' . $loader->findThemedResource($this->getProSharpVersionCssFolder());
 
                 // attempt to find the folder
                 if ($this->getProSharpVersionCssFolder() && file_exists($folder)) {
