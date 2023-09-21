@@ -31,7 +31,6 @@
     "extra": {
         "expose": [
             "css",
-            "js",
             "javascript",
             "webfonts"
         ]
