@@ -36,7 +36,7 @@ class LeftAndMainExtension extends Extension
             // load the sharp icons css only if it's not disabled
             if (!$this->getIsSharpIconsDisabled()) {
                 // path to the folder relative to this folder
-                $folder = Director::baseFolder() . '\\' . $loader->findThemedResource($this->getProSharpVersionCssFolder());
+                $folder = Director::baseFolder() . '/' . $loader->findThemedResource($this->getProSharpVersionCssFolder());
 
                 // attempt to find the folder
                 if ($this->getProSharpVersionCssFolder() && file_exists($folder)) {
