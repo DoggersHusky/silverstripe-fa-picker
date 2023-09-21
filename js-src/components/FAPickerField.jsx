@@ -25,12 +25,12 @@ class FAPickerField extends Component {
 
         this.state = {
             value: props.value ? props.value : "",
-            iconList: props.data.iconList ? props.data.iconList : null,
-            filteredList: props.data.iconList ? props.data.iconList.filter((icon) => {
+            iconList: fullIconList ? fullIconList : null,
+            filteredList: fullIconList ? fullIconList.filter((icon) => {
                 return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
             }) : null,
-            iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
-            iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
+            iconVersion: iconVersion ? iconVersion : null,
+            iconTotal: iconAmount ? iconAmount : null,
             isSharpDisabled: props.data.isSharpDisabled ? props.data.isSharpDisabled : false,
             activeFilterType: "all",
             activeFilterFamily: "classic",
@@ -177,7 +177,6 @@ class FAPickerField extends Component {
         // set the state
         this.setState({
             activeFilterFamily: activeFilterFamily,
-            activeFilterType: 'brands',
         });
 
         // determine if we should default back to the list

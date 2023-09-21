@@ -2,9 +2,11 @@
 
 namespace BucklesHusky\FontAwesomeIconPicker\Extensions;
 
+use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
@@ -18,6 +20,104 @@ class LeftAndMainExtension extends Extension
     public function init()
     {
         Requirements::add_i18n_javascript('buckleshusky/fontawesomeiconpicker: javascript/lang');
+        $icons = json_encode($this->owner->getIconList());
+        $iconAmount = $this->owner->getIconAmount();
+        $icountVersion = $this->owner->getVersionNumber();
+
+        Requirements::customScript(<<<JS
+            let fullIconList = $icons;
+            let iconAmount = '$iconAmount';
+            let iconVersion = '$icountVersion';
+        JS
+        );
+    }
+
+    /**
+     * get a list of icons to add to the array to be displayed in the field
+     *
+     * @return array
+     */
+    public function getIconList()
+    {
+        //array of icons
+        $iconArray = [];
+        $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
+        $version = '';
+
+        // check to see if the icon list exist
+        if (!$cache->has('iconList')) {
+            // get the icon list
+            $icons = Config::inst()->get('FontawesomeIconsListCustom') ? Config::inst()->get('FontawesomeIconsListCustom') : Config::inst()->get('FontawesomeIconsList');
+
+            // loop through the data
+            foreach ($icons as $key => $value) {
+                // determine which version to look at
+                $familyStylesByLicense = $this->getIsProVersion() ? $value['familyStylesByLicense']['pro'] : $value['familyStylesByLicense']['free'];
+
+                // set the version
+                if ($version < end($value['changes'])) {
+                    $version = end($value['changes']);
+                }
+
+                // loop through each license and get family and style
+                foreach ($familyStylesByLicense as $familyStyle) {
+                    if ($familyStyle['family'] === 'sharp' && $this->getIsSharpIconsDisabled()) {
+                        continue;
+                    }
+
+                    // the full name of the icon
+                    $fullName = 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key);
+
+                    // if we are dealing with the sharp family
+                    if ($familyStyle['family'] === 'sharp') {
+                        $fullName .= ' fa-sharp';
+                    }
+
+                    array_push($iconArray, [
+                        'iconStyle' => $familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style'],
+                        'iconFamily' => $familyStyle['family'],
+                        'shortName' => $value['label'],
+                        'searchName' => mb_strtolower($value['label']),
+                        'fullName' => $fullName,
+                    ]);
+                }
+            }
+
+            //total amount icons
+            $cache->set('iconAmount', number_format(count($iconArray)));
+
+            $cache->set('iconVersion', $version);
+
+            //cache the template
+            $cache->set('iconList', $iconArray);
+        } else {
+            //get from cache
+            $iconArray = $cache->get('iconList');
+        }
+
+        return $iconArray;
+    }
+
+    /**
+     * get what version of fontawesome is being used
+     *
+     * @return string
+     */
+    public function getVersionNumber()
+    {
+        $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
+        return $cache->get('iconVersion');
+    }
+
+    /**
+     * gets the total amount of icons
+     *
+     * @return int
+     */
+    public function getIconAmount()
+    {
+        $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
+        return $cache->get('iconAmount');
     }
 
     /**

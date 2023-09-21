@@ -11,11 +11,6 @@ use SilverStripe\Forms\TextField;
 
 class FAPickerField extends TextField implements Flushable
 {
-
-    private $iconAmount = null;
-    private $iconVersion = null;
-    private static $icons = null;
-
     protected $schemaDataType = FormField::SCHEMA_DATA_TYPE_TEXT;
 
     protected $schemaComponent = 'FAPickerField';
@@ -37,74 +32,6 @@ class FAPickerField extends TextField implements Flushable
         $classes[] .= "text";
 
         return implode(' ', $classes);
-    }
-
-    /**
-     * get a list of icons to add to the array to be displayed in the field
-     *
-     * @return array
-     */
-    public function getIconList()
-    {
-        //array of icons
-        $iconArray = [];
-        $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
-        $version = '';
-
-        //check to see if the icon list exist
-        if (self::$icons == null) {
-            if (!$cache->has('iconList')) {
-                // get the icon list
-                $icons = Config::inst()->get('FontawesomeIconsListCustom') ? Config::inst()->get('FontawesomeIconsListCustom') : Config::inst()->get('FontawesomeIconsList');
-
-                // loop through the data
-                foreach ($icons as $key => $value) {
-                    // determine which version to look at
-                    $familyStylesByLicense = $this->getIsProVersion() ? $value['familyStylesByLicense']['pro'] : $value['familyStylesByLicense']['free'];
-
-                    // set the version
-                    if ($version < end($value['changes'])) {
-                        $version = end($value['changes']);
-                    }
-
-                    // loop through each license and get family and style
-                    foreach ($familyStylesByLicense as $familyStyle) {
-                        if ($familyStyle['family'] === 'sharp' && $this->getIsSharpIconsDisabled()) {
-                            continue;
-                        }
-
-                        // the full name of the icon
-                        $fullName = 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key);
-
-                        // if we are dealing with the sharp family
-                        if ($familyStyle['family'] === 'sharp') {
-                            $fullName .= ' fa-sharp';
-                        }
-
-                        array_push($iconArray, [
-                            'iconStyle' => $familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style'],
-                            'iconFamily' => $familyStyle['family'],
-                            'shortName' => $value['label'],
-                            'searchName' => mb_strtolower($value['label']),
-                            'fullName' => $fullName,
-                        ]);
-                    }
-                }
-
-                //total amount icons
-                $cache->set('iconAmount', number_format(count($iconArray)));
-
-                $cache->set('iconVersion', $version);
-
-                //cache the template
-                $cache->set('iconList', $iconArray);
-            } else {
-                //get from cache
-                self::$icons = $cache->get('iconList');
-            }
-        }
-
-        return $iconArray ?? self::$icons;
     }
 
     /**
@@ -134,36 +61,6 @@ class FAPickerField extends TextField implements Flushable
     }
 
     /**
-     * get what version of fontawesome is being used
-     *
-     * @return string
-     */
-    public function getVersionNumber()
-    {
-        if ($this->iconVersion == null) {
-            $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
-            return $cache->get('iconVersion');
-        }
-
-        return $this->iconVersion;
-    }
-
-    /**
-     * gets the total amount of icons
-     *
-     * @return int
-     */
-    public function getIconAmount()
-    {
-        if ($this->iconAmount == null) {
-            $cache = Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker');
-            return $cache->get('iconAmount');
-        }
-
-        return $this->iconAmount;
-    }
-
-    /**
      * @inheritDoc
      * */
     public static function flush()
@@ -177,13 +74,9 @@ class FAPickerField extends TextField implements Flushable
      * */
     public function getSchemaDataDefaults()
     {
-        $iconList = $this->getIconList();
         $defaults = parent::getSchemaDataDefaults();
 
         //@todo needs to send over version, icon total, and pro enabled
-        $defaults['data']['iconList'] = $iconList;
-        $defaults['data']['iconVersion'] = $this->getVersionNumber();
-        $defaults['data']['iconTotal'] = $this->getIconAmount();
         $defaults['data']['pro'] = $this->getIsProVersion();
         $defaults['data']['isSharpDisabled'] = $this->getIsSharpIconsDisabled();
 

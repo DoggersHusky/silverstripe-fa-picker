@@ -1001,12 +1001,12 @@ var FAPickerField = function (_Component) {
     }
     _this.state = {
       value: props.value ? props.value : "",
-      iconList: props.data.iconList ? props.data.iconList : null,
-      filteredList: props.data.iconList ? props.data.iconList.filter(function (icon) {
+      iconList: fullIconList ? fullIconList : null,
+      filteredList: fullIconList ? fullIconList.filter(function (icon) {
         return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
       }) : null,
-      iconVersion: props.data.iconVersion ? props.data.iconVersion : null,
-      iconTotal: props.data.iconTotal ? props.data.iconTotal : null,
+      iconVersion: iconVersion ? iconVersion : null,
+      iconTotal: iconAmount ? iconAmount : null,
       isSharpDisabled: props.data.isSharpDisabled ? props.data.isSharpDisabled : false,
       activeFilterType: "all",
       activeFilterFamily: "classic",
@@ -1109,8 +1109,7 @@ var FAPickerField = function (_Component) {
       console.log('value: ' + value);
       console.log('family: ' + activeFilterFamily);
       this.setState({
-        activeFilterFamily: activeFilterFamily,
-        activeFilterType: 'brands'
+        activeFilterFamily: activeFilterFamily
       });
       if (activeFilterFamily == 'sharp') {
         newList = this.state.iconList.filter(function (icon) {
