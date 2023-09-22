@@ -138,9 +138,6 @@ class FAPickerField extends Component {
     }
 
     handleFilterFamilyClick(value) {
-        console.log('clicked: handleFilterFamilyClick');
-        console.log(value);
-
         this.setState({
             filteredList: [],
         },
@@ -170,10 +167,6 @@ class FAPickerField extends Component {
         let activeFilterFamily = (this.state.activeFilterFamily != 'classic' && value == 'brands') ?  'classic' : this.state.activeFilterFamily;
         // account for brands
         value = (value == "all" && this.state.activeFilterType == 'brands') ? 'brands' : value;
-
-        console.log('triggered: filterByType');
-        console.log('value: ' + value);
-        console.log('family: ' + activeFilterFamily);
 
         // set the state
         this.setState({
@@ -216,7 +209,7 @@ class FAPickerField extends Component {
 
     filterByFamily(value) {
         let newList = "";
-        console.log('family: ' + value);
+
         // filter the new list
         newList = this.state.iconList.filter((icon) => {
             if (value == 'classic') {
@@ -236,10 +229,6 @@ class FAPickerField extends Component {
      */
     searchIcons(value) {
         let newList = "";
-
-        console.log('triggered: searchIcons');
-        console.log('value: ' + value);
-        console.log('family: ' + this.state.activeFilterFamily);
 
         //check to see if we have a value to filter by
         if (value === "") {
@@ -269,8 +258,6 @@ class FAPickerField extends Component {
      */
     getTypeMenuClasses(value) {
         let classes = [];
-
-        console.log('Menu generating');
 
         // should this be active?
         if (this.state.activeFilterType == value) {
@@ -326,7 +313,6 @@ class FAPickerField extends Component {
      * Toggle the icon holder
      */
     toggleIconHolder() {
-        console.log('icon holder has been open with toggleIconHolder');
         let classname = (this.state.iconHolderDisplay === "hide") ? "show" : "hide";
         let families = ['classic', 'sharp', 'brands'];
         let activeIcon = this.state.value;
@@ -334,15 +320,11 @@ class FAPickerField extends Component {
 
         // if holder is being open
         if (classname == 'show' && activeIcon) {
-            console.log('active icon: ' + this.state.value);
-
             families.forEach(element => {
                 if (activeIcon.includes(element)) {
                     activeFamily = element;
                 }
             });
-
-            console.log('active family: ' + activeFamily);
         }
 
         // if we have an active family already atempt to switch tabs

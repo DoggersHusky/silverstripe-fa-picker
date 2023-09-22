@@ -1086,8 +1086,6 @@ var FAPickerField = function (_Component) {
     key: "handleFilterFamilyClick",
     value: function handleFilterFamilyClick(value) {
       var _this3 = this;
-      console.log('clicked: handleFilterFamilyClick');
-      console.log(value);
       this.setState({
         filteredList: []
       }, function () {
@@ -1106,9 +1104,6 @@ var FAPickerField = function (_Component) {
       var newList = "";
       var activeFilterFamily = this.state.activeFilterFamily != 'classic' && value == 'brands' ? 'classic' : this.state.activeFilterFamily;
       value = value == "all" && this.state.activeFilterType == 'brands' ? 'brands' : value;
-      console.log('triggered: filterByType');
-      console.log('value: ' + value);
-      console.log('family: ' + activeFilterFamily);
       this.setState({
         activeFilterFamily: activeFilterFamily
       });
@@ -1143,7 +1138,6 @@ var FAPickerField = function (_Component) {
     key: "filterByFamily",
     value: function filterByFamily(value) {
       var newList = "";
-      console.log('family: ' + value);
       newList = this.state.iconList.filter(function (icon) {
         if (value == 'classic') {
           return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
@@ -1157,9 +1151,6 @@ var FAPickerField = function (_Component) {
     key: "searchIcons",
     value: function searchIcons(value) {
       var newList = "";
-      console.log('triggered: searchIcons');
-      console.log('value: ' + value);
-      console.log('family: ' + this.state.activeFilterFamily);
       if (value === "") {
         newList = this.filterByType(this.state.activeFilterType);
       } else if (this.state.activeFilterFamily !== 'classic') {
@@ -1180,7 +1171,6 @@ var FAPickerField = function (_Component) {
     key: "getTypeMenuClasses",
     value: function getTypeMenuClasses(value) {
       var classes = [];
-      console.log('Menu generating');
       if (this.state.activeFilterType == value) {
         classes.push('active');
       }
@@ -1219,19 +1209,16 @@ var FAPickerField = function (_Component) {
   }, {
     key: "toggleIconHolder",
     value: function toggleIconHolder() {
-      console.log('icon holder has been open with toggleIconHolder');
       var classname = this.state.iconHolderDisplay === "hide" ? "show" : "hide";
       var families = ['classic', 'sharp', 'brands'];
       var activeIcon = this.state.value;
       var activeFamily = null;
       if (classname == 'show' && activeIcon) {
-        console.log('active icon: ' + this.state.value);
         families.forEach(function (element) {
           if (activeIcon.includes(element)) {
             activeFamily = element;
           }
         });
-        console.log('active family: ' + activeFamily);
       }
       if (activeFamily) {
         if (activeFamily == 'brands') {
