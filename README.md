@@ -93,23 +93,31 @@ These files should be located in your theme's css folder.
 ```yml
 # settings for FontawesomeIcons
 FontawesomeIcons:
+  # unlocks pro mode - onkly use this if you are using Font Awesome pro
   unlock_pro_mode: true
+  # the location of the icon-families.yml from fontawesome
+  icon_yml_location: 'fontawesome/icon-families.yml'
+  #the pro css for fonts
   pro_css: 'all.min.css'
   # only use one of the following to get your sharp css
   pro_sharp_css: 'webfonts/fontawesome/css/sharp-solid.min.css' # not needed if sharp is disabled
+  # the folder where all the sharp-*.css are located
   pro_sharp_css_folder: 'webfonts/fontawesome/css/' # not needed if sharp is disabled
+  # disable generating icons on dev build
+  disable_generate_on_build: false # this is false by default
 ```
 
 **Options:**
-| Option                     | Description                                                                                                                                                                           | Values                          | default |
-|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|---------|
-| free_css_cdn_version       | for the **FREE version**. This is the version to get from the fontawesome CDN. This can be used to get the new version. You will still need a copy of `icon-families.yml`.            | the version to get from the CDN | 6.2.0   |
-| unlock_pro_mode            | enable this to switch to **PRO version**                                                                                                                                              | true/false                      | false   |
-| disable_sharp_icons        | with this enabled, the sharp icons will not be loaded. `pro_sharp_css` will also not be required.                                                                                     | true/false                      | false   |
-| pro_css                    | the name of the **PRO version** css file                                                                                                                                              | string                          |         |
-| pro_sharp_css              | the name of the **PRO version sharp** css file. This should be a combined css file containing the sharp-solid, sharp-regular, sharp-light. Example: ``                                | string                          |         |
-| pro_sharp_css_folder       | the name of the folder that contains the css files that start with `sharp-`. Using this, it will scan through the folder and load all css files that start with `sharp-`. Example: `` | string                          |         |
-|
+| Option               | Description                                                                                                                                                                       | Values                          | default |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|---------|
+| free_css_cdn_version | for the FREE version. This is the version to get from the fontawesome CDN. This can be used to get the new version. You will still need a copy of icon-families.yml.              | the version to get from the CDN | 6.2.0   |
+| unlock_pro_mode      | enable this to switch to PRO version                                                                                                                                              | true/false                      | false   |
+| disable_sharp_icons  | with this enabled, the sharp icons will not be loaded. pro_sharp_css will also not be required.                                                                                   | true/false                      | false   |
+| pro_css              | the name of the PRO version css file                                                                                                                                              | string                          |         |
+| pro_sharp_css        | the name of the PRO version sharp css file. This should be a combined css file containing the sharp-solid, sharp-regular, sharp-light. Example: ``                                | string                          |         |
+| pro_sharp_css_folder | the name of the folder that contains the css files that start with sharp-. Using this, it will scan through the folder and load all css files that start with sharp-. Example: `` | string                          |         |
+| icon_yml_location                 | This is the location of the icon-families.yml file in your theme.                                                                                                                 | string                          |         |
+| disable_generate_on_build              | This will disable generating icons on dev/build. If you don't feel you'll update your icons, you can set this to disabled                                                         | true/false                      | false   |
 
 
 **How to setup the PRO version of fontawesome?**
@@ -119,46 +127,24 @@ FontawesomeIcons:
 - update your config:
     ```yml
     FontawesomeIcons:
-        unlock_pro_mode: false
+        unlock_pro_mode: true
+        # the location of the icon-families.yml from fontawesome
+        icon_yml_location: 'fontawesome/icon-families.yml'
         # the css of all and sharp-solid
         pro_css: 'webfonts/fontawesome/css/all.min.css'
         # not needed if sharp is disabled
         pro_sharp_css_folder: 'webfonts/fontawesome/css/'
     ```
+- place the `icon-families.yml` yml file into your theme folder. In this example, it would be placed in `fontawesome/icon-families.yml`.
+- do a `dev/build`, or, if you have it disabled, run the following tasks `dev/tasks/generate-font-awesome`
 
 **How do I use a newer version of Fontawesome?**
 - Get a copy of `icon-families.yml`.
     - You can obtain this from their [github](https://github.com/FortAwesome/Font-Awesome/blob/6.x/metadata/icon-families.yml).
     - for **pro**, you will get this file when you download pro from fontawesome
-- Place this file into your `app\_config` folder.
-- Open the file.
-- Indent everything in the file by 2 spaces and save.
-- Add the following to the top of the file
-```yml
----
-name: my-icon-list
-After: "#buckleshusky-fontawesomeiconpicker-icons"
----
-FontawesomeIconsListCustom:
-```
-- Your file should look something like the following:
-```yml
----
-name: my-icon-list
-After: "#buckleshusky-fontawesomeiconpicker-icons"
----
-FontawesomeIconsListCustom:
-  '0':
-    changes:
-      - 6.0.0-beta1
-      - 6.2.0
-    familyStylesByLicense:
-      free:
-[...]
-```
-**Note:** you can use `FontawesomeIconsList` and it will merge the two list together.
-
-- For the **FREE version**:
+- Place this file into your theme folder.
+- Updated `icon_yml_location` to point to the yml's folder i.e. `fontawesome/icon-families.yml`
+- For the **FREE version** you can optionally do the following:
     - add the following to your yml with the desired version you would like from the CDN:
     ```yml
     FontawesomeIcons:
@@ -168,7 +154,6 @@ FontawesomeIconsListCustom:
     - follow the steps above for **How to setup the PRO version of fontawesome?**
 
 ### What's New
-
 - switched to use **FontawesomeIconsListCustom** yml config to prevent duplicate icons
 - clicking sharp now allows you to select type
 - when you click a family, the type buttons are filtered down to only show you what's available
