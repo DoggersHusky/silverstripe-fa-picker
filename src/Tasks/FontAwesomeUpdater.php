@@ -56,8 +56,6 @@ class FontAwesomeUpdater extends BuildTask
         }
 
 
-
-
         // loop through the data
         foreach ($icons as $key => $value) {
             // determine which version to look at

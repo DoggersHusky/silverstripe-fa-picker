@@ -392,7 +392,7 @@ class FAPickerField extends Component {
         }
 
         let noIconWarning;
-        if (filteredList.length == 0 || !iconVersion || !iconTotal) {
+        if (filteredList.length == 0 && (!iconVersion || !iconTotal)) {
             noIconWarning = <p className='alert alert-warning'>
                 <span>Please run the following <a href={taskLink} target="_blank">task</a> to generate the data for the field.</span>
             </p>;

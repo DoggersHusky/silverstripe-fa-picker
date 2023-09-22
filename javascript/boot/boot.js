@@ -1298,7 +1298,7 @@ var FAPickerField = function (_Component) {
         }, brandsTranslated));
       }
       var noIconWarning;
-      if (filteredList.length == 0 || !iconVersion || !iconTotal) {
+      if (filteredList.length == 0 && (!iconVersion || !iconTotal)) {
         noIconWarning = react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
           className: "alert alert-warning"
         }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Please run the following ", react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
