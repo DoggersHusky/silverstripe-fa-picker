@@ -13,16 +13,19 @@ use stdClass;
 
 class LeftAndMainExtension extends Extension
 {
+    private static $iconData;
+
     /**
      * @inheritDoc
      */
     public function init()
     {
-        Requirements::add_i18n_javascript('buckleshusky/fontawesomeiconpicker: javascript/lang');
         $icons = json_encode($this->owner->getIconList());
         $iconAmount = $this->owner->getIconAmount();
         $icountVersion = $this->owner->getVersionNumber();
 
+        // load the requirements
+        Requirements::add_i18n_javascript('buckleshusky/fontawesomeiconpicker: javascript/lang');
         Requirements::customScript(<<<JS
             let fullIconList = $icons;
             let iconAmount = '$iconAmount';
@@ -32,23 +35,46 @@ class LeftAndMainExtension extends Extension
     }
 
     /**
+     * Get the icon data and store it in a private static
+     * @return stdClass|boolean
+     */
+    public function getIconData()
+    {
+        $data = self::$iconData;
+
+        if (!$data) {
+            // the path to the json
+            $path = ASSETS_PATH . '/fa-iconmap.json';
+
+            // if file exists
+            if (file_exists($path)) {
+                $icons = file_get_contents($path);
+
+                self::$iconData = json_decode($icons);
+
+                return self::$iconData;
+            } else {
+                return false;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
      * get a list of icons to add to the array to be displayed in the field
      *
      * @return array
      */
     public function getIconList()
     {
-        // the path to the json
-        $path = ASSETS_PATH . '/fa-iconmap.json';
+        $icons = $this->getIconData();
 
         // if file exists
-        if (file_exists($path)) {
-            $icons = file_get_contents($path);
-            $iconsDecoded = json_decode($icons);
-
+        if ($icons) {
             // make sure we are dealing with an object
-            if ($iconsDecoded && $iconsDecoded instanceof stdClass && property_exists($iconsDecoded, 'icons')) {
-                return json_decode($icons)->icons;
+            if ($icons && $icons instanceof stdClass && property_exists($icons, 'icons')) {
+                return $icons->icons;
             }
         }
 
@@ -62,17 +88,13 @@ class LeftAndMainExtension extends Extension
      */
     public function getVersionNumber()
     {
-        // the path to the json
-        $path = ASSETS_PATH . '/fa-iconmap.json';
+        $icons = $this->getIconData();
 
         // if file exists
-        if (file_exists($path)) {
-            $icons = file_get_contents($path);
-            $iconsDecoded = json_decode($icons);
-
+        if ($icons) {
             // make sure we are dealing with an object
-            if ($iconsDecoded && $iconsDecoded instanceof stdClass && property_exists($iconsDecoded, 'iconVersion')) {
-                return json_decode($icons)->iconVersion;
+            if ($icons && $icons instanceof stdClass && property_exists($icons, 'iconVersion')) {
+                return $icons->iconVersion;
             }
         }
 
@@ -86,17 +108,13 @@ class LeftAndMainExtension extends Extension
      */
     public function getIconAmount()
     {
-        // the path to the json
-        $path = ASSETS_PATH . '/fa-iconmap.json';
+        $icons = $this->getIconData();
 
         // if file exists
-        if (file_exists($path)) {
-            $icons = file_get_contents($path);
-            $iconsDecoded = json_decode($icons);
-
+        if ($icons) {
             // make sure we are dealing with an object
-            if ($iconsDecoded && $iconsDecoded instanceof stdClass && property_exists($iconsDecoded, 'iconAmount')) {
-                return json_decode($icons)->iconAmount;
+            if ($icons && $icons instanceof stdClass && property_exists($icons, 'iconAmount')) {
+                return $icons->iconAmount;
             }
         }
 
