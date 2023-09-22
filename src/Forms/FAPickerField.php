@@ -2,10 +2,8 @@
 
 namespace BucklesHusky\FontAwesomeIconPicker\Forms;
 
-use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Flushable;
-use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\TextField;
 
@@ -65,7 +63,7 @@ class FAPickerField extends TextField implements Flushable
      * */
     public static function flush()
     {
-        Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker')->clear();
+        // Injector::inst()->get(CacheInterface::class . '.fontawesomeiconpicker')->clear();
     }
 
     /**

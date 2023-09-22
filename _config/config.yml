@@ -5,6 +5,10 @@ PageController:
     extensions:
         FontAwesomeIconPicker: 'BucklesHusky\FontAwesomeIconPicker\Extensions\PageControllerExtension'
 
+SilverStripe\Dev\DevBuildController:
+  extensions:
+    - 'BucklesHusky\FontAwesomeIconPicker\Extensions\FontAwesomeUpdater'
+
 SilverStripe\Core\Injector\Injector:
     Psr\SimpleCache\CacheInterface.fontawesomeiconpicker:
         factory: SilverStripe\Core\Cache\CacheFactory
