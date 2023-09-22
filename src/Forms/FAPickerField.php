@@ -2,6 +2,8 @@
 
 namespace BucklesHusky\FontAwesomeIconPicker\Forms;
 
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Flushable;
 use SilverStripe\Forms\FormField;
@@ -77,6 +79,10 @@ class FAPickerField extends TextField implements Flushable
         //@todo needs to send over version, icon total, and pro enabled
         $defaults['data']['pro'] = $this->getIsProVersion();
         $defaults['data']['isSharpDisabled'] = $this->getIsSharpIconsDisabled();
+        $defaults['data']['taskLink'] = Controller::join_links([
+            Director::absoluteBaseURL(),
+            'dev/tasks/generate-font-awesome',
+        ]);
 
         return $defaults;
     }

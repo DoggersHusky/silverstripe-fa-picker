@@ -39,6 +39,7 @@ class FAPickerField extends Component {
             iconHolderDisplay: "hide",
             recentList: recentIconList,
             recentListHolderToggle: false,
+            taskLink: props.data.taskLink ? props.data.taskLink : false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -360,7 +361,7 @@ class FAPickerField extends Component {
     }
 
     render() {
-        const {value,filteredList,iconVersion,iconTotal,searchValue,iconHolderDisplay,recentList,recentListHolderToggle} = this.state;
+        const {value,filteredList,iconVersion,iconTotal,searchValue,iconHolderDisplay,recentList,recentListHolderToggle,taskLink} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
@@ -388,6 +389,13 @@ class FAPickerField extends Component {
                 {/* the below is actually a type, but because fontawesome treats it as a family, we moved it to the family bar */}
                 <span onClick={() => this.handleFilterTypeClick('brands')} className={'family-select__button ' + this.getFamilyMenuClasses('brands')}>{brandsTranslated}</span>
             </div>
+        }
+
+        let noIconWarning;
+        if (filteredList.length == 0 || !iconVersion || !iconTotal) {
+            noIconWarning = <p className='alert alert-warning'>
+                <span>Please run the following <a href={taskLink} target="_blank">task</a> to generate the data for the field.</span>
+            </p>;
         }
 
         return (
@@ -438,6 +446,7 @@ class FAPickerField extends Component {
                         <FAPickerExpand toggleIconHolder={this.toggleIconHolder} currentValue={iconHolderDisplay} />
                     </div>
                 </div>
+                { noIconWarning }
             </FieldGroup>
         )
     }

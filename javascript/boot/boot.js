@@ -1014,7 +1014,8 @@ var FAPickerField = function (_Component) {
       pro: props.data.pro ? props.data.pro : false,
       iconHolderDisplay: "hide",
       recentList: recentIconList,
-      recentListHolderToggle: false
+      recentListHolderToggle: false,
+      taskLink: props.data.taskLink ? props.data.taskLink : false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleFilterTypeClick = _this.handleFilterTypeClick.bind(_assertThisInitialized(_this));
@@ -1255,7 +1256,8 @@ var FAPickerField = function (_Component) {
         searchValue = _this$state.searchValue,
         iconHolderDisplay = _this$state.iconHolderDisplay,
         recentList = _this$state.recentList,
-        recentListHolderToggle = _this$state.recentListHolderToggle;
+        recentListHolderToggle = _this$state.recentListHolderToggle,
+        taskLink = _this$state.taskLink;
       var FieldGroup = this.props.FieldGroup;
       var newProps = _objectSpread(_objectSpread({}, this.props), {}, {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('fapicker-field')
@@ -1294,6 +1296,15 @@ var FAPickerField = function (_Component) {
           },
           className: 'family-select__button ' + this.getFamilyMenuClasses('brands')
         }, brandsTranslated));
+      }
+      var noIconWarning;
+      if (filteredList.length == 0 || !iconVersion || !iconTotal) {
+        noIconWarning = react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+          className: "alert alert-warning"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Please run the following ", react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+          href: taskLink,
+          target: "_blank"
+        }, "task"), " to generate the data for the field."));
       }
       return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(FieldGroup, newProps, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_tooltip__WEBPACK_IMPORTED_MODULE_8__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay == "hide" ? "" : "expand", "fapicker-icons")
@@ -1380,7 +1391,7 @@ var FAPickerField = function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, iconTotal), " Icons"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_FAPickerExpand_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
         toggleIconHolder: this.toggleIconHolder,
         currentValue: iconHolderDisplay
-      }))));
+      }))), noIconWarning);
     }
   }]);
   return FAPickerField;

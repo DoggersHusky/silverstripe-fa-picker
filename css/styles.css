@@ -273,5 +273,8 @@ span.fapicker-icons__holder__icon:hover {
   position: absolute;
   bottom: -61px;
 }
+.fa-holder .alert {
+  margin-top: 10px;
+}
 
 /*# sourceMappingURL=styles.css.map*/
