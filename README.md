@@ -96,7 +96,7 @@ FontawesomeIcons:
   # unlocks pro mode - onkly use this if you are using Font Awesome pro
   unlock_pro_mode: true
   # the location of the icon-families.yml from fontawesome
-  icon_yml_location: 'fontawesome/icon-families.yml'
+  icon_yml_location: 'app/fontawesome/icon-families.yml'
   #the pro css for fonts
   pro_css: 'all.min.css'
   # only use one of the following to get your sharp css
@@ -129,7 +129,7 @@ FontawesomeIcons:
     FontawesomeIcons:
         unlock_pro_mode: true
         # the location of the icon-families.yml from fontawesome
-        icon_yml_location: 'fontawesome/icon-families.yml'
+        icon_yml_location: 'app/fontawesome/icon-families.yml'
         # the css of all and sharp-solid
         pro_css: 'webfonts/fontawesome/css/all.min.css'
         # not needed if sharp is disabled
@@ -143,7 +143,7 @@ FontawesomeIcons:
     - You can obtain this from their [github](https://github.com/FortAwesome/Font-Awesome/blob/6.x/metadata/icon-families.yml).
     - for **pro**, you will get this file when you download pro from fontawesome
 - Place this file into your site's app folder.
-- Updated `icon_yml_location` to point to the yml's folder i.e. `fontawesome/icon-families.yml`
+- Updated `icon_yml_location` to point to the yml's folder i.e. `app/fontawesome/icon-families.yml`
 - For the **FREE version** you can optionally do the following:
     - add the following to your yml with the desired version you would like from the CDN:
     ```yml

@@ -5,8 +5,6 @@ use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\Core\Environment;
-use SilverStripe\Core\Manifest\ModuleLoader;
-use SilverStripe\Core\Manifest\ModuleManifest;
 use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\View\ThemeResourceLoader;
@@ -48,9 +46,7 @@ class FontAwesomeUpdater extends BuildTask
 
         // Get destination of app folder
         if ($ymlpath) {
-            $project = ModuleManifest::config()->get('project') ?: 'mysite';
-            $mysite = ModuleLoader::getModule($project);
-            $destPath = $mysite->getResource($ymlpath)->getPath();
+            $destPath = Director::baseFolder() . '/' . ModuleResourceLoader::singleton()->resolvePath($ymlpath);
         }
 
         // look in the app folder
