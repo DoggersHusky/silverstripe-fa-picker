@@ -8,7 +8,7 @@ use SilverStripe\Core\Extension;
 class FontAwesomeUpdater extends Extension
 {
     /**
-     * Handles generating or updating the Font Awesome icon map used in the WYSIWYG
+     * Handles generating or Font Awesome icons
      */
     public function afterCallActionHandler()
     {

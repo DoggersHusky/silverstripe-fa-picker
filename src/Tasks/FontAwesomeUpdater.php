@@ -16,16 +16,20 @@ class FontAwesomeUpdater extends BuildTask
 
     private static $segment = 'generate-font-awesome';
 
-    // @todo make sure we should update on dev/build
+    /**
+     * @inheritDoc
+     */
     public function run($request)
     {
-        self::generateFontAwesomeIconCache();
+        $path = Self::getIconYMLLocation();
+
+        self::generateFontAwesomeIconCache($path);
     }
 
     /**
      * Compiles the theme settings down into the stylesheet for use in the template
      */
-    public static function generateFontAwesomeIconCache()
+    public static function generateFontAwesomeIconCache($ymlpath)
     {
         // increase memory limit to 256
         Environment::increaseMemoryLimitTo('256MB');
@@ -35,10 +39,24 @@ class FontAwesomeUpdater extends BuildTask
         $iconArray = [];
         $iconArray['icons'] = [];
         $version = '';
+        $icons = '';
         $loader = ThemeResourceLoader::inst();
-        // @todo this needs to be configurable and default to the module's yml file
-        $icons = Yaml::parseFile(Director::baseFolder() . '/' . $loader->findThemedResource('fontawesome/icon-families.yml'));
+        $iconsURL = $ymlpath ? Director::baseFolder() . '/' . $loader->findThemedResource($ymlpath) : null;
         $path = ASSETS_PATH . '/fa-iconmap.json';
+
+        // if this doesn't exist
+        if (!$iconsURL || !file_exists($iconsURL) || $loader->findThemedResource($ymlpath) == null) {
+            self::displayMessage('To use an updated/pro version of Font Awesome, make sure to set `FontawesomeIcons.icon_yml_location` properly in your config.', true, true, true);
+
+            // parse the icons from the module
+            $icons = Yaml::parseFile(Director::baseFolder() . '/' . $loader->findThemedResource('pickerFontAwesomeIcons/icon-families.yml'));
+        } else {
+            // parse the icons from the user
+            $icons = Yaml::parseFile(Director::baseFolder() . '/' . $loader->findThemedResource($ymlpath));
+        }
+
+
+
 
         // loop through the data
         foreach ($icons as $key => $value) {
@@ -112,6 +130,15 @@ class FontAwesomeUpdater extends BuildTask
             return true;
         }
         return false;
+    }
+
+    /**
+     * Get the icon's YML location
+     * @return string|boolean
+     */
+    private static function getIconYMLLocation()
+    {
+        return Config::inst()->get('FontawesomeIcons', 'icon_yml_location') ? Config::inst()->get('FontawesomeIcons', 'icon_yml_location') : false;
     }
 
     /**
