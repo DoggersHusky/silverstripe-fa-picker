@@ -7,6 +7,7 @@ use SilverStripe\Core\Convert;
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Core\Manifest\ModuleManifest;
+use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\View\ThemeResourceLoader;
 use Symfony\Component\Yaml\Yaml;
@@ -61,7 +62,8 @@ class FontAwesomeUpdater extends BuildTask
             self::displayMessage('To use an updated/pro version of Font Awesome, make sure to set `FontawesomeIcons.icon_yml_location` properly in your config.', true, true, true);
 
             // parse the icons from the module
-            $icons = Yaml::parseFile(Director::baseFolder() . '/' . $loader->findThemedResource('pickerFontAwesomeIcons/icon-families.yml'));
+            $module = ModuleResourceLoader::singleton()->resolvePath('buckleshusky/fontawesomeiconpicker: pickerFontAwesomeIcons/icon-families.yml');
+            $icons = Yaml::parseFile(Director::baseFolder() . '/' . $module);
         } else {
             // parse the icons from the user
             $icons = Yaml::parseFile($iconsURL);
