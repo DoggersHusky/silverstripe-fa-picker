@@ -135,14 +135,14 @@ FontawesomeIcons:
         # not needed if sharp is disabled
         pro_sharp_css_folder: 'webfonts/fontawesome/css/'
     ```
-- place the `icon-families.yml` yml file into your theme folder. In this example, it would be placed in `fontawesome/icon-families.yml`.
+- place the `icon-families.yml` yml file into your site's app folder. In this example, it would be placed in `app/fontawesome/icon-families.yml`.
 - do a `dev/build`, or, if you have it disabled, run the following tasks `dev/tasks/generate-font-awesome`
 
 **How do I use a newer version of Fontawesome?**
 - Get a copy of `icon-families.yml`.
     - You can obtain this from their [github](https://github.com/FortAwesome/Font-Awesome/blob/6.x/metadata/icon-families.yml).
     - for **pro**, you will get this file when you download pro from fontawesome
-- Place this file into your theme folder.
+- Place this file into your site's app folder.
 - Updated `icon_yml_location` to point to the yml's folder i.e. `fontawesome/icon-families.yml`
 - For the **FREE version** you can optionally do the following:
     - add the following to your yml with the desired version you would like from the CDN:
