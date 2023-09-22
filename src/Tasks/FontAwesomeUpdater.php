@@ -5,6 +5,8 @@ use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\Core\Environment;
+use SilverStripe\Core\Manifest\ModuleLoader;
+use SilverStripe\Core\Manifest\ModuleManifest;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\View\ThemeResourceLoader;
 use Symfony\Component\Yaml\Yaml;
@@ -41,20 +43,29 @@ class FontAwesomeUpdater extends BuildTask
         $version = '';
         $icons = '';
         $loader = ThemeResourceLoader::inst();
-        $iconsURL = $ymlpath ? Director::baseFolder() . '/' . $loader->findThemedResource($ymlpath) : null;
+        $destPath = null;
+
+        // Get destination of app folder
+        if ($ymlpath) {
+            $project = ModuleManifest::config()->get('project') ?: 'mysite';
+            $mysite = ModuleLoader::getModule($project);
+            $destPath = $mysite->getResource($ymlpath)->getPath();
+        }
+
+        // look in the app folder
+        $iconsURL = $ymlpath ? $destPath : null;
         $path = ASSETS_PATH . '/fa-iconmap.json';
 
         // if this doesn't exist
-        if (!$iconsURL || !file_exists($iconsURL) || $loader->findThemedResource($ymlpath) == null) {
+        if (!$iconsURL || !file_exists($iconsURL) || $destPath == null) {
             self::displayMessage('To use an updated/pro version of Font Awesome, make sure to set `FontawesomeIcons.icon_yml_location` properly in your config.', true, true, true);
 
             // parse the icons from the module
             $icons = Yaml::parseFile(Director::baseFolder() . '/' . $loader->findThemedResource('pickerFontAwesomeIcons/icon-families.yml'));
         } else {
             // parse the icons from the user
-            $icons = Yaml::parseFile(Director::baseFolder() . '/' . $loader->findThemedResource($ymlpath));
+            $icons = Yaml::parseFile($iconsURL);
         }
-
 
         // loop through the data
         foreach ($icons as $key => $value) {
