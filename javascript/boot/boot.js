@@ -1182,7 +1182,7 @@ var FAPickerField = function (_Component) {
           classes.push('disabled');
         }
       }
-      if (value == 'brands' || value == 'duotone' || value == 'thin') {
+      if (value == 'brands' || value == 'duotone') {
         if (this.state.activeFilterFamily == 'sharp') {
           classes.push('disabled');
         }

@@ -277,7 +277,7 @@ class FAPickerField extends Component {
         }
 
         // should this be disable for sharp?
-        if (value == 'brands' || value == 'duotone' || value == 'thin') {
+        if (value == 'brands' || value == 'duotone') {
             if (this.state.activeFilterFamily == 'sharp') {
                 classes.push('disabled');
             }
