@@ -15,7 +15,8 @@ class FontAwesomeUpdater extends Extension
         // if this is true, don't run generating the icons
         if (!$this->getDisableGenerateOnBuild()) {
             // generate the cache
-            TasksFontAwesomeUpdater::generateFontAwesomeIconCache();
+            $path = Config::inst()->get('FontawesomeIcons', 'icon_yml_location') ? Config::inst()->get('FontawesomeIcons', 'icon_yml_location') : false;
+            TasksFontAwesomeUpdater::generateFontAwesomeIconCache($path);
         }
     }
 
