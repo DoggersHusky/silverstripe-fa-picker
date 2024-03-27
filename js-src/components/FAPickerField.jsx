@@ -371,6 +371,12 @@ class FAPickerField extends Component {
                 {/* the below is actually a type, but because fontawesome treats it as a family, we moved it to the family bar */}
                 <span onClick={() => this.handleFilterTypeClick('brands')} className={'family-select__button ' + this.getFamilyMenuClasses('brands')}>{brandsTranslated}</span>
             </div>
+        } else {
+            familyToggle = <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
+                <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('classic')}>Classic</span>
+                {/* the below is actually a type, but because fontawesome treats it as a family, we moved it to the family bar */}
+                <span onClick={() => this.handleFilterTypeClick('brands')} className={'family-select__button ' + this.getFamilyMenuClasses('brands')}>{brandsTranslated}</span>
+            </div>
         }
 
         let noIconWarning;

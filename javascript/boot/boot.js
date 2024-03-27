@@ -1283,6 +1283,20 @@ var FAPickerField = function (_Component) {
           },
           className: 'family-select__button ' + this.getFamilyMenuClasses('brands')
         }, brandsTranslated));
+      } else {
+        familyToggle = react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, 'family-select-holder')
+        }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+          onClick: function onClick() {
+            return _this4.handleFilterFamilyClick('classic');
+          },
+          className: 'family-select__button ' + this.getFamilyMenuClasses('classic')
+        }, "Classic"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+          onClick: function onClick() {
+            return _this4.handleFilterTypeClick('brands');
+          },
+          className: 'family-select__button ' + this.getFamilyMenuClasses('brands')
+        }, brandsTranslated));
       }
       var noIconWarning;
       if (filteredList.length == 0 && (!iconVersion || !iconTotal)) {
