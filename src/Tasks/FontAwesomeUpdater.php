@@ -159,7 +159,7 @@ class FontAwesomeUpdater extends BuildTask
     {
         if ($heading) {
             if (!$end) {
-                print (Director::is_cli() ? strtoupper("\n$message\n\n") : '<div class="build"><p><b>' . Convert::raw2xml($message) . '</b><ul>');
+                print (Director::is_cli() ? strtoupper("\n$message\n\n") : '<div class="build"><p><b>' . Convert::raw2xml($message) . '</b><ul></div>');
             } else {
                 print (Director::is_cli() ? strtoupper("\n" . $message) : '</ul><p>' . Convert::raw2xml($message) . '</div>');
             }
