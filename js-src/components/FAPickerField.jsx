@@ -32,7 +32,7 @@ class FAPickerField extends Component {
             iconVersion: iconVersion ? iconVersion : null,
             iconTotal: iconAmount ? iconAmount : null,
             isSharpDisabled: props.data.isSharpDisabled ? props.data.isSharpDisabled : false,
-            activeFilterType: "all",
+            activeFilterStyle: "all",
             activeFilterFamily: "classic",
             searchValue: null,
             pro: props.data.pro ? props.data.pro : false,
@@ -129,8 +129,8 @@ class FAPickerField extends Component {
             // update the filtered list as we want to always have a reference to the full list
             // also clear the search field
             this.setState({
-                filteredList: this.filterByType(value),
-                activeFilterType: value,
+                filteredList: this.filterByStyle(value),
+                activeFilterStyle: value,
                 searchValue: "",
                 recentListHolderToggle: false,
             })
@@ -148,7 +148,7 @@ class FAPickerField extends Component {
                 filteredList: this.filterByFamily(value),
                 activeFilterFamily: value,
                 // set filter type to all
-                activeFilterType: 'all',
+                activeFilterStyle: 'all',
                 searchValue: "",
                 recentListHolderToggle: false,
             });
@@ -156,17 +156,18 @@ class FAPickerField extends Component {
     }
 
     /**
-     * Filter down the list based on the selected type
+     * Filter down the list based on the selected style
      *
      * @param {string} value the type to filter too
      * @returns {array} of new icons filter down by type
      */
-    filterByType(value) {
+    filterByStyle(value) {
+        console.log('filter by style');
         let newList = "";
         // account for brands
         let activeFilterFamily = (this.state.activeFilterFamily != 'classic' && value == 'brands') ?  'classic' : this.state.activeFilterFamily;
         // account for brands
-        value = (value == "all" && this.state.activeFilterType == 'brands') ? 'brands' : value;
+        value = (value == "all" && this.state.activeFilterStyle == 'brands') ? 'brands' : value;
 
         // set the state
         this.setState({
@@ -233,14 +234,14 @@ class FAPickerField extends Component {
         //check to see if we have a value to filter by
         if (value === "") {
             //filter list by active filter
-            newList = this.filterByType(this.state.activeFilterType);
+            newList = this.filterByStyle(this.state.activeFilterStyle);
         } else if (this.state.activeFilterFamily !== 'classic') {
             newList = this.filterByFamily(this.state.activeFilterFamily).filter(icon => icon.searchName.includes(value));
         } else {
             // filter the filterlist by the searchName as we don't want far,fab to be
             // determining factors
             // this is filtering by type
-            newList = this.filterByType(this.state.activeFilterType).filter(icon => icon.searchName.includes(value));
+            newList = this.filterByStyle(this.state.activeFilterStyle).filter(icon => icon.searchName.includes(value));
         }
 
         //update the filtered list as we want to always have a reference to the full list
@@ -260,12 +261,12 @@ class FAPickerField extends Component {
         let classes = [];
 
         // should this be active?
-        if (this.state.activeFilterType == value) {
+        if (this.state.activeFilterStyle == value) {
             classes.push('active');
         }
 
         // account for brands
-        if (this.state.activeFilterType == 'brands' && this.state.activeFilterFamily == 'classic') {
+        if (this.state.activeFilterStyle == 'brands' && this.state.activeFilterFamily == 'classic') {
             classes.push('active');
         }
 
@@ -285,7 +286,7 @@ class FAPickerField extends Component {
 
         // should this be disable for duotone?
         if (value == 'regular' || value == 'light' || value == 'thin' || value == 'brands' || value == 'solid' || value == 'all' || value == 'duotone') {
-            if (this.state.activeFilterFamily == 'duotone' || this.state.activeFilterType == 'brands') {
+            if (this.state.activeFilterFamily == 'duotone' || this.state.activeFilterStyle == 'brands') {
                 classes.push('disabled');
             }
         }
@@ -297,12 +298,12 @@ class FAPickerField extends Component {
         let classes = '';
 
         //should this be active?
-        if (this.state.activeFilterFamily == value && this.state.activeFilterType != 'brands') {
+        if (this.state.activeFilterFamily == value && this.state.activeFilterStyle != 'brands') {
             classes = 'active-family';
         }
 
         // if we have brands click, which is not a family but being treated as one, activate button
-        if (this.state.activeFilterType == 'brands' && value == 'brands') {
+        if (this.state.activeFilterStyle == 'brands' && value == 'brands') {
             classes = 'active-family';
         }
 

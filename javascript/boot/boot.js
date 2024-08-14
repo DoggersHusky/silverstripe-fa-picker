@@ -1008,7 +1008,7 @@ var FAPickerField = function (_Component) {
       iconVersion: iconVersion ? iconVersion : null,
       iconTotal: iconAmount ? iconAmount : null,
       isSharpDisabled: props.data.isSharpDisabled ? props.data.isSharpDisabled : false,
-      activeFilterType: "all",
+      activeFilterStyle: "all",
       activeFilterFamily: "classic",
       searchValue: null,
       pro: props.data.pro ? props.data.pro : false,
@@ -1075,8 +1075,8 @@ var FAPickerField = function (_Component) {
         filteredList: []
       }, function () {
         _this2.setState({
-          filteredList: _this2.filterByType(value),
-          activeFilterType: value,
+          filteredList: _this2.filterByStyle(value),
+          activeFilterStyle: value,
           searchValue: "",
           recentListHolderToggle: false
         });
@@ -1092,18 +1092,19 @@ var FAPickerField = function (_Component) {
         _this3.setState({
           filteredList: _this3.filterByFamily(value),
           activeFilterFamily: value,
-          activeFilterType: 'all',
+          activeFilterStyle: 'all',
           searchValue: "",
           recentListHolderToggle: false
         });
       });
     }
   }, {
-    key: "filterByType",
-    value: function filterByType(value) {
+    key: "filterByStyle",
+    value: function filterByStyle(value) {
+      console.log('filter by style');
       var newList = "";
       var activeFilterFamily = this.state.activeFilterFamily != 'classic' && value == 'brands' ? 'classic' : this.state.activeFilterFamily;
-      value = value == "all" && this.state.activeFilterType == 'brands' ? 'brands' : value;
+      value = value == "all" && this.state.activeFilterStyle == 'brands' ? 'brands' : value;
       this.setState({
         activeFilterFamily: activeFilterFamily
       });
@@ -1152,13 +1153,13 @@ var FAPickerField = function (_Component) {
     value: function searchIcons(value) {
       var newList = "";
       if (value === "") {
-        newList = this.filterByType(this.state.activeFilterType);
+        newList = this.filterByStyle(this.state.activeFilterStyle);
       } else if (this.state.activeFilterFamily !== 'classic') {
         newList = this.filterByFamily(this.state.activeFilterFamily).filter(function (icon) {
           return icon.searchName.includes(value);
         });
       } else {
-        newList = this.filterByType(this.state.activeFilterType).filter(function (icon) {
+        newList = this.filterByStyle(this.state.activeFilterStyle).filter(function (icon) {
           return icon.searchName.includes(value);
         });
       }
@@ -1171,10 +1172,10 @@ var FAPickerField = function (_Component) {
     key: "getTypeMenuClasses",
     value: function getTypeMenuClasses(value) {
       var classes = [];
-      if (this.state.activeFilterType == value) {
+      if (this.state.activeFilterStyle == value) {
         classes.push('active');
       }
-      if (this.state.activeFilterType == 'brands' && this.state.activeFilterFamily == 'classic') {
+      if (this.state.activeFilterStyle == 'brands' && this.state.activeFilterFamily == 'classic') {
         classes.push('active');
       }
       if (value == 'light' || value == 'duotone' || value == 'thin') {
@@ -1188,7 +1189,7 @@ var FAPickerField = function (_Component) {
         }
       }
       if (value == 'regular' || value == 'light' || value == 'thin' || value == 'brands' || value == 'solid' || value == 'all' || value == 'duotone') {
-        if (this.state.activeFilterFamily == 'duotone' || this.state.activeFilterType == 'brands') {
+        if (this.state.activeFilterFamily == 'duotone' || this.state.activeFilterStyle == 'brands') {
           classes.push('disabled');
         }
       }
@@ -1198,10 +1199,10 @@ var FAPickerField = function (_Component) {
     key: "getFamilyMenuClasses",
     value: function getFamilyMenuClasses(value) {
       var classes = '';
-      if (this.state.activeFilterFamily == value && this.state.activeFilterType != 'brands') {
+      if (this.state.activeFilterFamily == value && this.state.activeFilterStyle != 'brands') {
         classes = 'active-family';
       }
-      if (this.state.activeFilterType == 'brands' && value == 'brands') {
+      if (this.state.activeFilterStyle == 'brands' && value == 'brands') {
         classes = 'active-family';
       }
       return classes;
