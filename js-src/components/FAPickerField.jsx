@@ -263,7 +263,6 @@ class FAPickerField extends Component {
 
     /**
      * Adds disabled to the style menu item if it needs to be disbaled
-     *
      * @param {string} value the class to check
      * @returns {string} of classes
      */
@@ -271,21 +270,20 @@ class FAPickerField extends Component {
         const {buttons, activeFilterFamily, activeFilterStyle} = this.state;
         let classes = [];
 
+        // disable if not in list and list length is less than or equal to 1
         if (buttons[activeFilterFamily].length > 1 && value === 'all') {
-
         } else {
             if (!buttons[activeFilterFamily].includes(value.toLowerCase())) {
                 classes.push('disabled');
             }
         }
 
-        // @todo need to fix all button
-
-
+        // if style filter is active, set as active
         if (activeFilterStyle == value) {
             classes.push('active');
         }
 
+        // if
         if (activeFilterStyle === 'all' && value === 'all') {
             classes.push('active');
         }
