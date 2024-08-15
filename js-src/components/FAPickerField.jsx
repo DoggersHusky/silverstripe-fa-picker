@@ -27,7 +27,7 @@ class FAPickerField extends Component {
             value: props.value ? props.value : "",
             iconList: fullIconList ? fullIconList : null,
             filteredList: fullIconList ? fullIconList.filter((icon) => {
-                return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
+                return icon.iconFamily === 'classic';
             }) : null,
             iconVersion: iconVersion ? iconVersion : null,
             iconTotal: iconAmount ? iconAmount : null,
@@ -187,7 +187,6 @@ class FAPickerField extends Component {
      * @returns array
      */
     filterByFamily(value) {
-        console.log('filter by family');
         let newList = "";
 
         // filter the new list
@@ -261,11 +260,17 @@ class FAPickerField extends Component {
      * @returns string
      */
     getFamilyMenuClasses(value) {
+        const {activeFilterFamily, isSharpDisabled} = this.state;
         let classes = '';
 
         //should this be active?
-        if (this.state.activeFilterFamily == value) {
+        if (activeFilterFamily == value) {
             classes = 'active-family';
+        }
+
+        // disbale sharp if user disabled it
+        if (isSharpDisabled && value.includes('sharp')) {
+            classes = 'disabled';
         }
 
         return classes;

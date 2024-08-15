@@ -184,7 +184,8 @@ span.fapicker-icons__holder__icon:hover {
     background-color: #d8e4eb;
 }
 
-.fapicker-icons__type-selector li.disabled {
+.fapicker-icons__type-selector li.disabled,
+.fa-holder .family-select__button.disabled {
     display: none;
 }
 

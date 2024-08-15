@@ -1003,7 +1003,7 @@ var FAPickerField = function (_Component) {
       value: props.value ? props.value : "",
       iconList: fullIconList ? fullIconList : null,
       filteredList: fullIconList ? fullIconList.filter(function (icon) {
-        return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
+        return icon.iconFamily === 'classic';
       }) : null,
       iconVersion: iconVersion ? iconVersion : null,
       iconTotal: iconAmount ? iconAmount : null,
@@ -1119,7 +1119,6 @@ var FAPickerField = function (_Component) {
   }, {
     key: "filterByFamily",
     value: function filterByFamily(value) {
-      console.log('filter by family');
       var newList = "";
       newList = this.state.iconList.filter(function (icon) {
         return icon.iconFamily === value;
@@ -1170,9 +1169,15 @@ var FAPickerField = function (_Component) {
   }, {
     key: "getFamilyMenuClasses",
     value: function getFamilyMenuClasses(value) {
+      var _this$state2 = this.state,
+        activeFilterFamily = _this$state2.activeFilterFamily,
+        isSharpDisabled = _this$state2.isSharpDisabled;
       var classes = '';
-      if (this.state.activeFilterFamily == value) {
+      if (activeFilterFamily == value) {
         classes = 'active-family';
+      }
+      if (isSharpDisabled && value.includes('sharp')) {
+        classes = 'disabled';
       }
       return classes;
     }
@@ -1204,17 +1209,17 @@ var FAPickerField = function (_Component) {
     key: "render",
     value: function render() {
       var _this5 = this;
-      var _this$state2 = this.state,
-        value = _this$state2.value,
-        filteredList = _this$state2.filteredList,
-        iconVersion = _this$state2.iconVersion,
-        iconTotal = _this$state2.iconTotal,
-        searchValue = _this$state2.searchValue,
-        iconHolderDisplay = _this$state2.iconHolderDisplay,
-        recentList = _this$state2.recentList,
-        recentListHolderToggle = _this$state2.recentListHolderToggle,
-        taskLink = _this$state2.taskLink,
-        buttons = _this$state2.buttons;
+      var _this$state3 = this.state,
+        value = _this$state3.value,
+        filteredList = _this$state3.filteredList,
+        iconVersion = _this$state3.iconVersion,
+        iconTotal = _this$state3.iconTotal,
+        searchValue = _this$state3.searchValue,
+        iconHolderDisplay = _this$state3.iconHolderDisplay,
+        recentList = _this$state3.recentList,
+        recentListHolderToggle = _this$state3.recentListHolderToggle,
+        taskLink = _this$state3.taskLink,
+        buttons = _this$state3.buttons;
       var FieldGroup = this.props.FieldGroup;
       var newProps = _objectSpread(_objectSpread({}, this.props), {}, {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('fapicker-field')
