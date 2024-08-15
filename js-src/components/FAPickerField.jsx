@@ -172,18 +172,6 @@ class FAPickerField extends Component {
         // @todo needs to be fixed
         console.log('filter by style');
         let newList = "";
-        // // account for brands
-        // let activeFilterFamily = (this.state.activeFilterFamily != 'classic' && value == 'brands') ?  'classic' : this.state.activeFilterFamily;
-        // console.log(activeFilterFamily);
-        // console.log(this.state.activeFilterFamily);
-        // // account for brands
-        // value = (value == "all" && this.state.activeFilterStyle == 'brands') ? 'brands' : value;
-        // console.log(value);
-
-        // set the state
-        // this.setState({
-        //     activeFilterFamily: activeFilterFamily,
-        // });
 
         newList = this.state.iconList.filter((icon) => {
             if (value == "all") {
