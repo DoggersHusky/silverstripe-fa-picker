@@ -281,4 +281,8 @@ span.fapicker-icons__holder__icon:hover {
   margin-top: 10px;
 }
 
+.fa-holder .force-hide-style-menu {
+  display: none !important;
+}
+
 /*# sourceMappingURL=styles.css.map*/

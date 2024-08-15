@@ -288,6 +288,14 @@ class FAPickerField extends Component {
     }
 
     /**
+     * Hide the style menu if there is only one style for the selected family
+     * @returns string
+     */
+    getHideStyleMenu() {
+        return this.state.buttons[this.state.activeFilterFamily].length <= 1 ? 'force-hide-style-menu' : '';
+    }
+
+    /**
      * Toggle the icon holder
      */
     toggleIconHolder() {
@@ -392,8 +400,8 @@ class FAPickerField extends Component {
                         {familyToggle}
                         {brandsButton}
                     </div>
-
-                    <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
+                    {/* @todo */}
+                    <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector", this.getHideStyleMenu())}>
                         <li onClick={() => this.handleFilterStyleClick('all')} class={this.getStyleMenuClasses('all')}>{allTranslated}</li>
                         {styleToggle}
                     </ul>

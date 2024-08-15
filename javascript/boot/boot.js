@@ -1191,6 +1191,11 @@ var FAPickerField = function (_Component) {
       return classes;
     }
   }, {
+    key: "getHideStyleMenu",
+    value: function getHideStyleMenu() {
+      return this.state.buttons[this.state.activeFilterFamily].length <= 1 ? 'force-hide-style-menu' : '';
+    }
+  }, {
     key: "toggleIconHolder",
     value: function toggleIconHolder() {
       var classname = this.state.iconHolderDisplay === "hide" ? "show" : "hide";
@@ -1319,7 +1324,7 @@ var FAPickerField = function (_Component) {
       }, recentIconRenderedList)), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, 'family-select-holder')
       }, familyToggle, brandsButton), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__type-selector")
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__type-selector", this.getHideStyleMenu())
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
           return _this5.handleFilterStyleClick('all');
