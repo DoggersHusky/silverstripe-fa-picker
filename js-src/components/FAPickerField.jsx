@@ -289,7 +289,7 @@ class FAPickerField extends Component {
      */
     toggleIconHolder() {
         let classname = (this.state.iconHolderDisplay === "hide") ? "show" : "hide";
-        let families = [];
+        let families = ['brands'];
         let activeIcon = this.state.value;
         let activeFamily = null;
 
@@ -309,7 +309,11 @@ class FAPickerField extends Component {
 
         // if we have an active family already atempt to switch tabs
         if (activeFamily) {
-            this.handleFilterFamilyClick(activeFamily);
+            if (activeFamily === 'brands') {
+                this.handleFilterStyleClick(activeFamily);
+            } else {
+                this.handleFilterFamilyClick(activeFamily);
+            }
         }
 
         //set the state

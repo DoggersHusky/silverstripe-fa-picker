@@ -1190,7 +1190,7 @@ var FAPickerField = function (_Component) {
     key: "toggleIconHolder",
     value: function toggleIconHolder() {
       var classname = this.state.iconHolderDisplay === "hide" ? "show" : "hide";
-      var families = [];
+      var families = ['brands'];
       var activeIcon = this.state.value;
       var activeFamily = null;
       Object.keys(this.state.buttons).map(function (family, index) {
@@ -1204,7 +1204,11 @@ var FAPickerField = function (_Component) {
         });
       }
       if (activeFamily) {
-        this.handleFilterFamilyClick(activeFamily);
+        if (activeFamily === 'brands') {
+          this.handleFilterStyleClick(activeFamily);
+        } else {
+          this.handleFilterFamilyClick(activeFamily);
+        }
       }
       this.setState({
         iconHolderDisplay: classname
