@@ -7,7 +7,6 @@ use SilverStripe\Core\Convert;
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\Dev\BuildTask;
-use SilverStripe\View\ThemeResourceLoader;
 use Symfony\Component\Yaml\Yaml;
 
 class FontAwesomeUpdater extends BuildTask
@@ -41,7 +40,6 @@ class FontAwesomeUpdater extends BuildTask
         $iconArray['icons'] = [];
         $version = '';
         $icons = '';
-        $loader = ThemeResourceLoader::inst();
         $destPath = null;
 
         // Get destination of app folder
@@ -77,24 +75,23 @@ class FontAwesomeUpdater extends BuildTask
 
             // loop through each license and get family and style
             foreach ($familyStylesByLicense as $familyStyle) {
-                if ($familyStyle['family'] === 'sharp' && self::getIsSharpIconsDisabled()) {
+                if (str_contains($familyStyle['family'], 'sharp') && self::getIsSharpIconsDisabled()) {
                     continue;
                 }
 
-                // the full name of the icon
-                $fullName = 'fa-' . ($familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style']) . ' fa-' . str_replace(' ', '-', $key);
-
-                // if we are dealing with the sharp family
-                if ($familyStyle['family'] === 'sharp') {
-                    $fullName .= ' fa-sharp';
-                }
+                $fullName = [
+                    '',
+                    $familyStyle['family'] === 'classic' ? '' : $familyStyle['family'],
+                    $familyStyle['style'],
+                    str_replace(' ', '-', $key),
+                ];
 
                 array_push($iconArray['icons'], [
-                    'iconStyle' => $familyStyle['family'] === 'duotone' ? $familyStyle['family'] : $familyStyle['style'],
                     'iconFamily' => $familyStyle['family'],
+                    'iconStyle' => $familyStyle['style'],
                     'shortName' => $value['label'],
                     'searchName' => mb_strtolower($value['label']),
-                    'fullName' => $fullName,
+                    'fullName' => trim(implode(' fa-', $fullName)),
                 ]);
             }
         }
