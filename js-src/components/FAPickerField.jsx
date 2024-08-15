@@ -167,12 +167,15 @@ class FAPickerField extends Component {
      */
     filterByStyle(value) {
         let newList = "";
-
         newList = this.state.iconList.filter((icon) => {
             if (value == "all") {
                 return icon.iconFamily === this.state.activeFilterFamily && icon.iconStyle !== 'brands';
             } else {
-                return icon.iconStyle.includes(value) && icon.iconFamily === this.state.activeFilterFamily;
+                if (value === 'brands') {
+                    return icon.iconStyle.includes(value) && icon.iconFamily === 'classic';
+                } else {
+
+                }
             }
         });
 

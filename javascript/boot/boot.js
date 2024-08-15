@@ -1109,7 +1109,9 @@ var FAPickerField = function (_Component) {
         if (value == "all") {
           return icon.iconFamily === _this4.state.activeFilterFamily && icon.iconStyle !== 'brands';
         } else {
-          return icon.iconStyle.includes(value) && icon.iconFamily === _this4.state.activeFilterFamily;
+          if (value === 'brands') {
+            return icon.iconStyle.includes(value) && icon.iconFamily === 'classic';
+          } else {}
         }
       });
       return newList;
