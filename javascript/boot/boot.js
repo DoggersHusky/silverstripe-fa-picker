@@ -1145,9 +1145,11 @@ var FAPickerField = function (_Component) {
         if (value == 'classic') {
           return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
         } else {
+          console.log(value);
           return icon.iconFamily.includes(value);
         }
       });
+      console.log(newList);
       return newList;
     }
   }, {
@@ -1171,29 +1173,21 @@ var FAPickerField = function (_Component) {
       });
     }
   }, {
-    key: "getTypeMenuClasses",
-    value: function getTypeMenuClasses(value) {
+    key: "getStyleMenuClasses",
+    value: function getStyleMenuClasses(value) {
+      var _this$state = this.state,
+        buttons = _this$state.buttons,
+        activeFilterFamily = _this$state.activeFilterFamily,
+        activeFilterStyle = _this$state.activeFilterStyle;
       var classes = [];
-      if (this.state.activeFilterStyle == value) {
+      if (!buttons[activeFilterFamily].includes(value.toLowerCase())) {
+        classes.push('disabled');
+      }
+      if (activeFilterStyle == value) {
         classes.push('active');
       }
-      if (this.state.activeFilterStyle == 'brands' && this.state.activeFilterFamily == 'classic') {
+      if (activeFilterStyle === 'all' && value === 'all') {
         classes.push('active');
-      }
-      if (value == 'light' || value == 'duotone' || value == 'thin') {
-        if (this.state.pro !== true) {
-          classes.push('disabled');
-        }
-      }
-      if (value == 'brands' || value == 'duotone') {
-        if (this.state.activeFilterFamily == 'sharp') {
-          classes.push('disabled');
-        }
-      }
-      if (value == 'regular' || value == 'light' || value == 'thin' || value == 'brands' || value == 'solid' || value == 'all' || value == 'duotone') {
-        if (this.state.activeFilterFamily == 'duotone' || this.state.activeFilterStyle == 'brands') {
-          classes.push('disabled');
-        }
       }
       return classes.join(' ');
     }
@@ -1238,17 +1232,17 @@ var FAPickerField = function (_Component) {
     key: "render",
     value: function render() {
       var _this4 = this;
-      var _this$state = this.state,
-        value = _this$state.value,
-        filteredList = _this$state.filteredList,
-        iconVersion = _this$state.iconVersion,
-        iconTotal = _this$state.iconTotal,
-        searchValue = _this$state.searchValue,
-        iconHolderDisplay = _this$state.iconHolderDisplay,
-        recentList = _this$state.recentList,
-        recentListHolderToggle = _this$state.recentListHolderToggle,
-        taskLink = _this$state.taskLink,
-        buttons = _this$state.buttons;
+      var _this$state2 = this.state,
+        value = _this$state2.value,
+        filteredList = _this$state2.filteredList,
+        iconVersion = _this$state2.iconVersion,
+        iconTotal = _this$state2.iconTotal,
+        searchValue = _this$state2.searchValue,
+        iconHolderDisplay = _this$state2.iconHolderDisplay,
+        recentList = _this$state2.recentList,
+        recentListHolderToggle = _this$state2.recentListHolderToggle,
+        taskLink = _this$state2.taskLink,
+        buttons = _this$state2.buttons;
       var FieldGroup = this.props.FieldGroup;
       var newProps = _objectSpread(_objectSpread({}, this.props), {}, {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('fapicker-field')
@@ -1280,7 +1274,7 @@ var FAPickerField = function (_Component) {
           onClick: function onClick() {
             return _this4.handleFilterTypeClick(style);
           },
-          "class": _this4.getTypeMenuClasses(style)
+          "class": _this4.getStyleMenuClasses(style)
         }, style.replace('-', ' '));
       });
       var noIconWarning;
@@ -1330,7 +1324,7 @@ var FAPickerField = function (_Component) {
         onClick: function onClick() {
           return _this4.handleFilterTypeClick('all');
         },
-        "class": this.getTypeMenuClasses('all')
+        "class": this.getStyleMenuClasses('all')
       }, allTranslated), styleToggle), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__holder")
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_paginated_list__WEBPACK_IMPORTED_MODULE_5__.PaginatedList, {

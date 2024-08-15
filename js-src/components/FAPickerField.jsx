@@ -139,6 +139,7 @@ class FAPickerField extends Component {
     }
 
     handleFilterFamilyClick(value) {
+        // @todo needs to be fixed
         this.setState({
             filteredList: [],
         },
@@ -163,6 +164,7 @@ class FAPickerField extends Component {
      * @returns {array} of new icons filter down by type
      */
     filterByStyle(value) {
+        // @todo needs to be fixed
         console.log('filter by style');
         let newList = "";
         // account for brands
@@ -209,7 +211,13 @@ class FAPickerField extends Component {
         return newList;
     }
 
+    /**
+     * get the icon list filtered by family
+     * @param {string} value
+     * @returns array
+     */
     filterByFamily(value) {
+        // @todo needs to be adjusted
         console.log('filter by family');
         let newList = "";
 
@@ -218,10 +226,12 @@ class FAPickerField extends Component {
             if (value == 'classic') {
                 return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
             } else {
+                console.log(value);
                 return icon.iconFamily.includes(value);
             }
         });
 
+        console.log(newList);
         return newList;
     }
 
@@ -254,43 +264,27 @@ class FAPickerField extends Component {
     }
 
     /**
-     * Adds disabled to the type menu item if it needs to be disbaled
+     * Adds disabled to the style menu item if it needs to be disbaled
      *
      * @param {string} value the class to check
      * @returns {string} of classes
      */
-    getTypeMenuClasses(value) {
+    getStyleMenuClasses(value) {
+        const {buttons, activeFilterFamily, activeFilterStyle} = this.state;
         let classes = [];
 
-        // should this be active?
-        if (this.state.activeFilterStyle == value) {
+        // @todo need to fix all button
+
+        if (!buttons[activeFilterFamily].includes(value.toLowerCase())) {
+            classes.push('disabled');
+        }
+
+        if (activeFilterStyle == value) {
             classes.push('active');
         }
 
-        // account for brands
-        if (this.state.activeFilterStyle == 'brands' && this.state.activeFilterFamily == 'classic') {
+        if (activeFilterStyle === 'all' && value === 'all') {
             classes.push('active');
-        }
-
-        // should pro classes be disabled
-        if (value == 'light' || value == 'duotone' || value == 'thin') {
-            if (this.state.pro !== true) {
-                classes.push('disabled');
-            }
-        }
-
-        // should this be disable for sharp?
-        if (value == 'brands' || value == 'duotone') {
-            if (this.state.activeFilterFamily == 'sharp') {
-                classes.push('disabled');
-            }
-        }
-
-        // should this be disable for duotone?
-        if (value == 'regular' || value == 'light' || value == 'thin' || value == 'brands' || value == 'solid' || value == 'all' || value == 'duotone') {
-            if (this.state.activeFilterFamily == 'duotone' || this.state.activeFilterStyle == 'brands') {
-                classes.push('disabled');
-            }
         }
 
         return classes.join(' ');
@@ -372,7 +366,7 @@ class FAPickerField extends Component {
         );
 
         const styleToggle = buttons.classic.map((style) =>
-            <li onClick={() => this.handleFilterTypeClick(style)} class={this.getTypeMenuClasses(style)}>{style.replace('-', ' ')}</li>
+            <li onClick={() => this.handleFilterTypeClick(style)} class={this.getStyleMenuClasses(style)}>{style.replace('-', ' ')}</li>
         );
 
         let noIconWarning;
@@ -403,7 +397,7 @@ class FAPickerField extends Component {
                     </div>
 
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
-                        <li onClick={() => this.handleFilterTypeClick('all')} class={this.getTypeMenuClasses('all')}>{allTranslated}</li>
+                        <li onClick={() => this.handleFilterTypeClick('all')} class={this.getStyleMenuClasses('all')}>{allTranslated}</li>
                         {styleToggle}
                     </ul>
 
