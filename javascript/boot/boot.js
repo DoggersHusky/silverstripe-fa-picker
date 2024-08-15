@@ -1276,7 +1276,7 @@ var FAPickerField = function (_Component) {
           className: 'family-select__button ' + this.getFamilyMenuClasses('classic')
         }, "Classic"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           onClick: function onClick() {
-            return _this4.handleFilterFamilyClick('classic');
+            return _this4.handleFilterFamilyClick('duotone');
           },
           className: 'family-select__button ' + this.getFamilyMenuClasses('duotone')
         }, "Duotone"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {

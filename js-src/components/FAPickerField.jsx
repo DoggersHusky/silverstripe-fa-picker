@@ -369,7 +369,7 @@ class FAPickerField extends Component {
         if (!this.state.isSharpDisabled && this.state.pro) {
             familyToggle = <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
                 <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('classic')}>Classic</span>
-                <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('duotone')}>Duotone</span>
+                <span onClick={() => this.handleFilterFamilyClick('duotone')} className={'family-select__button ' + this.getFamilyMenuClasses('duotone')}>Duotone</span>
                 <span onClick={() => this.handleFilterFamilyClick('sharp')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp')}>Sharp</span>
                 <span onClick={() => this.handleFilterFamilyClick('sharp-duotone')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp-duotone')}>Sharp Duotone</span>
                 {/* the below is actually a type, but because fontawesome treats it as a family, we moved it to the family bar */}
