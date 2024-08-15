@@ -1172,10 +1172,7 @@ var FAPickerField = function (_Component) {
     key: "getFamilyMenuClasses",
     value: function getFamilyMenuClasses(value) {
       var classes = '';
-      if (this.state.activeFilterFamily == value && this.state.activeFilterStyle != 'brands') {
-        classes = 'active-family';
-      }
-      if (this.state.activeFilterStyle == 'brands' && value == 'brands') {
+      if (this.state.activeFilterFamily == value) {
         classes = 'active-family';
       }
       return classes;

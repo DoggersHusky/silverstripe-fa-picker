@@ -215,7 +215,6 @@ class FAPickerField extends Component {
 
     /**
      * Search the icons for the desired icons
-     *
      * @param {string} value the value to filter the icons by
      */
     searchIcons(value) {
@@ -243,7 +242,7 @@ class FAPickerField extends Component {
 
     /**
      * Adds disabled to the style menu item if it needs to be disbaled
-     * @param {string} value the class to check
+     * @param {string} value the styles menu item clicked
      * @returns {string} of classes
      */
     getStyleMenuClasses(value) {
@@ -271,16 +270,16 @@ class FAPickerField extends Component {
         return classes.join(' ');
     }
 
+    /**
+     * Get the Family menu classes
+     * @param {string} value the family menu item clicked
+     * @returns string
+     */
     getFamilyMenuClasses(value) {
         let classes = '';
 
         //should this be active?
-        if (this.state.activeFilterFamily == value && this.state.activeFilterStyle != 'brands') {
-            classes = 'active-family';
-        }
-
-        // if we have brands click, which is not a family but being treated as one, activate button
-        if (this.state.activeFilterStyle == 'brands' && value == 'brands') {
+        if (this.state.activeFilterFamily == value) {
             classes = 'active-family';
         }
 
