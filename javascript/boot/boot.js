@@ -1102,6 +1102,7 @@ var FAPickerField = function (_Component) {
   }, {
     key: "filterByStyle",
     value: function filterByStyle(value) {
+      var _this4 = this;
       console.log('filter by style');
       var newList = "";
       var activeFilterFamily = this.state.activeFilterFamily != 'classic' && value == 'brands' ? 'classic' : this.state.activeFilterFamily;
@@ -1109,31 +1110,14 @@ var FAPickerField = function (_Component) {
       this.setState({
         activeFilterFamily: activeFilterFamily
       });
-      if (activeFilterFamily == 'sharp') {
-        newList = this.state.iconList.filter(function (icon) {
-          if (value == "all") {
-            return icon.iconFamily.includes('sharp');
-          } else {
-            return icon.iconStyle.includes(value) && icon.iconFamily.includes('sharp');
-          }
-        });
-      } else if (activeFilterFamily == 'duotone') {
-        newList = this.state.iconList.filter(function (icon) {
-          if (value == "all") {
-            return icon.iconFamily.includes('duotone');
-          } else {
-            return icon.iconStyle.includes(value);
-          }
-        });
-      } else {
-        newList = this.state.iconList.filter(function (icon) {
-          if (value == "all") {
-            return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
-          } else {
-            return icon.iconStyle.includes(value) && !icon.iconFamily.includes('sharp');
-          }
-        });
-      }
+      newList = this.state.iconList.filter(function (icon) {
+        if (value == "all") {
+          return icon.iconFamily === _this4.state.activeFilterFamily;
+          ;
+        } else {
+          return icon.iconStyle.includes(value) && icon.iconFamily === _this4.state.activeFilterFamily;
+        }
+      });
       return newList;
     }
   }, {
@@ -1142,11 +1126,7 @@ var FAPickerField = function (_Component) {
       console.log('filter by family');
       var newList = "";
       newList = this.state.iconList.filter(function (icon) {
-        if (value == 'classic') {
-          return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
-        } else {
-          return icon.iconFamily === value;
-        }
+        return icon.iconFamily === value;
       });
       return newList;
     }
@@ -1231,7 +1211,7 @@ var FAPickerField = function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
       var _this$state2 = this.state,
         value = _this$state2.value,
         filteredList = _this$state2.filteredList,
@@ -1249,9 +1229,9 @@ var FAPickerField = function (_Component) {
       });
       var recentIconRenderedList = recentList.map(function (icon) {
         return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_FAPickerIcon_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          className: _this4.state.value == icon ? 'active' : null,
+          className: _this5.state.value == icon ? 'active' : null,
           fullIconName: icon,
-          onChange: _this4.handleChange
+          onChange: _this5.handleChange
         });
       });
       var allTranslated = ss.i18n._t('FontAwesomeIconPicker.ALL', 'All');
@@ -1264,17 +1244,17 @@ var FAPickerField = function (_Component) {
       var familyToggle = Object.keys(buttons).map(function (button, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           onClick: function onClick() {
-            return _this4.handleFilterFamilyClick(button);
+            return _this5.handleFilterFamilyClick(button);
           },
-          className: 'family-select__button ' + _this4.getFamilyMenuClasses(button)
+          className: 'family-select__button ' + _this5.getFamilyMenuClasses(button)
         }, button.replace('-', ' '));
       });
       var styleToggle = buttons.classic.map(function (style) {
         return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
           onClick: function onClick() {
-            return _this4.handleFilterTypeClick(style);
+            return _this5.handleFilterTypeClick(style);
           },
-          "class": _this4.getStyleMenuClasses(style)
+          "class": _this5.getStyleMenuClasses(style)
         }, style.replace('-', ' '));
       });
       var noIconWarning;
@@ -1304,13 +1284,13 @@ var FAPickerField = function (_Component) {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "text"),
         placeholder: "Filter...",
         onChange: function onChange(e) {
-          return _this4.searchIcons(e.target.value);
+          return _this5.searchIcons(e.target.value);
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__recent-icon-button"),
         "data-tip": "Recently used icons",
         onClick: function onClick() {
-          return _this4.handleClickRecentList();
+          return _this5.handleClickRecentList();
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
         "class": "fas fa-redo"
@@ -1322,7 +1302,7 @@ var FAPickerField = function (_Component) {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__type-selector")
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
-          return _this4.handleFilterTypeClick('all');
+          return _this5.handleFilterTypeClick('all');
         },
         "class": this.getStyleMenuClasses('all')
       }, allTranslated), styleToggle), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1333,9 +1313,9 @@ var FAPickerField = function (_Component) {
         renderList: function renderList(icons, key) {
           return icons.map(function (icon, id) {
             return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_FAPickerIcon_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              className: _this4.state.value == icon.fullName ? 'active' : null,
+              className: _this5.state.value == icon.fullName ? 'active' : null,
               iconValue: icon,
-              onChange: _this4.handleChange
+              onChange: _this5.handleChange
             });
           });
         }
