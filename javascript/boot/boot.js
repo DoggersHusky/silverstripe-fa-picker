@@ -1138,6 +1138,7 @@ var FAPickerField = function (_Component) {
   }, {
     key: "filterByFamily",
     value: function filterByFamily(value) {
+      console.log('filter by family');
       var newList = "";
       newList = this.state.iconList.filter(function (icon) {
         if (value == 'classic') {
@@ -1275,10 +1276,20 @@ var FAPickerField = function (_Component) {
           className: 'family-select__button ' + this.getFamilyMenuClasses('classic')
         }, "Classic"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           onClick: function onClick() {
+            return _this4.handleFilterFamilyClick('classic');
+          },
+          className: 'family-select__button ' + this.getFamilyMenuClasses('duotone')
+        }, "Duotone"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+          onClick: function onClick() {
             return _this4.handleFilterFamilyClick('sharp');
           },
           className: 'family-select__button ' + this.getFamilyMenuClasses('sharp')
         }, "Sharp"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+          onClick: function onClick() {
+            return _this4.handleFilterFamilyClick('sharp-duotone');
+          },
+          className: 'family-select__button ' + this.getFamilyMenuClasses('sharp-duotone')
+        }, "Sharp Duotone"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           onClick: function onClick() {
             return _this4.handleFilterTypeClick('brands');
           },
@@ -1365,12 +1376,7 @@ var FAPickerField = function (_Component) {
           return _this4.handleFilterTypeClick('thin');
         },
         "class": this.getTypeMenuClasses('thin')
-      }, thinTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        onClick: function onClick() {
-          return _this4.handleFilterTypeClick('duotone');
-        },
-        "class": this.getTypeMenuClasses('duotone')
-      }, duotoneTranslated)), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, thinTranslated)), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__holder")
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_paginated_list__WEBPACK_IMPORTED_MODULE_5__.PaginatedList, {
         list: filteredList,

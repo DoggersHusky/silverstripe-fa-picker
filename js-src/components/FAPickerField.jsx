@@ -209,6 +209,7 @@ class FAPickerField extends Component {
     }
 
     filterByFamily(value) {
+        console.log('filter by family');
         let newList = "";
 
         // filter the new list
@@ -368,7 +369,9 @@ class FAPickerField extends Component {
         if (!this.state.isSharpDisabled && this.state.pro) {
             familyToggle = <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
                 <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('classic')}>Classic</span>
+                <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('duotone')}>Duotone</span>
                 <span onClick={() => this.handleFilterFamilyClick('sharp')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp')}>Sharp</span>
+                <span onClick={() => this.handleFilterFamilyClick('sharp-duotone')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp-duotone')}>Sharp Duotone</span>
                 {/* the below is actually a type, but because fontawesome treats it as a family, we moved it to the family bar */}
                 <span onClick={() => this.handleFilterTypeClick('brands')} className={'family-select__button ' + this.getFamilyMenuClasses('brands')}>{brandsTranslated}</span>
             </div>
@@ -411,7 +414,6 @@ class FAPickerField extends Component {
                         <li onClick={() => this.handleFilterTypeClick('regular')} class={this.getTypeMenuClasses('regular')}>{regularTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('light')} class={this.getTypeMenuClasses('light')}>{lightTranslated}</li>
                         <li onClick={() => this.handleFilterTypeClick('thin')} class={this.getTypeMenuClasses('thin')}>{thinTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('duotone')} class={this.getTypeMenuClasses('duotone')}>{duotoneTranslated}</li>
                     </ul>
 
                     <div className={classNames(iconHolderDisplay, "fapicker-icons__holder")}>
