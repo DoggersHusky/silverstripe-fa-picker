@@ -144,7 +144,6 @@ class FAPickerField extends Component {
         // determine if all should be clicked when family is switched
         const newActiveFilterStyle = this.state.buttons[value].length > 1 ? 'all' : this.state.buttons[value][0];
 
-        // @todo needs to be fixed
         this.setState({
             filteredList: [],
         },
@@ -169,8 +168,6 @@ class FAPickerField extends Component {
      * @returns {array} of new icons filter down by type
      */
     filterByStyle(value) {
-        // @todo needs to be fixed
-        console.log('filter by style');
         let newList = "";
 
         newList = this.state.iconList.filter((icon) => {
@@ -279,9 +276,14 @@ class FAPickerField extends Component {
      */
     toggleIconHolder() {
         let classname = (this.state.iconHolderDisplay === "hide") ? "show" : "hide";
-        let families = ['classic', 'sharp', 'brands'];
+        let families = [];
         let activeIcon = this.state.value;
         let activeFamily = null;
+
+        // get the families
+        Object.keys(this.state.buttons).map((family, index) => {
+            families.push(family);
+        });
 
         // if holder is being open
         if (classname == 'show' && activeIcon) {
@@ -294,11 +296,7 @@ class FAPickerField extends Component {
 
         // if we have an active family already atempt to switch tabs
         if (activeFamily) {
-            if (activeFamily == 'brands') {
-                this.handleFilterStyleClick(activeFamily)
-            } else {
-                this.handleFilterFamilyClick(activeFamily)
-            }
+            this.handleFilterFamilyClick(activeFamily);
         }
 
         //set the state
