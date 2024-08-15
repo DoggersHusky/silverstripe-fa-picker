@@ -154,17 +154,9 @@ FontawesomeIcons:
     - follow the steps above for **How to setup the PRO version of fontawesome?**
 
 ### What's New
-- switched to use **FontawesomeIconsListCustom** yml config to prevent duplicate icons
-- clicking sharp now allows you to select type
-- when you click a family, the type buttons are filtered down to only show you what's available
-- added support for display logic
-- added support for all sharp icons not just sharp solid
-- pagination no longer remembers the page when choose a family/type
-- when you expand the field, it will get the family and switch to the proper tab
-- updated documentation
+- Family buttons are now pulled from the yml
+- Style buttons are now pulled from the yml
+- Brands has been moved to Classic -> Brands because the FA yml considers **Brands** a style under classic.
 
 ### Future
-- add back in removing icons
-    - removed for now to clean this up and get it released
-- add documentation for adding your own icons
-- dynamic generating of style types
+- TBD
