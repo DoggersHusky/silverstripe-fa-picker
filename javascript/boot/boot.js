@@ -1015,7 +1015,8 @@ var FAPickerField = function (_Component) {
       iconHolderDisplay: "hide",
       recentList: recentIconList,
       recentListHolderToggle: false,
-      taskLink: props.data.taskLink ? props.data.taskLink : false
+      taskLink: props.data.taskLink ? props.data.taskLink : false,
+      buttons: FAButtons ? FAButtons : null
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleFilterTypeClick = _this.handleFilterTypeClick.bind(_assertThisInitialized(_this));
@@ -1246,7 +1247,8 @@ var FAPickerField = function (_Component) {
         iconHolderDisplay = _this$state.iconHolderDisplay,
         recentList = _this$state.recentList,
         recentListHolderToggle = _this$state.recentListHolderToggle,
-        taskLink = _this$state.taskLink;
+        taskLink = _this$state.taskLink,
+        buttons = _this$state.buttons;
       var FieldGroup = this.props.FieldGroup;
       var newProps = _objectSpread(_objectSpread({}, this.props), {}, {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('fapicker-field')
@@ -1265,51 +1267,22 @@ var FAPickerField = function (_Component) {
       var duotoneTranslated = ss.i18n._t('FontAwesomeIconPicker.DUOTONE', 'Duotone');
       var brandsTranslated = ss.i18n._t('FontAwesomeIconPicker.BRANDS', 'Brands');
       var thinTranslated = ss.i18n._t('FontAwesomeIconPicker.THIN', 'Thin');
-      var familyToggle;
-      if (!this.state.isSharpDisabled && this.state.pro) {
-        familyToggle = react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, 'family-select-holder')
-        }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      var familyToggle = Object.keys(buttons).map(function (key, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           onClick: function onClick() {
-            return _this4.handleFilterFamilyClick('classic');
+            return _this4.handleFilterFamilyClick(key);
           },
-          className: 'family-select__button ' + this.getFamilyMenuClasses('classic')
-        }, "Classic"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+          className: 'family-select__button ' + _this4.getFamilyMenuClasses(key)
+        }, key);
+      });
+      var styleToggle = buttons.classic.map(function (style) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
           onClick: function onClick() {
-            return _this4.handleFilterFamilyClick('duotone');
+            return _this4.handleFilterTypeClick(style);
           },
-          className: 'family-select__button ' + this.getFamilyMenuClasses('duotone')
-        }, "Duotone"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-          onClick: function onClick() {
-            return _this4.handleFilterFamilyClick('sharp');
-          },
-          className: 'family-select__button ' + this.getFamilyMenuClasses('sharp')
-        }, "Sharp"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-          onClick: function onClick() {
-            return _this4.handleFilterFamilyClick('sharp-duotone');
-          },
-          className: 'family-select__button ' + this.getFamilyMenuClasses('sharp-duotone')
-        }, "Sharp Duotone"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-          onClick: function onClick() {
-            return _this4.handleFilterTypeClick('brands');
-          },
-          className: 'family-select__button ' + this.getFamilyMenuClasses('brands')
-        }, brandsTranslated));
-      } else {
-        familyToggle = react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, 'family-select-holder')
-        }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-          onClick: function onClick() {
-            return _this4.handleFilterFamilyClick('classic');
-          },
-          className: 'family-select__button ' + this.getFamilyMenuClasses('classic')
-        }, "Classic"), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-          onClick: function onClick() {
-            return _this4.handleFilterTypeClick('brands');
-          },
-          className: 'family-select__button ' + this.getFamilyMenuClasses('brands')
-        }, brandsTranslated));
-      }
+          "class": _this4.getTypeMenuClasses(style)
+        }, style);
+      });
       var noIconWarning;
       if (filteredList.length == 0 && (!iconVersion || !iconTotal)) {
         noIconWarning = react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
@@ -1349,34 +1322,16 @@ var FAPickerField = function (_Component) {
         "class": "fas fa-redo"
       })), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(recentListHolderToggle == true ? "list-open" : "hide", iconHolderDisplay, "fapicker-icons__recent-icon-list")
-      }, recentIconRenderedList)), familyToggle, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
+      }, recentIconRenderedList)), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, 'family-select-holder')
+      }, familyToggle), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__type-selector")
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
           return _this4.handleFilterTypeClick('all');
         },
         "class": this.getTypeMenuClasses('all')
-      }, allTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        onClick: function onClick() {
-          return _this4.handleFilterTypeClick('solid');
-        },
-        "class": this.getTypeMenuClasses('solid')
-      }, solidTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        onClick: function onClick() {
-          return _this4.handleFilterTypeClick('regular');
-        },
-        "class": this.getTypeMenuClasses('regular')
-      }, regularTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        onClick: function onClick() {
-          return _this4.handleFilterTypeClick('light');
-        },
-        "class": this.getTypeMenuClasses('light')
-      }, lightTranslated), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        onClick: function onClick() {
-          return _this4.handleFilterTypeClick('thin');
-        },
-        "class": this.getTypeMenuClasses('thin')
-      }, thinTranslated)), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, allTranslated), styleToggle), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__holder")
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_paginated_list__WEBPACK_IMPORTED_MODULE_5__.PaginatedList, {
         list: filteredList,

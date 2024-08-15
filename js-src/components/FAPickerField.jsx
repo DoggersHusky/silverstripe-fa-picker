@@ -40,6 +40,7 @@ class FAPickerField extends Component {
             recentList: recentIconList,
             recentListHolderToggle: false,
             taskLink: props.data.taskLink ? props.data.taskLink : false,
+            buttons: FAButtons ? FAButtons : null,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -345,7 +346,7 @@ class FAPickerField extends Component {
     }
 
     render() {
-        const {value,filteredList,iconVersion,iconTotal,searchValue,iconHolderDisplay,recentList,recentListHolderToggle,taskLink} = this.state;
+        const {value,filteredList,iconVersion,iconTotal,searchValue,iconHolderDisplay,recentList,recentListHolderToggle,taskLink,buttons} = this.state;
         const {FieldGroup} = this.props;
         const newProps = {
             ...this.props,
@@ -356,7 +357,7 @@ class FAPickerField extends Component {
             <FAPickerIcon className={this.state.value == icon ? 'active' : null} fullIconName={icon} onChange={this.handleChange}/>
         );
 
-        //translations
+        // translations
         const allTranslated = ss.i18n._t('FontAwesomeIconPicker.ALL', 'All');
         const solidTranslated = ss.i18n._t('FontAwesomeIconPicker.SOLID', 'Solid');
         const regularTranslated = ss.i18n._t('FontAwesomeIconPicker.REGULAR', 'Regular');
@@ -365,23 +366,14 @@ class FAPickerField extends Component {
         const brandsTranslated = ss.i18n._t('FontAwesomeIconPicker.BRANDS', 'Brands');
         const thinTranslated = ss.i18n._t('FontAwesomeIconPicker.THIN', 'Thin');
 
-        let familyToggle;
-        if (!this.state.isSharpDisabled && this.state.pro) {
-            familyToggle = <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
-                <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('classic')}>Classic</span>
-                <span onClick={() => this.handleFilterFamilyClick('duotone')} className={'family-select__button ' + this.getFamilyMenuClasses('duotone')}>Duotone</span>
-                <span onClick={() => this.handleFilterFamilyClick('sharp')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp')}>Sharp</span>
-                <span onClick={() => this.handleFilterFamilyClick('sharp-duotone')} className={'family-select__button ' + this.getFamilyMenuClasses('sharp-duotone')}>Sharp Duotone</span>
-                {/* the below is actually a type, but because fontawesome treats it as a family, we moved it to the family bar */}
-                <span onClick={() => this.handleFilterTypeClick('brands')} className={'family-select__button ' + this.getFamilyMenuClasses('brands')}>{brandsTranslated}</span>
-            </div>
-        } else {
-            familyToggle = <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
-                <span onClick={() => this.handleFilterFamilyClick('classic')} className={'family-select__button ' + this.getFamilyMenuClasses('classic')}>Classic</span>
-                {/* the below is actually a type, but because fontawesome treats it as a family, we moved it to the family bar */}
-                <span onClick={() => this.handleFilterTypeClick('brands')} className={'family-select__button ' + this.getFamilyMenuClasses('brands')}>{brandsTranslated}</span>
-            </div>
-        }
+        // handle creating the family buttons
+        const familyToggle = Object.keys(buttons).map((key, index) =>
+            <span onClick={() => this.handleFilterFamilyClick(key)} className={'family-select__button ' + this.getFamilyMenuClasses(key)}>{key}</span>
+        );
+
+        const styleToggle = buttons.classic.map((style) =>
+            <li onClick={() => this.handleFilterTypeClick(style)} class={this.getTypeMenuClasses(style)}>{style}</li>
+        );
 
         let noIconWarning;
         if (filteredList.length == 0 && (!iconVersion || !iconTotal)) {
@@ -406,14 +398,13 @@ class FAPickerField extends Component {
                         </div>
                     </div>
 
-                    {familyToggle}
+                    <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
+                        {familyToggle}
+                    </div>
 
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
                         <li onClick={() => this.handleFilterTypeClick('all')} class={this.getTypeMenuClasses('all')}>{allTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('solid')} class={this.getTypeMenuClasses('solid')}>{solidTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('regular')} class={this.getTypeMenuClasses('regular')}>{regularTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('light')} class={this.getTypeMenuClasses('light')}>{lightTranslated}</li>
-                        <li onClick={() => this.handleFilterTypeClick('thin')} class={this.getTypeMenuClasses('thin')}>{thinTranslated}</li>
+                        {styleToggle}
                     </ul>
 
                     <div className={classNames(iconHolderDisplay, "fapicker-icons__holder")}>
