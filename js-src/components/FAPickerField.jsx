@@ -367,12 +367,12 @@ class FAPickerField extends Component {
         const thinTranslated = ss.i18n._t('FontAwesomeIconPicker.THIN', 'Thin');
 
         // handle creating the family buttons
-        const familyToggle = Object.keys(buttons).map((key, index) =>
-            <span onClick={() => this.handleFilterFamilyClick(key)} className={'family-select__button ' + this.getFamilyMenuClasses(key)}>{key}</span>
+        const familyToggle = Object.keys(buttons).map((button, index) =>
+            <span onClick={() => this.handleFilterFamilyClick(button)} className={'family-select__button ' + this.getFamilyMenuClasses(button)}>{button.replace('-', ' ')}</span>
         );
 
         const styleToggle = buttons.classic.map((style) =>
-            <li onClick={() => this.handleFilterTypeClick(style)} class={this.getTypeMenuClasses(style)}>{style}</li>
+            <li onClick={() => this.handleFilterTypeClick(style)} class={this.getTypeMenuClasses(style)}>{style.replace('-', ' ')}</li>
         );
 
         let noIconWarning;

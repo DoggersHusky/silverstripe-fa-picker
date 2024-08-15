@@ -166,6 +166,7 @@ span.fapicker-icons__holder__icon:hover {
   text-align: center;
   cursor: pointer;
   color: #5589a7;
+  text-transform: capitalize;
 }
 
 .fapicker-icons__type-selector li.active {
@@ -260,6 +261,7 @@ span.fapicker-icons__holder__icon:hover {
   background-color: #f7f7f7;
   cursor: pointer;
   padding: 5px;
+  text-transform: capitalize;
 }
 .fapicker-icons .family-select__button:hover {
   background-color: #d8e4eb;
