@@ -139,8 +139,6 @@ class FAPickerField extends Component {
     }
 
     handleFilterFamilyClick(value) {
-        console.log('handleFilterFamilyClick');
-
         // determine if all should be clicked when family is switched
         const newActiveFilterStyle = this.state.buttons[value].length > 1 ? 'all' : this.state.buttons[value][0];
 

@@ -1087,7 +1087,6 @@ var FAPickerField = function (_Component) {
     key: "handleFilterFamilyClick",
     value: function handleFilterFamilyClick(value) {
       var _this3 = this;
-      console.log('handleFilterFamilyClick');
       var newActiveFilterStyle = this.state.buttons[value].length > 1 ? 'all' : this.state.buttons[value][0];
       this.setState({
         filteredList: []
