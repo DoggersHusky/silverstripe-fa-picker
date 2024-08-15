@@ -174,7 +174,7 @@ class FAPickerField extends Component {
                 if (value === 'brands') {
                     return icon.iconStyle.includes(value) && icon.iconFamily === 'classic';
                 } else {
-
+                    return icon.iconStyle.includes(value) && icon.iconFamily === this.state.activeFilterFamily;
                 }
             }
         });

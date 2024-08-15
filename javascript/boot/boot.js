@@ -1111,7 +1111,9 @@ var FAPickerField = function (_Component) {
         } else {
           if (value === 'brands') {
             return icon.iconStyle.includes(value) && icon.iconFamily === 'classic';
-          } else {}
+          } else {
+            return icon.iconStyle.includes(value) && icon.iconFamily === _this4.state.activeFilterFamily;
+          }
         }
       });
       return newList;
