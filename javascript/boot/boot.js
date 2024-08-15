@@ -1232,12 +1232,6 @@ var FAPickerField = function (_Component) {
         });
       });
       var allTranslated = ss.i18n._t('FontAwesomeIconPicker.ALL', 'All');
-      var solidTranslated = ss.i18n._t('FontAwesomeIconPicker.SOLID', 'Solid');
-      var regularTranslated = ss.i18n._t('FontAwesomeIconPicker.REGULAR', 'Regular');
-      var lightTranslated = ss.i18n._t('FontAwesomeIconPicker.LIGHT', 'Light');
-      var duotoneTranslated = ss.i18n._t('FontAwesomeIconPicker.DUOTONE', 'Duotone');
-      var brandsTranslated = ss.i18n._t('FontAwesomeIconPicker.BRANDS', 'Brands');
-      var thinTranslated = ss.i18n._t('FontAwesomeIconPicker.THIN', 'Thin');
       var familyToggle = Object.keys(buttons).map(function (button, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           onClick: function onClick() {

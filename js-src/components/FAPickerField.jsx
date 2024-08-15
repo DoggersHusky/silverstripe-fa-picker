@@ -324,12 +324,6 @@ class FAPickerField extends Component {
 
         // translations
         const allTranslated = ss.i18n._t('FontAwesomeIconPicker.ALL', 'All');
-        const solidTranslated = ss.i18n._t('FontAwesomeIconPicker.SOLID', 'Solid');
-        const regularTranslated = ss.i18n._t('FontAwesomeIconPicker.REGULAR', 'Regular');
-        const lightTranslated = ss.i18n._t('FontAwesomeIconPicker.LIGHT', 'Light');
-        const duotoneTranslated = ss.i18n._t('FontAwesomeIconPicker.DUOTONE', 'Duotone');
-        const brandsTranslated = ss.i18n._t('FontAwesomeIconPicker.BRANDS', 'Brands');
-        const thinTranslated = ss.i18n._t('FontAwesomeIconPicker.THIN', 'Thin');
 
         // handle creating the family buttons
         const familyToggle = Object.keys(buttons).map((button, index) =>
