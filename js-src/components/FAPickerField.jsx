@@ -217,7 +217,6 @@ class FAPickerField extends Component {
      * @returns array
      */
     filterByFamily(value) {
-        // @todo needs to be adjusted
         console.log('filter by family');
         let newList = "";
 
@@ -226,7 +225,7 @@ class FAPickerField extends Component {
             if (value == 'classic') {
                 return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
             } else {
-                return icon.iconFamily.includes(value);
+                return icon.iconFamily === value;
             }
         });
 
@@ -254,7 +253,7 @@ class FAPickerField extends Component {
             newList = this.filterByStyle(this.state.activeFilterStyle).filter(icon => icon.searchName.includes(value));
         }
 
-        //update the filtered list as we want to always have a reference to the full list
+        // update the filtered list as we want to always have a reference to the full list
         this.setState({
             filteredList: newList,
             searchValue: value,
@@ -283,7 +282,7 @@ class FAPickerField extends Component {
             classes.push('active');
         }
 
-        // if
+        // if all is active
         if (activeFilterStyle === 'all' && value === 'all') {
             classes.push('active');
         }

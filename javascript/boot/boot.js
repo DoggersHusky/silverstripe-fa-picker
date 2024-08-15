@@ -1145,7 +1145,7 @@ var FAPickerField = function (_Component) {
         if (value == 'classic') {
           return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
         } else {
-          return icon.iconFamily.includes(value);
+          return icon.iconFamily === value;
         }
       });
       return newList;
