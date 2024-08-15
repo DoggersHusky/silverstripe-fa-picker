@@ -27,7 +27,7 @@ class FAPickerField extends Component {
             value: props.value ? props.value : "",
             iconList: fullIconList ? fullIconList : null,
             filteredList: fullIconList ? fullIconList.filter((icon) => {
-                return icon.iconFamily === 'classic';
+                return icon.iconFamily === 'classic' && icon.iconStyle !== 'brands';
             }) : null,
             iconVersion: iconVersion ? iconVersion : null,
             iconTotal: iconAmount ? iconAmount : null,
@@ -170,7 +170,7 @@ class FAPickerField extends Component {
 
         newList = this.state.iconList.filter((icon) => {
             if (value == "all") {
-                return icon.iconFamily === this.state.activeFilterFamily;;
+                return icon.iconFamily === this.state.activeFilterFamily && icon.iconStyle !== 'brands';
             } else {
                 return icon.iconStyle.includes(value) && icon.iconFamily === this.state.activeFilterFamily;
             }
@@ -189,7 +189,7 @@ class FAPickerField extends Component {
 
         // filter the new list
         newList = this.state.iconList.filter((icon) => {
-            return icon.iconFamily === value;
+            return icon.iconFamily === value && icon.iconStyle !== 'brands';
         });
 
         return newList;
@@ -231,10 +231,15 @@ class FAPickerField extends Component {
         const {buttons, activeFilterFamily, activeFilterStyle} = this.state;
         let classes = [];
 
+        // if brands disable all
+        if (activeFilterStyle === 'brands' && value !== 'brands') {
+            return 'disabled';
+        }
+
         // disable if not in list and list length is less than or equal to 1
         if (buttons[activeFilterFamily].length > 1 && value === 'all') {
         } else {
-            if (!buttons[activeFilterFamily].includes(value.toLowerCase())) {
+            if (!buttons[activeFilterFamily].includes(value.toLowerCase()) && value !== 'brands') {
                 classes.push('disabled');
             }
         }
@@ -258,8 +263,13 @@ class FAPickerField extends Component {
      * @returns string
      */
     getFamilyMenuClasses(value) {
-        const {activeFilterFamily, isSharpDisabled} = this.state;
+        const {activeFilterFamily, isSharpDisabled, activeFilterStyle} = this.state;
         let classes = '';
+
+        // if brands unclick all families
+        if (activeFilterStyle === 'brands') {
+            return classes;
+        }
 
         //should this be active?
         if (activeFilterFamily == value) {
@@ -315,6 +325,7 @@ class FAPickerField extends Component {
             ...this.props,
             className: classNames('fapicker-field')
           };
+        let brandsFound = false;
 
         const recentIconRenderedList = recentList.map((icon) =>
             <FAPickerIcon className={this.state.value == icon ? 'active' : null} fullIconName={icon} onChange={this.handleChange}/>
@@ -330,13 +341,28 @@ class FAPickerField extends Component {
 
         const styleToggle = buttons.classic.map((style) =>
             <li onClick={() => this.handleFilterStyleClick(style)} class={this.getStyleMenuClasses(style)}>{style.replace('-', ' ')}</li>
-        );
+        ).filter((button) => {
+            // if we find brands, note it and remove from this bar
+            if (button.props.children === 'brands') {
+                brandsFound = true;
+
+                return false;
+            }
+
+            return true;
+        });
 
         let noIconWarning;
         if (filteredList.length == 0 && (!iconVersion || !iconTotal)) {
             noIconWarning = <p className='alert alert-warning'>
                 <span>Please run the following <a href={taskLink} target="_blank">task</a> to generate the data for the field.</span>
             </p>;
+        }
+
+        // move brands button, if found, to the top bar
+        let brandsButton = '';
+        if (brandsFound) {
+            brandsButton = <span onClick={() => this.handleFilterStyleClick('brands')} className={'family-select__button ' + this.getStyleMenuClasses('brands')}>Brands</span>;
         }
 
         return (
@@ -357,6 +383,7 @@ class FAPickerField extends Component {
 
                     <div className={classNames(iconHolderDisplay, 'family-select-holder')}>
                         {familyToggle}
+                        {brandsButton}
                     </div>
 
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>

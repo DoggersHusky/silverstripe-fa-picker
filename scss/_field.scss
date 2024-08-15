@@ -176,7 +176,8 @@ span.fapicker-icons__holder__icon:hover {
     text-transform: capitalize;
 }
 
-.fapicker-icons__type-selector li.active {
+.fapicker-icons__type-selector li.active,
+.fapicker-icons .family-select__button.active {
     background-color: #d8e4eb;
 }
 
