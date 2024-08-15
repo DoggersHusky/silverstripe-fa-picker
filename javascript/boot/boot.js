@@ -1019,7 +1019,7 @@ var FAPickerField = function (_Component) {
       buttons: FAButtons ? FAButtons : null
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
-    _this.handleFilterTypeClick = _this.handleFilterTypeClick.bind(_assertThisInitialized(_this));
+    _this.handleFilterStyleClick = _this.handleFilterStyleClick.bind(_assertThisInitialized(_this));
     _this.searchIcons = _this.searchIcons.bind(_assertThisInitialized(_this));
     _this.toggleIconHolder = _this.toggleIconHolder.bind(_assertThisInitialized(_this));
     _this.handleClickRecentList = _this.handleClickRecentList.bind(_assertThisInitialized(_this));
@@ -1069,8 +1069,8 @@ var FAPickerField = function (_Component) {
       });
     }
   }, {
-    key: "handleFilterTypeClick",
-    value: function handleFilterTypeClick(value) {
+    key: "handleFilterStyleClick",
+    value: function handleFilterStyleClick(value) {
       var _this2 = this;
       this.setState({
         filteredList: []
@@ -1087,13 +1087,15 @@ var FAPickerField = function (_Component) {
     key: "handleFilterFamilyClick",
     value: function handleFilterFamilyClick(value) {
       var _this3 = this;
+      console.log('handleFilterFamilyClick');
+      var newActiveFilterStyle = this.state.buttons[value].length > 1 ? 'all' : this.state.buttons[value][0];
       this.setState({
         filteredList: []
       }, function () {
         _this3.setState({
           filteredList: _this3.filterByFamily(value),
           activeFilterFamily: value,
-          activeFilterStyle: 'all',
+          activeFilterStyle: newActiveFilterStyle,
           searchValue: "",
           recentListHolderToggle: false
         });
@@ -1105,11 +1107,6 @@ var FAPickerField = function (_Component) {
       var _this4 = this;
       console.log('filter by style');
       var newList = "";
-      var activeFilterFamily = this.state.activeFilterFamily != 'classic' && value == 'brands' ? 'classic' : this.state.activeFilterFamily;
-      value = value == "all" && this.state.activeFilterStyle == 'brands' ? 'brands' : value;
-      this.setState({
-        activeFilterFamily: activeFilterFamily
-      });
       newList = this.state.iconList.filter(function (icon) {
         if (value == "all") {
           return icon.iconFamily === _this4.state.activeFilterFamily;
@@ -1199,7 +1196,7 @@ var FAPickerField = function (_Component) {
       }
       if (activeFamily) {
         if (activeFamily == 'brands') {
-          this.handleFilterTypeClick(activeFamily);
+          this.handleFilterStyleClick(activeFamily);
         } else {
           this.handleFilterFamilyClick(activeFamily);
         }
@@ -1252,7 +1249,7 @@ var FAPickerField = function (_Component) {
       var styleToggle = buttons.classic.map(function (style) {
         return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
           onClick: function onClick() {
-            return _this5.handleFilterTypeClick(style);
+            return _this5.handleFilterStyleClick(style);
           },
           "class": _this5.getStyleMenuClasses(style)
         }, style.replace('-', ' '));
@@ -1302,7 +1299,7 @@ var FAPickerField = function (_Component) {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(iconHolderDisplay, "fapicker-icons__type-selector")
       }, react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         onClick: function onClick() {
-          return _this5.handleFilterTypeClick('all');
+          return _this5.handleFilterStyleClick('all');
         },
         "class": this.getStyleMenuClasses('all')
       }, allTranslated), styleToggle), react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

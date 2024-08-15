@@ -45,7 +45,7 @@ class FAPickerField extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         //handle clicking on a filter all, bold, etc
-        this.handleFilterTypeClick = this.handleFilterTypeClick.bind(this);
+        this.handleFilterStyleClick = this.handleFilterStyleClick.bind(this);
         //handle search icons
         this.searchIcons = this.searchIcons.bind(this);
         //handle toggling icon holder
@@ -122,7 +122,7 @@ class FAPickerField extends Component {
      * handles filtering down the list
      * when all, bold, etc is clicked
      */
-    handleFilterTypeClick(value) {
+    handleFilterStyleClick(value) {
         this.setState({
             filteredList: [],
         },
@@ -139,6 +139,11 @@ class FAPickerField extends Component {
     }
 
     handleFilterFamilyClick(value) {
+        console.log('handleFilterFamilyClick');
+
+        // determine if all should be clicked when family is switched
+        const newActiveFilterStyle = this.state.buttons[value].length > 1 ? 'all' : this.state.buttons[value][0];
+
         // @todo needs to be fixed
         this.setState({
             filteredList: [],
@@ -150,7 +155,7 @@ class FAPickerField extends Component {
                 filteredList: this.filterByFamily(value),
                 activeFilterFamily: value,
                 // set filter type to all
-                activeFilterStyle: 'all',
+                activeFilterStyle: newActiveFilterStyle,
                 searchValue: "",
                 recentListHolderToggle: false,
             });
@@ -167,15 +172,18 @@ class FAPickerField extends Component {
         // @todo needs to be fixed
         console.log('filter by style');
         let newList = "";
-        // account for brands
-        let activeFilterFamily = (this.state.activeFilterFamily != 'classic' && value == 'brands') ?  'classic' : this.state.activeFilterFamily;
-        // account for brands
-        value = (value == "all" && this.state.activeFilterStyle == 'brands') ? 'brands' : value;
+        // // account for brands
+        // let activeFilterFamily = (this.state.activeFilterFamily != 'classic' && value == 'brands') ?  'classic' : this.state.activeFilterFamily;
+        // console.log(activeFilterFamily);
+        // console.log(this.state.activeFilterFamily);
+        // // account for brands
+        // value = (value == "all" && this.state.activeFilterStyle == 'brands') ? 'brands' : value;
+        // console.log(value);
 
         // set the state
-        this.setState({
-            activeFilterFamily: activeFilterFamily,
-        });
+        // this.setState({
+        //     activeFilterFamily: activeFilterFamily,
+        // });
 
         newList = this.state.iconList.filter((icon) => {
             if (value == "all") {
@@ -300,7 +308,7 @@ class FAPickerField extends Component {
         // if we have an active family already atempt to switch tabs
         if (activeFamily) {
             if (activeFamily == 'brands') {
-                this.handleFilterTypeClick(activeFamily)
+                this.handleFilterStyleClick(activeFamily)
             } else {
                 this.handleFilterFamilyClick(activeFamily)
             }
@@ -339,7 +347,7 @@ class FAPickerField extends Component {
         );
 
         const styleToggle = buttons.classic.map((style) =>
-            <li onClick={() => this.handleFilterTypeClick(style)} class={this.getStyleMenuClasses(style)}>{style.replace('-', ' ')}</li>
+            <li onClick={() => this.handleFilterStyleClick(style)} class={this.getStyleMenuClasses(style)}>{style.replace('-', ' ')}</li>
         );
 
         let noIconWarning;
@@ -370,7 +378,7 @@ class FAPickerField extends Component {
                     </div>
 
                     <ul className={classNames(iconHolderDisplay, "fapicker-icons__type-selector")}>
-                        <li onClick={() => this.handleFilterTypeClick('all')} class={this.getStyleMenuClasses('all')}>{allTranslated}</li>
+                        <li onClick={() => this.handleFilterStyleClick('all')} class={this.getStyleMenuClasses('all')}>{allTranslated}</li>
                         {styleToggle}
                     </ul>
 
