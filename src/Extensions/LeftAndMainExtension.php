@@ -23,6 +23,7 @@ class LeftAndMainExtension extends Extension
         $icons = json_encode($this->owner->getIconList());
         $iconAmount = $this->owner->getIconAmount();
         $icountVersion = $this->owner->getVersionNumber();
+        $faButtons = json_encode($this->owner->getButtonList());
 
         // load the requirements
         Requirements::add_i18n_javascript('buckleshusky/fontawesomeiconpicker: javascript/lang');
@@ -30,6 +31,7 @@ class LeftAndMainExtension extends Extension
             let fullIconList = $icons;
             let iconAmount = '$iconAmount';
             let iconVersion = '$icountVersion';
+            let FAButtons = $faButtons;
         JS
         );
     }
@@ -61,6 +63,7 @@ class LeftAndMainExtension extends Extension
         return $data;
     }
 
+
     /**
      * get a list of icons to add to the array to be displayed in the field
      *
@@ -75,6 +78,26 @@ class LeftAndMainExtension extends Extension
             // make sure we are dealing with an object
             if ($icons && $icons instanceof stdClass && property_exists($icons, 'icons')) {
                 return $icons->icons;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * get a list of icons to add to the array to be displayed in the field
+     *
+     * @return array
+     */
+    public function getButtonList()
+    {
+        $icons = $this->getIconData();
+
+        // if file exists
+        if ($icons) {
+            // make sure we are dealing with an object
+            if ($icons && $icons instanceof stdClass && property_exists($icons, 'buttons')) {
+                return $icons->buttons;
             }
         }
 

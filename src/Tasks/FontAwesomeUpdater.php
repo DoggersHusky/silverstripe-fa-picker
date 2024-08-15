@@ -38,6 +38,7 @@ class FontAwesomeUpdater extends BuildTask
 
         $iconArray = [];
         $iconArray['icons'] = [];
+        $iconArray['buttons'] = [];
         $version = '';
         $icons = '';
         $destPath = null;
@@ -80,10 +81,9 @@ class FontAwesomeUpdater extends BuildTask
                 }
 
                 $fullName = [
-                    '',
-                    $familyStyle['family'] === 'classic' ? '' : $familyStyle['family'],
-                    $familyStyle['style'],
-                    str_replace(' ', '-', $key),
+                    $familyStyle['family'] === 'classic' ? '' : 'fa-' . $familyStyle['family'],
+                    'fa-' . $familyStyle['style'],
+                    'fa-' . str_replace(' ', '-', $key),
                 ];
 
                 array_push($iconArray['icons'], [
@@ -91,8 +91,21 @@ class FontAwesomeUpdater extends BuildTask
                     'iconStyle' => $familyStyle['style'],
                     'shortName' => $value['label'],
                     'searchName' => mb_strtolower($value['label']),
-                    'fullName' => trim(implode(' fa-', $fullName)),
+                    'fullName' => trim(implode(' ', $fullName)),
                 ]);
+
+                // build the button list
+                if (array_key_exists($familyStyle['family'], $iconArray['buttons'])) {
+                    if (!in_array($familyStyle['style'], $iconArray['buttons'][$familyStyle['family']])) {
+                        $iconArray['buttons'][$familyStyle['family']][] = $familyStyle['style'];
+                    }
+                } else {
+                    $iconArray['buttons'][$familyStyle['family']] = [
+                        $familyStyle['style'],
+                    ];
+                }
+
+
             }
         }
 
