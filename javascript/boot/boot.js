@@ -1145,11 +1145,9 @@ var FAPickerField = function (_Component) {
         if (value == 'classic') {
           return !icon.iconFamily.includes('sharp') && !icon.iconStyle.includes('brands');
         } else {
-          console.log(value);
           return icon.iconFamily.includes(value);
         }
       });
-      console.log(newList);
       return newList;
     }
   }, {
@@ -1180,8 +1178,10 @@ var FAPickerField = function (_Component) {
         activeFilterFamily = _this$state.activeFilterFamily,
         activeFilterStyle = _this$state.activeFilterStyle;
       var classes = [];
-      if (!buttons[activeFilterFamily].includes(value.toLowerCase())) {
-        classes.push('disabled');
+      if (buttons[activeFilterFamily].length > 1 && value === 'all') {} else {
+        if (!buttons[activeFilterFamily].includes(value.toLowerCase())) {
+          classes.push('disabled');
+        }
       }
       if (activeFilterStyle == value) {
         classes.push('active');
